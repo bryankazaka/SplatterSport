@@ -43,7 +43,7 @@ public class MobController : MonoBehaviour
             
             foreach (Transform limb in limbs)
             {
-                Debug.Log(1);
+                
                 limb.GetComponent<LimbScatter>().enabled = true;
                 limb.GetComponent<LimbScatter>().Scatter(dir,limbSpeed,limbSpread);
             }

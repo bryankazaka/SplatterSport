@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class LimbScatter : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class LimbScatter : MonoBehaviour
     private int rotation;
     private bool isScatter;
     private float speed;
+    public Tilemap splatterMap;
     
     public void Scatter(Vector3 dir, float speedP, int spreadP)
     {
@@ -49,7 +51,8 @@ public class LimbScatter : MonoBehaviour
             if (speed <= 0)
             {
                 speed = 0;
-                
+                Vector3Int location = splatterMap.WorldToCell(transform.position);
+                splatterMap.GetComponent<SplatterController>().Propagate(location,1.0f,1);
                 GameObject.Destroy(gameObject);
             }
             else
