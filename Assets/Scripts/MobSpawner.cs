@@ -7,8 +7,9 @@ public class MobSpawner : MonoBehaviour
 
     public float spawnFreq;
     public float spawnWaitTime;
+
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         InvokeRepeating(nameof(Spawn), spawnWaitTime, spawnFreq); 
     }
@@ -20,17 +21,13 @@ public class MobSpawner : MonoBehaviour
     }
 
     void Spawn()
-    {
-        foreach (Transform mob in transform)
-        {
-        
-            Transform mobClone = Instantiate(mob,position: SpawnPoint(), mob.transform.rotation);
-            mobClone.GetComponent<MobController>().enabled = true;
-            mobClone.GetComponent<SpriteRenderer>().enabled = true;
-        }
+    {        
+        Transform mobClone = Instantiate(transform,position: SpawnPoint(), transform.rotation);
+        mobClone.GetComponent<MobController>().enabled = true;
+        mobClone.GetComponent<SpriteRenderer>().enabled = true;
        
-    
     }
+    
 
     Vector3 SpawnPoint()
     {
