@@ -11,13 +11,17 @@ public class LimbScatter : MonoBehaviour
     private int rotation;
     private bool isScatter;
     private float speed;
+    private float splatProp;
+    private int color;
     public Tilemap splatterMap;
     
-    public void Scatter(Vector3 dir, float speedP, int spreadP)
+    public void Scatter(Vector3 dir, float speedP, int spreadP, int colorP,float splatPropP)
     {
         spread = spreadP;
         transform.parent = null;
-        speed = speedP;        
+        speed = speedP;  
+        color = colorP;  
+        splatProp = splatPropP; 
         direct = Quaternion.AngleAxis(UnityEngine.Random.Range(-spread,spread), Vector3.back) * dir;
         direct.Normalize();
         rotation = UnityEngine.Random.Range(-10,10);
@@ -52,7 +56,7 @@ public class LimbScatter : MonoBehaviour
             {
                 speed = 0;
                 Vector3Int location = splatterMap.WorldToCell(transform.position);
-                splatterMap.GetComponent<SplatterController>().Propagate(location,1.0f,1);
+                splatterMap.GetComponent<SplatterController>().Propagate(location,splatProp,color);
                 GameObject.Destroy(gameObject);
             }
             else

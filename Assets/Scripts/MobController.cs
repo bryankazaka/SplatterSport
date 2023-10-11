@@ -40,12 +40,12 @@ public class MobController : MonoBehaviour
 
         if (speed < 0)
         {
-            
+            int color = Random.Range(1,5);
             foreach (Transform limb in limbs)
             {
                 
                 limb.GetComponent<LimbScatter>().enabled = true;
-                limb.GetComponent<LimbScatter>().Scatter(dir,limbSpeed,limbSpread);
+                limb.GetComponent<LimbScatter>().Scatter(dir,limbSpeed,limbSpread,color,splatProp);
             }
             GameObject.Destroy(gameObject);
         }

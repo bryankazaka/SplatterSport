@@ -14,13 +14,16 @@ public class SplatterController : MonoBehaviour
     private int[,] splatterStructOld;
     private List<(int,int)> structUpdate;
     public Tilemap splatterMap;
-    public TileBase splatter;
-    public TileBase clear;
+    public TileBase[] colors;
+
+    
     void Start()
     {
         splatterStruct = new int[128,52];
         splatterStructOld = splatterStruct;
-        structUpdate =  new List<(int,int)>();        
+        structUpdate =  new List<(int,int)>();
+        
+       
         
     }
 
@@ -31,10 +34,11 @@ public class SplatterController : MonoBehaviour
         {
             //Remove the duplicate entries as the newest splatter overwrites the old one
             var structUpdateSet = structUpdate.Distinct().ToList(); 
-            foreach (var item in structUpdateSet)
+            foreach (var dataP in structUpdateSet)
             {
-                (int,int) pos = DataToCell(item);
-                splatterMap.SetTile(new Vector3Int(pos.Item1,pos.Item2,0),splatter); //set the splatter
+                (int,int) pos = DataToCell(dataP);
+               
+                splatterMap.SetTile(new Vector3Int(pos.Item1,pos.Item2,0),colors[splatterStruct[dataP.Item1,dataP.Item2]]); //set the splatter
             }
             structUpdate.Clear();
         }
@@ -59,18 +63,119 @@ public class SplatterController : MonoBehaviour
             
             //Propagate at the cardinal directions            
             cellPos.y += 1;
-            Propagate(cellPos,stren - 0.1f, color);
+            PropagateUp(cellPos,stren - 0.1f, color);
             cellPos.y -= 2;
-            Propagate(cellPos,stren - 0.1f, color);
+            PropagateDown(cellPos,stren - 0.1f, color);
             cellPos.y +=1;
             cellPos.x +=1;
-            Propagate(cellPos,stren - 0.1f, color);
+            PropagateRight(cellPos,stren - 0.1f, color);
             cellPos.x -= 2;
-            Propagate(cellPos,stren - 0.1f, color);           
+            PropagateLeft(cellPos,stren - 0.1f, color);           
 
         }
     }
 
+    public void PropagateUp(Vector3Int cellPos, float stren,int color)
+     {
+        //randomly check if splatter strenght is enough and checks if splatter is in bounds
+        if ((stren >= Random.Range(0.0f,1.0f)) 
+            && cellPos.y <= 11 && cellPos.y >= -40 && cellPos.x <= 63 && cellPos.x >= -64) 
+        {
+
+            (int, int) dataP = CellToData((cellPos.x,cellPos.y));
+           
+            splatterStruct[dataP.Item1,dataP.Item2] = color;    //update the splatter data structure
+            structUpdate.Add(dataP);                            //add the tile position that needs to be updated            
+            
+            //Propagate at the cardinal directions            
+            cellPos.y += 1;
+            PropagateUp(cellPos,stren - 0.1f, color);
+            cellPos.y -=1;
+            cellPos.x +=1;
+            PropagateRight(cellPos,stren - 0.1f, color);
+            cellPos.x -= 2;
+            PropagateLeft(cellPos,stren - 0.1f, color);           
+
+        }
+    }
+    public void PropagateDown(Vector3Int cellPos, float stren,int color)
+    {
+        //randomly check if splatter strenght is enough and checks if splatter is in bounds
+        if ((stren >= Random.Range(0.0f,1.0f)) 
+            && cellPos.y <= 11 && cellPos.y >= -40 && cellPos.x <= 63 && cellPos.x >= -64) 
+        {
+
+            (int, int) dataP = CellToData((cellPos.x,cellPos.y));
+           
+            splatterStruct[dataP.Item1,dataP.Item2] = color;    //update the splatter data structure
+            structUpdate.Add(dataP);                            //add the tile position that needs to be updated            
+            
+                    
+         
+            
+            cellPos.y -=1;
+            PropagateDown(cellPos,stren - 0.1f, color);
+            cellPos.y +=1;
+            cellPos.x +=1;
+            PropagateRight(cellPos,stren - 0.1f, color);
+            cellPos.x -=2;
+            PropagateLeft(cellPos,stren - 0.1f, color);
+           
+                      
+
+        }
+    }
+    public void PropagateRight(Vector3Int cellPos, float stren,int color)
+    {
+        //randomly check if splatter strenght is enough and checks if splatter is in bounds
+        if ((stren >= Random.Range(0.0f,1.0f)) 
+            && cellPos.y <= 11 && cellPos.y >= -40 && cellPos.x <= 63 && cellPos.x >= -64) 
+        {
+
+            (int, int) dataP = CellToData((cellPos.x,cellPos.y));
+           
+            splatterStruct[dataP.Item1,dataP.Item2] = color;    //update the splatter data structure
+            structUpdate.Add(dataP);                            //add the tile position that needs to be updated            
+            
+            //Propagate at the cardinal directions            
+            cellPos.y += 1;
+            PropagateUp(cellPos,stren - 0.1f, color);
+            cellPos.y -= 2;
+            PropagateDown(cellPos,stren - 0.1f, color);
+            cellPos.y +=1;
+            cellPos.x +=1;
+            PropagateRight(cellPos,stren - 0.1f, color);
+           
+                      
+
+        }
+    }
+    public void PropagateLeft(Vector3Int cellPos, float stren,int color)
+    {
+        //randomly check if splatter strenght is enough and checks if splatter is in bounds
+        if ((stren >= Random.Range(0.0f,1.0f)) 
+            && cellPos.y <= 11 && cellPos.y >= -40 && cellPos.x <= 63 && cellPos.x >= -64) 
+        {
+
+            (int, int) dataP = CellToData((cellPos.x,cellPos.y));
+           
+            splatterStruct[dataP.Item1,dataP.Item2] = color;    //update the splatter data structure
+            structUpdate.Add(dataP);                            //add the tile position that needs to be updated            
+            
+            //Propagate at the cardinal directions            
+            cellPos.y += 1;
+            PropagateUp(cellPos,stren - 0.1f, color);
+            cellPos.y -= 2;
+            PropagateDown(cellPos,stren - 0.1f, color);
+            cellPos.y +=1;
+            cellPos.x -=1;
+            PropagateLeft(cellPos,stren - 0.1f, color);
+           
+                      
+
+        }
+    }
+    
     private (int,int) CellToData((int,int) pos) //Converts cell position to the data position.
     {
         return (pos.Item1 +64,-pos.Item2+11);
