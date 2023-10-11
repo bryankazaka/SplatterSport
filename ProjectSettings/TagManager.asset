@@ -42,6 +42,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Crowd
+    uniqueID: 1658112529
+    locked: 0
+  - name: Splatter
+    uniqueID: 1716463755
+    locked: 0
   - name: Mobs
     uniqueID: 1157402573
     locked: 0

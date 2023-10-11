@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Unity.Collections;
+using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
@@ -11,22 +13,32 @@ public class SplatterController : MonoBehaviour
 {
     // Start is called before the first frame update
     private int[,] splatterStruct; 
-    private int[,] splatterStructOld;
     private List<(int,int)> structUpdate;
     public Tilemap splatterMap;
     public TileBase[] colors;
+    public GameObject crowd;
 
     
     void Start()
     {
-        splatterStruct = new int[128,52];
-        splatterStructOld = splatterStruct;
+        splatterStruct = new int[128,52];       
         structUpdate =  new List<(int,int)>();
         
        
         
     }
 
+
+    float[] ArrayCount()
+    {
+        float[] newD = new float[4];
+        int[] tempStruct = splatterStruct.Cast<int>().ToArray();
+        for (int i = 0; i < 4; i++)
+        {
+            newD[i] = Array.FindAll<int>(tempStruct,elem => elem == i+1).Length;
+        }
+        return newD;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -37,9 +49,10 @@ public class SplatterController : MonoBehaviour
             foreach (var dataP in structUpdateSet)
             {
                 (int,int) pos = DataToCell(dataP);
-               
+                
                 splatterMap.SetTile(new Vector3Int(pos.Item1,pos.Item2,0),colors[splatterStruct[dataP.Item1,dataP.Item2]]); //set the splatter
             }
+            crowd.GetComponent<CrowdController>().updateCrowd(ArrayCount());
             structUpdate.Clear();
         }
     }
@@ -52,7 +65,7 @@ public class SplatterController : MonoBehaviour
     {
         
         //randomly check if splatter strenght is enough and checks if splatter is in bounds
-        if ((stren >= Random.Range(0.0f,1.0f)) 
+        if ((stren >= UnityEngine.Random.Range(0.0f,1.0f)) 
             && cellPos.y <= 11 && cellPos.y >= -40 && cellPos.x <= 63 && cellPos.x >= -64) 
         {
 
@@ -78,7 +91,7 @@ public class SplatterController : MonoBehaviour
     public void PropagateUp(Vector3Int cellPos, float stren,int color)
      {
         //randomly check if splatter strenght is enough and checks if splatter is in bounds
-        if ((stren >= Random.Range(0.0f,1.0f)) 
+        if ((stren >= UnityEngine.Random.Range(0.0f,1.0f)) 
             && cellPos.y <= 11 && cellPos.y >= -40 && cellPos.x <= 63 && cellPos.x >= -64) 
         {
 
@@ -101,7 +114,7 @@ public class SplatterController : MonoBehaviour
     public void PropagateDown(Vector3Int cellPos, float stren,int color)
     {
         //randomly check if splatter strenght is enough and checks if splatter is in bounds
-        if ((stren >= Random.Range(0.0f,1.0f)) 
+        if ((stren >= UnityEngine.Random.Range(0.0f,1.0f)) 
             && cellPos.y <= 11 && cellPos.y >= -40 && cellPos.x <= 63 && cellPos.x >= -64) 
         {
 
@@ -128,7 +141,7 @@ public class SplatterController : MonoBehaviour
     public void PropagateRight(Vector3Int cellPos, float stren,int color)
     {
         //randomly check if splatter strenght is enough and checks if splatter is in bounds
-        if ((stren >= Random.Range(0.0f,1.0f)) 
+        if ((stren >= UnityEngine.Random.Range(0.0f,1.0f)) 
             && cellPos.y <= 11 && cellPos.y >= -40 && cellPos.x <= 63 && cellPos.x >= -64) 
         {
 
@@ -153,7 +166,7 @@ public class SplatterController : MonoBehaviour
     public void PropagateLeft(Vector3Int cellPos, float stren,int color)
     {
         //randomly check if splatter strenght is enough and checks if splatter is in bounds
-        if ((stren >= Random.Range(0.0f,1.0f)) 
+        if ((stren >=UnityEngine. Random.Range(0.0f,1.0f)) 
             && cellPos.y <= 11 && cellPos.y >= -40 && cellPos.x <= 63 && cellPos.x >= -64) 
         {
 
