@@ -27,6 +27,12 @@ public class MobController : MonoBehaviour
             limbs[i++] = t;
         }
         origin = new Vector3(0,0,0);
+
+        //randomize
+        speed *= Random.Range(0.90f,1.10f);
+        limbSpeed *= Random.Range(0.90f,1.10f);
+        limbSpread = (int) (limbSpread * Random.Range(0.90f,1.10f));
+        splatProp *= Random.Range(0.90f,1.10f);
           
     }
 
