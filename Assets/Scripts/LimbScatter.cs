@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -13,6 +14,7 @@ public class LimbScatter : MonoBehaviour
     private float speed; // the speed if the limbs movement
     private float splatProp; // the propagation strenght of the limb
     private int color; // the color of the player who killed the mob
+    private Color32[] colors;
     public Tilemap splatterMap; // the map which the splatter is put on
     
     //function that is called to start the scattering process and get data from the parent mob
@@ -26,8 +28,15 @@ public class LimbScatter : MonoBehaviour
         direct = Quaternion.AngleAxis(UnityEngine.Random.Range(-spread,spread), Vector3.back) * dir;
         direct.Normalize();
         rotation = UnityEngine.Random.Range(-10,10);
+        colors = new Color32[4];
+        colors[0] =  new Color32(0x00,0xB0,0xF6,0xFF);
+        colors[1] =  new Color32(0xFF,0xF3,0x00,0xFF);
+        colors[2] =  new Color32(0x15,0xFF,0x08,0xFF);
+        colors[3] =  new Color32(0xFF,0x00,0x8E,0xFF);
         
-        transform.GetComponent<SpriteRenderer>().enabled = true;
+        var SpriteRender = transform.GetComponent<SpriteRenderer>();
+        SpriteRender.enabled = true;
+        SpriteRender.color = colors[color-1];
     }
 
     void Update()
