@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class Button : MonoBehaviour, ISelectHandler , IPointerEnterHandler
+public class CustomButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 {
-    // Start is called before the first frame update
     public GameManager gameManager;
+
     void Start()
     {
         
@@ -18,6 +19,7 @@ public class Button : MonoBehaviour, ISelectHandler , IPointerEnterHandler
     {
         
     }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         gameManager.btnHighlight();
@@ -25,7 +27,7 @@ public class Button : MonoBehaviour, ISelectHandler , IPointerEnterHandler
 
     public void OnSelect(BaseEventData eventData)
     {
+        
         gameManager.btnClick();
     }
-
 }
