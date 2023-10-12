@@ -6,16 +6,17 @@ using UnityEngine.Tilemaps;
 
 public class LimbScatter : MonoBehaviour
 {
-    private Vector3 direct;
-    private int spread;
-    private int rotation;
-    private bool isScatter;
-    private float speed;
-    private float splatProp;
-    private int color;
-    public Tilemap splatterMap;
+    private Vector3 direct; //direction of the limbs scattering
+    private int spread; //spread in angles where the mob spreads to
+    private int rotation; // the speed of the limbs rotation to simulate movement
+    private int resistance; //how much speed the limb loses when bouncing
+    private float speed; // the speed if the limbs movement
+    private float splatProp; // the propagation strenght of the limb
+    private int color; // the color of the player who killed the mob
+    public Tilemap splatterMap; // the map which the splatter is put on
     
-    public void Scatter(Vector3 dir, float speedP, int spreadP, int colorP,float splatPropP)
+    //function that is called to start the scattering process and get data from the parent mob
+    public void Scatter(Vector3 dir, float speedP, int spreadP, int colorP,float splatPropP) 
     {
         spread = spreadP;
         transform.parent = null;
@@ -25,47 +26,49 @@ public class LimbScatter : MonoBehaviour
         direct = Quaternion.AngleAxis(UnityEngine.Random.Range(-spread,spread), Vector3.back) * dir;
         direct.Normalize();
         rotation = UnityEngine.Random.Range(-10,10);
-        isScatter = true;
+        
         transform.GetComponent<SpriteRenderer>().enabled = true;
     }
 
     void Update()
-    {
-     if (isScatter)
-        {
-            var nextPos = transform.position + (speed * 1/60 * direct);
-            
-            if (math.abs(nextPos.y + 3.5)>= 6.5f )
-            {
-                BounceY(); 
-            }
-            else if (math.abs(nextPos.x) >= 16.0f)
-            {
-                BounceX(); 
-            }
-            else
-            {
-                direct.Normalize();
-                
-                transform.position += speed * 1/60 * direct;
-                transform.Rotate(Vector3.back,rotation);
-            }
+    {     
+        var nextPos = transform.position + (speed * 1/60 * direct); //the next postion of the limb
         
-
-            if (speed <= 0)
-            {
-                speed = 0;
-                Vector3Int location = splatterMap.WorldToCell(transform.position);
-                splatterMap.GetComponent<SplatterController>().Propagate(location,splatProp,color);
-                GameObject.Destroy(gameObject);
-            }
-            else
-            {
-                speed -= 1/speed/4;
-            }
-            
+        //checkes if the next position is out of bounds and if it is bounces the limb
+        if (math.abs(nextPos.y + 3.5)>= 6.5f )
+        {
+            BounceY(); 
         }
+        else if (math.abs(nextPos.x) >= 16.0f)
+        {
+            BounceX(); 
+        }
+        else
+        {
+            //move the limb
+            direct.Normalize();            
+            transform.position += speed * 1/60 * direct;
+            transform.Rotate(Vector3.back,rotation);
+        }
+    
+        //if the limb's speed reaches 0 or less call the splatter process and delete the limb object
+        if (speed <= 0)
+        {
+        
+            speed = 0;
+            Vector3Int location = splatterMap.WorldToCell(transform.position);
+            splatterMap.GetComponent<SplatterController>().Propagate(location,splatProp,color);
+            GameObject.Destroy(gameObject);
+        }
+        else
+        {
+            speed -= 1/speed/4; //reduce the speed of the limb 
+        }
+        
+       
     }
+
+    //change the dir if hitting the ybounds
     void BounceY()
     {
         float angle;
@@ -105,6 +108,7 @@ public class LimbScatter : MonoBehaviour
             direct.Normalize();        
     
     }
+    //change the dir if hitting the xbounds
     void BounceX()
     {
         float angle;

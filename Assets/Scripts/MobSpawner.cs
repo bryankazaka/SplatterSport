@@ -5,13 +5,14 @@ using UnityEngine;
 public class MobSpawner : MonoBehaviour
 {
 
-    public float spawnFreq;
-    public float spawnWaitTime;
+    public float mobsPerSecond; //how many mobs spawn per second
+    public float spawnWaitTime; //how long before mobs being to spawn 
 
     // Start is called before the first frame update
     public void Start()
     {
-        InvokeRepeating(nameof(Spawn), spawnWaitTime, spawnFreq); 
+        mobsPerSecond = 1.0f/mobsPerSecond; 
+        InvokeRepeating(nameof(Spawn), spawnWaitTime, mobsPerSecond); //repeats the instantiation of another mob object
     }
 
     // Update is called once per frame
@@ -20,7 +21,7 @@ public class MobSpawner : MonoBehaviour
         
     }
 
-    void Spawn()
+    void Spawn() //spawns a mob and enables the rendering and controller
     {        
         Transform mobClone = Instantiate(transform,position: SpawnPoint(), transform.rotation);
         mobClone.GetComponent<MobController>().enabled = true;
@@ -29,7 +30,7 @@ public class MobSpawner : MonoBehaviour
     }
     
 
-    Vector3 SpawnPoint()
+    Vector3 SpawnPoint() // randomly generates a spawnpoint within the bounds of the 3 outside screens.
     {
         int side = Random.Range(1,4);
 

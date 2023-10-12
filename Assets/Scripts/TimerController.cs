@@ -13,35 +13,29 @@ public class TimerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float secondsPerUpdate = ((float)timerSeconds)/(32.0f*3.0f);
+        float secondsPerUpdate = ((float)timerSeconds)/(32.0f*3.0f); //calculate the amount of time between brazier tile updates
 
         state = 0;
-        pos = (-16,9);
-        InvokeRepeating(nameof(Light), 0, secondsPerUpdate); 
+        pos = (-16,9); // the leftmost position of the braziers
+        InvokeRepeating(nameof(Light), 0, secondsPerUpdate); //repeat the animation
     }
 
     void Light()
     {
-        state+=1;
-        if (state > 3)
-        {
-            state = 1;
-        }
+        state+=1; // set it to the next state, cycles between 1, 2, and 3 to go between the three brazier states
         
-        timerMap.SetTile(new Vector3Int(pos.Item1,pos.Item2,0),brazierStates[state]);
-        if (state == 3)
+        timerMap.SetTile(new Vector3Int(pos.Item1,pos.Item2,0),brazierStates[state]); //set the tile for the brazier
+        
+        if (state == 3) //if its the final state move to the next tile and reset the states
         {
             pos.Item1 += 1;
+            state = 0;
         }
         
-        if (pos.Item1 > 15)
+        if (pos.Item1 > 15) // when the timer runs out destroy the object {add end round function here}
         {
             GameObject.Destroy(gameObject);
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

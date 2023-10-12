@@ -14,8 +14,7 @@ public class MobController : MonoBehaviour
     public bool[]   affects;     //Which affects alter the mob and its limbs {StickySplatter, Lead Limbs... ect} 
     private Vector3 origin; 
     private Vector3 dir;         //The Direction the Mob is moving in
-
-    private Transform[] limbs;
+    private Transform[] limbs;   //The limb objects of the mob
     
     // Start is called before the first frame update
     void Start()
