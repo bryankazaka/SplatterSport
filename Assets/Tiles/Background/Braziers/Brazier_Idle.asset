@@ -12,9 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
   m_Name: Brazier_Idle
   m_EditorClassIdentifier: 
-  m_AnimatedSprites: []
-  m_MinSpeed: 1
-  m_MaxSpeed: 1
+  m_AnimatedSprites:
+  - {fileID: 1108735400, guid: 23b78d6f346db954eb9624ce49c15827, type: 3}
+  - {fileID: 590030993, guid: 23b78d6f346db954eb9624ce49c15827, type: 3}
+  - {fileID: 990886840, guid: 23b78d6f346db954eb9624ce49c15827, type: 3}
+  - {fileID: -1833173722, guid: 23b78d6f346db954eb9624ce49c15827, type: 3}
+  - {fileID: -1328272793, guid: 23b78d6f346db954eb9624ce49c15827, type: 3}
+  - {fileID: -1325158997, guid: 23b78d6f346db954eb9624ce49c15827, type: 3}
+  - {fileID: -1610707173, guid: 23b78d6f346db954eb9624ce49c15827, type: 3}
+  - {fileID: 956162278, guid: 23b78d6f346db954eb9624ce49c15827, type: 3}
+  - {fileID: -989531728, guid: 23b78d6f346db954eb9624ce49c15827, type: 3}
+  m_MinSpeed: 10
+  m_MaxSpeed: 10
   m_AnimationStartTime: 0
   m_AnimationStartFrame: 0
   m_TileColliderType: 0
