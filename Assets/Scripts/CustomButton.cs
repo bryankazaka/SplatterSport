@@ -11,7 +11,6 @@ public class CustomButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
     public GameManager gameManager;
 
     private TextMeshProUGUI tmpText;
-    public float duration = 1;
 
     private void Awake()
     {
@@ -23,7 +22,7 @@ public class CustomButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
     }
     public void Fade()
     {
-        StartCoroutine(FadeOutText(1f));
+        StartCoroutine(FadeOutText(0.4f));
     }
     
     IEnumerator FadeOutText(float duration)

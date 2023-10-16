@@ -33,5 +33,6 @@ public class ButtonEffect : MonoBehaviour
         }
 
         imageComponent.color = targetColor; 
+        gameObject.SetActive(false);
     }
 }

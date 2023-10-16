@@ -12,12 +12,13 @@ public class GameManager : MonoBehaviour
     public AudioClip bgmMenu;
     public TextMeshProUGUI volumeText;  
     public TextMeshProUGUI rules;  
+ 
     public Slider slider;
     private AudioSource audioSource;
 
     public GameObject zoom;
 
-    public float transitionTime = 1f;
+    //public float transitionTime = 2f;
 
     private string[] rulesText = new string[] {
         "About:\nDive into the 'Colour Colliseum' and battle friends in a vibrant PVE arena. Spread your paint by defeating mobs, and claim victory by covering the most ground. Beware! Losers get to choose power-ups, so strategize wisely!",
@@ -25,6 +26,9 @@ public class GameManager : MonoBehaviour
         "Tips:\nLosing a round might offer strategic upgrades. The dynamic crowd showcases the leading player by donning their color.",
         "Controls:\nMove: Directional Keys\nAttack/Pickup/Use: R2\nDodge: L2"
     };
+
+    private string[] roundCounter = new string[] {"3","5","7"};
+    private string[] dropChoice = new string[] {"Enabled", "Disabled"};
     [SerializeField] private int currentRule;
     private int lenRules = 4;
     void Start()
@@ -73,6 +77,27 @@ public class GameManager : MonoBehaviour
             currentRule+=1;
         }
     }
+    public void roundsTextForward()
+    {
+
+    }
+
+    public void roundsTextBackwards()
+    {
+
+    }
+
+    public void dropsTextForward()
+    {
+
+    }
+
+    public void dropsTextBackwards()
+    {
+
+    }
+
+
 
     public void fadeBlack()
     {
@@ -82,7 +107,7 @@ public class GameManager : MonoBehaviour
     IEnumerator LoadBattleScene(int sceneIndex)
     {
         
-        yield return new WaitForSeconds(transitionTime);
+        yield return new WaitForSeconds(0.85f);
         SceneManager.LoadScene(sceneIndex);
         
     }
