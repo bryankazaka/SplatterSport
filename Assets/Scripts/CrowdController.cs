@@ -26,18 +26,26 @@ public class CrowdController : MonoBehaviour
         {
             //change the crowd ratios and set the tiles
             int xs = i - 21;
-            crowdHMap.SetTile(new Vector3Int(xs,6),heads[UnityEngine.Random.Range(0,4)]);
-            crowdHMap.SetAnimationTime(new Vector3Int(xs,6),UnityEngine.Random.Range(0,4));
-            crowdBMap.SetAnimationTime(new Vector3Int(xs,6),UnityEngine.Random.Range(0,4));
-            crowdHMap.SetTile(new Vector3Int(xs,7),heads[UnityEngine.Random.Range(0,4)]);
-            crowdHMap.SetAnimationTime(new Vector3Int(xs,7),UnityEngine.Random.Range(0,4));
-            crowdBMap.SetAnimationTime(new Vector3Int(xs,7),UnityEngine.Random.Range(0,4));
-            crowdHMap.SetTile(new Vector3Int(xs,8),heads[UnityEngine.Random.Range(0,4)]);
-            crowdHMap.SetAnimationTime(new Vector3Int(xs,8),UnityEngine.Random.Range(0,4));
-            crowdBMap.SetAnimationTime(new Vector3Int(xs,8),UnityEngine.Random.Range(0,4));
-            crowdHMap.SetTile(new Vector3Int(xs,9),heads[UnityEngine.Random.Range(0,4)]);
-            crowdHMap.SetAnimationTime(new Vector3Int(xs,9),UnityEngine.Random.Range(0,4));
-            crowdBMap.SetAnimationTime(new Vector3Int(xs,9),UnityEngine.Random.Range(0,4));
+            int rand = UnityEngine.Random.Range(0,4);
+            crowdHMap.SetTile(new Vector3Int(xs,6),heads[rand]);
+            rand = UnityEngine.Random.Range(0,4);
+            crowdHMap.SetAnimationTime(new Vector3Int(xs,6),rand);
+            crowdBMap.SetAnimationTime(new Vector3Int(xs,6),rand);
+            rand = UnityEngine.Random.Range(0,4);
+            crowdHMap.SetTile(new Vector3Int(xs,7),heads[rand]);
+            rand = UnityEngine.Random.Range(0,4);
+            crowdHMap.SetAnimationTime(new Vector3Int(xs,7),rand);
+            crowdBMap.SetAnimationTime(new Vector3Int(xs,7),rand);
+            rand = UnityEngine.Random.Range(0,4);
+            crowdHMap.SetTile(new Vector3Int(xs,8),heads[rand]);
+            rand = UnityEngine.Random.Range(0,4);
+            crowdHMap.SetAnimationTime(new Vector3Int(xs,8),rand);
+            crowdBMap.SetAnimationTime(new Vector3Int(xs,8),rand);
+            rand = UnityEngine.Random.Range(0,4);
+            crowdHMap.SetTile(new Vector3Int(xs,9),heads[rand]);
+            rand = UnityEngine.Random.Range(0,4);
+            crowdHMap.SetAnimationTime(new Vector3Int(xs,9),rand);
+            crowdBMap.SetAnimationTime(new Vector3Int(xs,9),rand);
            
             
         }
