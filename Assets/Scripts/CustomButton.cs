@@ -4,17 +4,46 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using TMPro; 
 
 public class CustomButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 {
     public GameManager gameManager;
 
+    private TextMeshProUGUI tmpText;
+    public float duration = 1;
+
+    private void Awake()
+    {
+        tmpText = GetComponent<TextMeshProUGUI>();
+    }
     void Start()
     {
         
     }
+    public void Fade()
+    {
+        StartCoroutine(FadeOutText(1f));
+    }
+    
+    IEnumerator FadeOutText(float duration)
+    {
+        Color originalColor = tmpText.color;
+        Color targetColor = new Color(originalColor.r, originalColor.g, originalColor.b, 0f); 
 
-    // Update is called once per frame
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            Debug.Log(elapsed);
+            tmpText.color = Color.Lerp(originalColor, targetColor, elapsed / duration);
+            yield return null; 
+        }
+
+        tmpText.color = targetColor; 
+    }
+
     void Update()
     {
         

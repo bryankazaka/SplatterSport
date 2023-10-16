@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;  
 using TMPro;  
 using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
     public AudioClip btn_highlight;
@@ -14,8 +15,10 @@ public class GameManager : MonoBehaviour
     public Slider slider;
     private AudioSource audioSource;
 
-    public Animator transition;
-    public float transitionTime = 3f;
+    public GameObject zoom;
+
+    public float transitionTime = 1f;
+
     private string[] rulesText = new string[] {
         "About:\nDive into the 'Colour Colliseum' and battle friends in a vibrant PVE arena. Spread your paint by defeating mobs, and claim victory by covering the most ground. Beware! Losers get to choose power-ups, so strategize wisely!",
         "Goal:\nDominate by covering the arena with your paint color. Defeat continuously spawning enemies, causing them to explode into paint splats. Overpaint your opponent's marks for the win! In this realm, mastery over color crowns you the Grand Master of Colors.",
@@ -69,18 +72,18 @@ public class GameManager : MonoBehaviour
         {
             currentRule+=1;
         }
+    }
+
+    public void fadeBlack()
+    {
+       StartCoroutine(LoadBattleScene(SceneManager.GetActiveScene().buildIndex+1));
+    }
+
+    IEnumerator LoadBattleScene(int sceneIndex)
+    {
         
-    }
-
-    public void ScreenWipe()
-    {
-       StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex+1));
-    }
-
-    IEnumerator LoadScene(int sceneIndex)
-    {
-        transition.SetTrigger("Switch");
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(sceneIndex);
+        
     }
 }
