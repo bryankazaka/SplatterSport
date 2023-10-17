@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    const int GREEN = 0, YELLOW = 1, RED = 2, BLUE = 3;
+    const int BLUE = 0, YELLOW = 1, RED = 2, GREEN = 3;
     private const int BRUSH = 0, PENCIL = 1, ROLLER = 2;
 
-    public int colour = GREEN;
+    public int colour = BLUE;
     public int weapon = ROLLER;
     public float speed;
     public float damageMult = 1.00f;

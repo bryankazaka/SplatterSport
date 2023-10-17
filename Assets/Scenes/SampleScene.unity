@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 234127157}
   - component: {fileID: 234127159}
   - component: {fileID: 234127158}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: canvasBroke_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,7 +754,7 @@ GameObject:
   - component: {fileID: 360360713}
   - component: {fileID: 360360715}
   - component: {fileID: 360360714}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bucketL_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1221,7 +1221,7 @@ GameObject:
   - component: {fileID: 673568776}
   - component: {fileID: 673568778}
   - component: {fileID: 673568777}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bucketL_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1453,7 +1453,9 @@ GameObject:
   - component: {fileID: 909289024}
   - component: {fileID: 909289027}
   - component: {fileID: 909289026}
-  m_Layer: 0
+  - component: {fileID: 909289029}
+  - component: {fileID: 909289028}
+  m_Layer: 3
   m_Name: bucketM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1564,7 +1566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596a40ad05e286347a1426a40940d5d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobsPerSecond: 1
+  mobsPerSecond: 0
   spawnWaitTime: 0
 --- !u!114 &909289027
 MonoBehaviour:
@@ -1582,8 +1584,81 @@ MonoBehaviour:
   limbSpeed: 10
   limbSpread: 45
   splatProp: 1
-  health: 0
+  health: 12
   affects: 
+  players: {fileID: 919202794}
+--- !u!61 &909289028
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909289022}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!50 &909289029
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909289022}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &919202793
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,7 +1819,9 @@ GameObject:
   - component: {fileID: 1028168509}
   - component: {fileID: 1028168508}
   - component: {fileID: 1028168507}
-  m_Layer: 0
+  - component: {fileID: 1028168512}
+  - component: {fileID: 1028168511}
+  m_Layer: 3
   m_Name: canvasM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1782,7 +1859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596a40ad05e286347a1426a40940d5d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobsPerSecond: 0.5
+  mobsPerSecond: 0
   spawnWaitTime: 0
 --- !u!114 &1028168508
 MonoBehaviour:
@@ -1800,8 +1877,9 @@ MonoBehaviour:
   limbSpeed: 10
   limbSpread: 45
   splatProp: 1.1
-  health: 0
+  health: 20
   affects: 
+  players: {fileID: 919202794}
 --- !u!95 &1028168509
 Animator:
   serializedVersion: 5
@@ -1875,6 +1953,78 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1028168511
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028168505}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.5, y: 2.35}
+    newSize: {x: 1.5, y: 2.35}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 2.35}
+  m_EdgeRadius: 0
+--- !u!50 &1028168512
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028168505}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1042447539
 GameObject:
   m_ObjectHideFlags: 0
@@ -6189,7 +6339,7 @@ Tilemap:
       - {fileID: -1610707173, guid: 23b78d6f346db954eb9624ce49c15827, type: 3}
       - {fileID: 956162278, guid: 23b78d6f346db954eb9624ce49c15827, type: 3}
       - {fileID: -989531728, guid: 23b78d6f346db954eb9624ce49c15827, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 2, y: 8, z: 0}
@@ -6468,7 +6618,7 @@ GameObject:
   - component: {fileID: 1277403604}
   - component: {fileID: 1277403606}
   - component: {fileID: 1277403605}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bucketL_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6566,7 +6716,7 @@ GameObject:
   - component: {fileID: 1357114401}
   - component: {fileID: 1357114403}
   - component: {fileID: 1357114402}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: canvasBroke_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6885,7 +7035,7 @@ GameObject:
   - component: {fileID: 1399933334}
   - component: {fileID: 1399933336}
   - component: {fileID: 1399933335}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: canvasBroke_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7461,6 +7611,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 1157402573
       objectReference: {fileID: 0}
+    - target: {fileID: 6457056891192495987, guid: 5a5e3ccc860c1634fbea428e29c323aa, type: 3}
+      propertyPath: enemyLayers.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6718407317814077976, guid: 5a5e3ccc860c1634fbea428e29c323aa, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.6914825
@@ -7558,7 +7712,7 @@ GameObject:
   - component: {fileID: 1682149145}
   - component: {fileID: 1682149147}
   - component: {fileID: 1682149146}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bucketL_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7655,7 +7809,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1720018573}
   - component: {fileID: 1720018574}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mobs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7702,7 +7856,7 @@ GameObject:
   - component: {fileID: 1733258200}
   - component: {fileID: 1733258202}
   - component: {fileID: 1733258201}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: canvasBroke_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

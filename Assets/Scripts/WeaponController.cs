@@ -9,7 +9,7 @@ using Unity.Mathematics;
 
 public class WeaponController : MonoBehaviour
 {
-    const int GREEN = 1, YELLOW = 2, RED = 3, BLUE = 4;
+   
     private const int BRUSH = 0, PENCIL = 1, ROLLER = 2;
     public float weaponRange = 1f;
     public float minWeaponRange = 0.5f;
@@ -36,7 +36,7 @@ public class WeaponController : MonoBehaviour
         animator = GetComponent<Animator>();
         setWeaponType = GetComponent<SetWeaponType>();
         initWeapon(playerController.colour,playerController.weapon);
-        print("here");
+        
     }
     
     private void FixedUpdate()
@@ -73,10 +73,10 @@ public class WeaponController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
 
-        if (animator.GetCurrentAnimatorStateInfo(0).shortNameHash == Animator.StringToHash("Roller_Swing"))
+        if (animator.GetCurrentAnimatorStateInfo(0).shortNameHash == Animator.StringToHash("Swing"))
         {
-            print("attacking");
-            List<Collider2D> currentHits = (Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers)).ToList();
+            
+            List<Collider2D> currentHits = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers).ToList();
             foreach (Collider2D hit in currentHits)
             {
                 if(!hitEnemies.Contains(hit)){
@@ -126,7 +126,7 @@ public class WeaponController : MonoBehaviour
                 //set colour of weapon
                 break;
             default:
-                weapon = new Brush(GREEN);
+                weapon = new Brush(colour);
                 setWeaponType.Set(BRUSH);
                 break;
         }
@@ -138,7 +138,9 @@ public class WeaponController : MonoBehaviour
     
     private void damageEnemy(Collider2D hit)
     {
+   
         float dmgAmount = weapon.getDamage() * playerController.damageMult;
+        hit.gameObject.GetComponent<MobController>().takeDamage(playerController.gameObject, dmgAmount);
         //deal dmg to hit enemy
     }
 

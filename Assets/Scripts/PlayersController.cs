@@ -13,10 +13,7 @@ public class PlayersController : MonoBehaviour
 
     public void StartGame()
     {
-        foreach (Transform child in transform)
-        {
-            child.gameObject.SetActive(false);
-        }
+        
     }
     // Update is called once per frame
     void Update()
