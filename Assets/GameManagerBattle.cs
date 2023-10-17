@@ -14,6 +14,8 @@ public class GameManagerBattle : MonoBehaviour
     private int roundIndex = 0;
     private int dropIndex = 0;
 
+    private bool inBattle = false;
+
     void Start()
     {
         tRounds.text = "Rounds:" + "\n";
@@ -22,8 +24,19 @@ public class GameManagerBattle : MonoBehaviour
 
     void Update()
     {
-        tRounds.text = "Rounds:" + "\n" + roundCounter[roundIndex];
-        tDrops.text = "Crowd Drops:" + "\n" + dropChoice[dropIndex];
+        if (!inBattle)
+        {
+           
+            tRounds.text = "Rounds:" + "\n" + roundCounter[roundIndex];
+            tDrops.text = "Crowd Drops:" + "\n" + dropChoice[dropIndex];
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                inBattle = true;
+                startBattle();
+                tRounds.ClearMesh();
+                tDrops.ClearMesh();
+            }
+        }
 
     }
 
@@ -51,6 +64,11 @@ public class GameManagerBattle : MonoBehaviour
         }
     }
 
+    public void startBattle()
+    {
+        gameObject.GetComponentInChildren<MainSpawner>().enabled = true;
+        gameObject.GetComponentInChildren<PlayersController>().StartGame();
+    }
     public void dropsTextBackwards()
     {
         if(dropIndex !=0)
