@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5944297718631748012}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 6457056891192495987}
   - component: {fileID: 2837468935128039705}
   - component: {fileID: 1924558837840999890}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,9 +106,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -105541197
-  m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 63926866fcc0c4967bbb385558b9cf0c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -160,9 +160,8 @@ MonoBehaviour:
   attackPoint: {fileID: 5944297718631748012}
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 8388608
-  newAnimatorController: {fileID: 22100000, guid: 6c4a08ef33e2c4e83892d6230d6d7554,
-    type: 2}
+    m_Bits: 128
+  newAnimatorController: {fileID: 22100000, guid: 6c4a08ef33e2c4e83892d6230d6d7554, type: 2}
   screenPosition: {x: 0, y: 0, z: 0}
   worldPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &2837468935128039705
@@ -208,7 +207,7 @@ GameObject:
   - component: {fileID: 6942991261721749655}
   - component: {fileID: 515415895499830905}
   - component: {fileID: 6834475146123955850}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,9 +268,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -44025399
-  m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingLayerID: 223821915
+  m_SortingLayer: 4
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d372a32f5dd0b4b0eb93e8fe391de297, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
