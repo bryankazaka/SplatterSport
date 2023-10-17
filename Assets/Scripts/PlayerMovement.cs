@@ -7,14 +7,14 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
     public Animator animator;
-
+    private PlayerController playerController;
 
     Vector2 movement;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerController = GetComponent<PlayerController>();
     }
 
     //function that runs every frame (like update) but is better for physics stuff
