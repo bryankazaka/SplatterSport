@@ -36,7 +36,7 @@ public class LimbScatter : MonoBehaviour
         
         var SpriteRender = transform.GetComponent<SpriteRenderer>();
         SpriteRender.enabled = true;
-        SpriteRender.color = colors[color-1];
+        SpriteRender.color = colors[color];
     }
 
     void Update()
@@ -66,7 +66,7 @@ public class LimbScatter : MonoBehaviour
         
             speed = 0;
             Vector3Int location = splatterMap.WorldToCell(transform.position);
-            splatterMap.GetComponent<SplatterController>().Propagate(location,splatProp,color);
+            splatterMap.GetComponent<SplatterController>().Propagate(location,splatProp,color+1);
             GameObject.Destroy(gameObject);
         }
         else
