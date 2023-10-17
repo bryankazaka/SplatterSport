@@ -48,6 +48,7 @@ public class WeaponController : MonoBehaviour
         target = Vector3.Normalize(target)*1.5f;
         target = playerController.transform.position + target;
         transform.position = target;
+        attackPoint.position = target;
         
        
         if (math.abs(angle) > 90)

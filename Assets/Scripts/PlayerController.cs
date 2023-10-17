@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         colour = GREEN;
         weapon = ROLLER;
-        print(colour + " " + weapon);
+    
         playerMovement = GetComponent<PlayerMovement>();
         weaponController = GetComponentInChildren<WeaponController>();
         spriteRenderer = GetComponent<SpriteRenderer>();

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline;
 using UnityEngine;
 
 public class PlayersController : MonoBehaviour
@@ -14,7 +15,7 @@ public class PlayersController : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            child.gameObject.SetActive(true);
+            child.gameObject.SetActive(false);
         }
     }
     // Update is called once per frame
