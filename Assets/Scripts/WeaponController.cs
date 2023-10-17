@@ -50,12 +50,13 @@ public class WeaponController : MonoBehaviour
     
     private void FixedUpdate()
     {
-       Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
+        Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouse = new Vector3(mouse.x,mouse.y,0);
         Vector3 target = mouse - playerController.transform.position;
         float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
-        
-        target = playerController.transform.position + Vector3.Normalize(target) * 2.0f;
+        target = Vector3.Normalize(target)*1.5f;
+        Debug.Log(target);
+        target = playerController.transform.position + target;
         transform.position = target;
         
        
