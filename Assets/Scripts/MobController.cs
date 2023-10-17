@@ -20,6 +20,7 @@ public class MobController : MonoBehaviour
     private Vector3 dir;         //The Direction the Mob is moving in
     private Transform[] limbs;   //The limb objects of the mob
     public Transform players;
+    private float knockBackSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,10 +47,15 @@ public class MobController : MonoBehaviour
           
     }
 
+    void knockBack(float strenght)
+    {
+        knockBackSpeed = strenght;
+    }
     
     public void takeDamage(GameObject Player, float damage)
     {
         health -= damage;
+        
         color = Player.GetComponent<PlayerController>().colour;
         var SpriteRender = transform.GetComponent<SpriteRenderer>();
         
@@ -57,6 +63,7 @@ public class MobController : MonoBehaviour
         {
             Splatter();
         }
+        knockBack(damage/5);
         var newCol =  colors[color];
         byte byteR = (byte)Mathf.Clamp(newCol.r - newCol.r*(health/maxHealth), 0f, 255f);
         byte byteG = (byte)Mathf.Clamp(newCol.g - newCol.g*(health/maxHealth), 0f, 255f);
@@ -76,6 +83,7 @@ public class MobController : MonoBehaviour
     }
     void Update()
     {
+        
         float dist = 0.0f;
         foreach (Transform player in players)
         {
@@ -85,8 +93,18 @@ public class MobController : MonoBehaviour
                 target = player.position;
             }
         }
-        dir = Vector3.Normalize(target - transform.position);
-        transform.position += dir * speed * 1/60;
+        
+        if (knockBackSpeed >= 0)
+        {
+            Debug.Log(knockBackSpeed);
+            transform.position += -dir * knockBackSpeed * 1/60;
+            knockBackSpeed -= 0.1f;
+        }
+        else
+        {
+            dir = Vector3.Normalize(target - transform.position);
+            transform.position += dir * speed * 1/60;
+        }
 
     }
 }

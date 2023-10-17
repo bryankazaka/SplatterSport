@@ -132,8 +132,8 @@ public class WeaponController : MonoBehaviour
         }
 
         attackRange = weapon.getRange();
-        attackSpeed = weapon.getAttackSpeed();
-
+        //attackSpeed = weapon.getAttackSpeed();
+        animator.SetFloat("Speed",attackSpeed);
     }
     
     private void damageEnemy(Collider2D hit)
