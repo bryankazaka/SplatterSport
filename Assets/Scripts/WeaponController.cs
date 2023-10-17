@@ -5,6 +5,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Mathematics;
 
 public class WeaponController : MonoBehaviour
 {
@@ -49,26 +50,38 @@ public class WeaponController : MonoBehaviour
     
     private void FixedUpdate()
     {
-        screenPosition = Input.mousePosition;
-        worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-        Vector3 direction = worldPosition - playerTransform.position;
-        direction.z = 0;
-
-        float distance = direction.magnitude;
-        // Check if the position is outside the sphere.
-        if (distance > weaponRange)
-        {
-            Vector3 closestPoint = playerTransform.position + direction.normalized * weaponRange;
-            worldPosition = closestPoint;
+       Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        
+        Vector3 target = mouse - playerController.transform.position;
+        float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
+        
+        target = playerController.transform.position + Vector3.Normalize(target) * 2.0f;
+        transform.position = target;
+        
+       
+        if (math.abs(angle) > 90)
+        {           
+           
+            gameObject.GetComponent<SpriteRenderer>().flipY = true;
+            
         }
-        if (distance < minWeaponRange)
+        else
         {
-            Vector3 closestPoint = playerTransform.position + direction.normalized * minWeaponRange;
-            worldPosition = closestPoint;
+            gameObject.GetComponent<SpriteRenderer>().flipY = false;
         }
 
-        Quaternion rotation = Quaternion.LookRotation(Vector3.forward, direction);
-        Vector3 adjustedPosition = worldPosition - rotation * (Vector3.up * 1.5f);
+        if (angle > 0)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        }
+        
+        
+        // Apply the rotation to the child GameObject (the one with the sprite)
+        transform.rotation = Quaternion.Euler(0, 0, angle);
 
 
         if (animator.GetCurrentAnimatorStateInfo(0).shortNameHash == Animator.StringToHash("Roller_Swing"))
@@ -88,13 +101,17 @@ public class WeaponController : MonoBehaviour
             if (hitEnemies.Count > 0){
                 hitEnemies.Clear();
             }
-            transform.rotation = Quaternion.Euler(0, 0, rotation.eulerAngles.z);
-            transform.position = adjustedPosition;
+
         }
 
         if (Input.GetButtonDown("Fire1"))
         {
-            Attack();
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Swing"))
+            {
+                Attack();
+            }
+
+            
         }
 
     }
@@ -138,6 +155,7 @@ public class WeaponController : MonoBehaviour
 
     public void Attack()
     {
+        
         animator.SetTrigger("Attack");
 
     }
