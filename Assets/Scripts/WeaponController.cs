@@ -9,12 +9,16 @@ using Unity.Mathematics;
 
 public class WeaponController : MonoBehaviour
 {
-   
+    
     private const int BRUSH = 0, PENCIL = 1, ROLLER = 2;
     public float weaponRange = 1f;
+    private float maxRange ;
     public float minWeaponRange = 0.5f;
     public float attackRange = 0.5f;
     public float attackSpeed = 1.00f;
+    private float startAttackTime;
+    private bool isAttacking;
+    private bool attackHold;
     private Transform playerTransform;
     public Transform attackPoint;
     public LayerMask enemyLayers;
@@ -28,6 +32,7 @@ public class WeaponController : MonoBehaviour
     private PlayerController playerController;
     private List<Collider2D> hitEnemies = new List<Collider2D>();
 
+
     private void Awake()
     {
         playerController = GetComponentInParent<PlayerController>();
@@ -36,9 +41,10 @@ public class WeaponController : MonoBehaviour
         animator = GetComponent<Animator>();
         setWeaponType = GetComponent<SetWeaponType>();
         initWeapon(playerController.colour,playerController.weapon);
-        
+       maxRange = attackRange;
     }
-    
+     
+
     private void FixedUpdate()
     {
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -84,6 +90,13 @@ public class WeaponController : MonoBehaviour
                     damageEnemy(hit);
                 }
             }
+
+            if (( Time.time - startAttackTime ) >= (1/attackSpeed))
+            {
+                startAttackTime = Time.time;                
+            }                      
+            attackRange = MathF.Sin((Time.time - startAttackTime)/(1/attackSpeed) * math.PI) * maxRange;  
+
         }
         else
         {
@@ -92,15 +105,17 @@ public class WeaponController : MonoBehaviour
             }
 
         }
-
-        if (Input.GetButtonDown("Fire1"))
+        
+       
+        if (Input.GetButtonDown("Fire1") || Input.GetButton("Fire1"))
         {
-            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Swing"))
+
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Swing")) // if I press and its not attacking attack
             {
                 Attack();
-            }
-
-            
+                startAttackTime = Time.time;                
+            }          
+           
         }
 
     }
@@ -158,5 +173,20 @@ public class WeaponController : MonoBehaviour
             return;
         }
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+     float GetAnimationClipLengthByName(string clipName)
+    {
+        float length = 0f;
+        AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0); // Layer 0
+        foreach (var info in clipInfo)
+        {
+            if (info.clip.name == clipName)
+            {
+                length = info.clip.length;
+                break;
+            }
+        }
+        return length;
     }
 }
