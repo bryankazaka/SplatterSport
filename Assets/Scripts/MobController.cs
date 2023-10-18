@@ -96,7 +96,7 @@ public class MobController : MonoBehaviour
         
         if (knockBackSpeed >= 0)
         {
-            Debug.Log(knockBackSpeed);
+            
             transform.position += -dir * knockBackSpeed * 1/60;
             knockBackSpeed -= 0.1f;
         }

@@ -8237,7 +8237,7 @@ Tilemap:
       - {fileID: -1610707173, guid: 23b78d6f346db954eb9624ce49c15827, type: 3}
       - {fileID: 956162278, guid: 23b78d6f346db954eb9624ce49c15827, type: 3}
       - {fileID: -989531728, guid: 23b78d6f346db954eb9624ce49c15827, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -12, y: 8, z: 0}
@@ -9981,11 +9981,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6457056891192495987, guid: 5a5e3ccc860c1634fbea428e29c323aa, type: 3}
       propertyPath: attackRange
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6457056891192495987, guid: 5a5e3ccc860c1634fbea428e29c323aa, type: 3}
       propertyPath: attackSpeed
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6457056891192495987, guid: 5a5e3ccc860c1634fbea428e29c323aa, type: 3}
       propertyPath: weaponRange
@@ -10224,7 +10224,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720018571}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd75355d2bb150d4ebaea5c8a7998ca5, type: 3}
   m_Name: 
