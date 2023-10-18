@@ -457,8 +457,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5155282}
-  m_AnchoredPosition: {x: 0.00010681, y: -7.3591}
-  m_SizeDelta: {x: 800, y: 448.08}
+  m_AnchoredPosition: {x: 0.000043928, y: -3.6914}
+  m_SizeDelta: {x: 800, y: 468.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &168568307
 Animator:
@@ -501,7 +501,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 173627399, guid: b493a1c18508b4d1da5b0fdf1a5321d8, type: 3}
+  m_Sprite: {fileID: -271618250, guid: 4f398d059c7e14ae6b6094e6937241fd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -939,7 +939,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1007092720, guid: b493a1c18508b4d1da5b0fdf1a5321d8, type: 3}
+  m_Sprite: {fileID: -409256138, guid: 4f398d059c7e14ae6b6094e6937241fd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1456,8 +1456,10 @@ MonoBehaviour:
   bgmMenu: {fileID: 8300000, guid: b1cb6a63645c0c546b469585d00e299e, type: 3}
   volumeText: {fileID: 297596021}
   rules: {fileID: 1881003997}
+  boardDrop: {fileID: 168568305}
+  btnClose: {fileID: 830601591}
   slider: {fileID: 2071060984}
-  zoom: {fileID: 0}
+  zoom: {fileID: 2053060650}
   currentRule: 0
 --- !u!4 &694199261
 Transform:
@@ -2187,8 +2189,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00028467, y: -0.001585}
-  m_SizeDelta: {x: 800, y: 450.83}
+  m_AnchoredPosition: {x: 0.00028467, y: -0.00039053}
+  m_SizeDelta: {x: 800, y: 475.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &971513332
 Animator:
@@ -2766,7 +2768,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -73, y: 107}
+  m_AnchoredPosition: {x: -73, y: 123.1}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1881003997
@@ -4037,6 +4039,18 @@ MonoBehaviour:
       - m_Target: {fileID: 694199260}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: fadeBlack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 694199260}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: clearMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

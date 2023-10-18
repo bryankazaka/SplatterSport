@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     public AudioClip bgmMenu;
     public TextMeshProUGUI volumeText;  
     public TextMeshProUGUI rules;  
+    public GameObject boardDrop;
+
+    public Button btnClose;
  
     public Slider slider;
     private AudioSource audioSource;
@@ -110,5 +113,13 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.85f);
         SceneManager.LoadScene(sceneIndex);
         
+    }
+
+    public void clearMenu()
+    {
+        if(boardDrop.gameObject.activeSelf)
+        {
+            btnClose.onClick.Invoke();
+        }   
     }
 }
