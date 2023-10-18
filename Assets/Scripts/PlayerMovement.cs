@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// using In
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerController = GetComponent<PlayerController>();
     }
+    public void OnMove(InputAction.CallbackContext ctx) => movement = ctx.ReadValue<Vector2>();
 
     //function that runs every frame (like update) but is better for physics stuff
     void Update()
