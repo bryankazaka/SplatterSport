@@ -14,12 +14,19 @@ public class GameManagerBattle : MonoBehaviour
     private int roundIndex = 0;
     private int dropIndex = 0;
 
+    public AudioClip btn_highlight;
+    public AudioClip btn_click;
+
+    private AudioSource audioSource;
+
     private bool inBattle = false;
 
     void Start()
     {
         tRounds.text = "Rounds:" + "\n";
         tDrops.text = "Crowd Drops:" + "\n";
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.volume = 0.3f;  
     }
 
     void Update()
@@ -38,6 +45,16 @@ public class GameManagerBattle : MonoBehaviour
             }
         }
 
+    }
+
+    public void btnHighlight()
+    {
+        audioSource.PlayOneShot(btn_highlight, 6.0f);
+    }
+
+    public void btnClick()
+    {
+        audioSource.PlayOneShot(btn_click, 6.0f);
     }
 
     public void roundsTextForward()
