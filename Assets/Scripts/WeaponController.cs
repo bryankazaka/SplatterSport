@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Mathematics;
+using UnityEngine.InputSystem;
 
 public class WeaponController : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class WeaponController : MonoBehaviour
     private SetWeaponType setWeaponType;
     private PlayerController playerController;
     private List<Collider2D> hitEnemies = new List<Collider2D>();
+    public InputActionAsset inputActionAsset;
 
 
     private void Awake()
@@ -41,15 +43,27 @@ public class WeaponController : MonoBehaviour
         animator = GetComponent<Animator>();
         setWeaponType = GetComponent<SetWeaponType>();
         initWeapon(playerController.colour,playerController.weapon);
-       maxRange = attackRange;
+        maxRange = attackRange;
+
+
+    
     }
      
 
     private void FixedUpdate()
     {
-        Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mouse = new Vector3(mouse.x,mouse.y,0);
-        Vector3 target = mouse - playerController.transform.position;
+        Vector3 target;
+        if (Input.mousePresent)
+        {
+            Vector3 mouse = Camera.main.ScreenToWorldPoint( Mouse.current.position.ReadValue());
+            mouse = new Vector3(mouse.x,mouse.y,0);
+            target = mouse - playerController.transform.position;
+        }
+        else
+        {
+            target = new(0,0,0); // Add The vector of the aim here Cameron
+        }
+       
         float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
         target = Vector3.Normalize(target)*1.5f;
         target = playerController.transform.position + target;
@@ -90,12 +104,13 @@ public class WeaponController : MonoBehaviour
                     damageEnemy(hit);
                 }
             }
-
-            if (( Time.time - startAttackTime ) >= (1/attackSpeed))
+            var lenA = animator.GetCurrentAnimatorStateInfo(0).length;
+            if (( Time.time - startAttackTime ) >= lenA)
             {
                 startAttackTime = Time.time;                
-            }                      
-            attackRange = MathF.Sin((Time.time - startAttackTime)/(1/attackSpeed) * math.PI) * maxRange;  
+            }               
+            Debug.Log( MathF.Sin((Time.time - startAttackTime)/lenA * math.PI));       
+            attackRange = MathF.Sin((Time.time - startAttackTime)/lenA * math.PI) * maxRange;  
 
         }
         else
@@ -113,7 +128,7 @@ public class WeaponController : MonoBehaviour
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Swing")) // if I press and its not attacking attack
             {
                 Attack();
-                startAttackTime = Time.time;                
+                          
             }          
            
         }
@@ -163,6 +178,7 @@ public class WeaponController : MonoBehaviour
     {
         
         animator.SetTrigger("Attack");
+        startAttackTime = Time.time;      
 
     }
 
