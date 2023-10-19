@@ -16,7 +16,7 @@ public class WeaponController : MonoBehaviour
     private float maxRange ;
     public float minWeaponRange = 0.5f;
     public float attackRange = 0.5f;
-    public float attackSpeed = 1.00f;
+    public float attackSpeed;
     private float startAttackTime;
     private bool isAttacking;
     private Transform playerTransform;
@@ -33,8 +33,9 @@ public class WeaponController : MonoBehaviour
     private List<Collider2D> hitEnemies = new List<Collider2D>();
 
     public PlayerInput playerInput;
-    private bool isMouse;
-
+    public bool isMouse;
+    private Vector2 joystickDirection;
+    private  Vector3 target;
 
     private void Awake()
     {
@@ -47,22 +48,14 @@ public class WeaponController : MonoBehaviour
         initWeapon(playerController.colour,playerController.weapon);
         maxRange = attackRange;
         playerInput = GetComponentInParent<PlayerInput>();
-        foreach (var device in playerInput.devices)
-        {
-            if (device.GetType() == typeof(Keyboard))
-            {
-                
-            }
-        }
-        
-
+        isMouse = playerInput.currentControlScheme == "Keyboard";
+        animator.SetFloat("Speed",attackSpeed);
     }
     
 
     private void FixedUpdate()
     {
-        Vector3 target;
-        isMouse = true;
+       
         if (isMouse)
         {
             Vector3 mouse = Camera.main.ScreenToWorldPoint( Mouse.current.position.ReadValue());
@@ -71,7 +64,18 @@ public class WeaponController : MonoBehaviour
         }
         else
         {
-            target = new(0,0,0); // Add The vector of the aim here Cameron _________________________________________________________
+            var tempTarget = new Vector3(joystickDirection.x,joystickDirection.y,0);
+            if (!(tempTarget == new Vector3(0,0,0)))
+            {
+                target = tempTarget;
+            }
+            else
+            {
+                target = new(1,0,0);
+            }
+
+            // Add The vector of the aim here Cameron _________________________________________________________
+            
         }
        
         float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
@@ -177,7 +181,7 @@ public class WeaponController : MonoBehaviour
 
         attackRange = weapon.getRange();
         //attackSpeed = weapon.getAttackSpeed();
-        animator.SetFloat("Speed",attackSpeed);
+        
     }
     
     private void damageEnemy(Collider2D hit)
@@ -198,16 +202,8 @@ public class WeaponController : MonoBehaviour
 
     }
 
-    public void OnAttack(InputAction.CallbackContext ctx)
-    {
-        
-        
-            
-        Attack();
-                          
-         
-    }
-
+    public void OnAttack(InputAction.CallbackContext ctx) => Attack();
+    public void OnAim(InputAction.CallbackContext ctx) => joystickDirection = ctx.ReadValue<Vector2>();
 
     void OnDrawGizmosSelected()
     {
