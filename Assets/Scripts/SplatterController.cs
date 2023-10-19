@@ -55,7 +55,22 @@ public class SplatterController : MonoBehaviour
         }
     }
 
-    
+  public int getWinner()
+  {
+    float amount = 0;
+    float[] points = ArrayCount();
+    int winner = 0;
+    for (int i = 0; i < points.Length; i++)
+    {
+        if (points[i] > amount)
+        {
+            amount = points[i];
+            winner = i;
+        
+        }
+    }
+    return winner;
+  }  
 
    
 
