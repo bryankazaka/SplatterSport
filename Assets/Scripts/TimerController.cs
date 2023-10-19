@@ -67,7 +67,7 @@ public class TimerController : MonoBehaviour
 
     void EndRound()
     {
-        Debug.Log("Round End");
+        gameObject.GetComponentInParent<GameManagerBattle>().EndRound();
     }
 
 }
