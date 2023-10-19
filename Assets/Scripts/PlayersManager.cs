@@ -4,6 +4,7 @@ using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class PlayersManager : MonoBehaviour
 {
     [SerializeField] private int numberOfPlayers = 0;

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    const int BLUE = 0, YELLOW = 1, GREEN = 2, RED = 3;
+    const int BLUE = 0, YELLOW = 1, GREEN = 2, PINK = 3;
     private const int BRUSH = 0, PENCIL = 1, ROLLER = 2;
 
     public int colour = BLUE;
