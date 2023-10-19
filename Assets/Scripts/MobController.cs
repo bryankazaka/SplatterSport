@@ -87,7 +87,9 @@ public class MobController : MonoBehaviour
         float dist = 0.0f;
         foreach (Transform player in players)
         {
-            if (dist < (player.position - transform.position).magnitude)
+            ;
+            if (dist < (player.position - transform.position).magnitude 
+                && !player.gameObject.GetComponent<PlayerMovement>().isStunned)
             {
                 dist = (player.position - transform.position).magnitude;
                 target = player.position;

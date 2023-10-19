@@ -26,6 +26,10 @@ public class PlayerMovement : MonoBehaviour
         // movement.z = 0; 
     } 
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("I GOT HIT");
+    }
     //function that runs every frame (like update) but is better for physics stuff
     void Update()
     {

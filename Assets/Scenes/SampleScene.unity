@@ -3610,7 +3610,7 @@ Transform:
   m_GameObject: {fileID: 909289022}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.54, y: 1.47, z: 0}
+  m_LocalPosition: {x: -5, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3705,7 +3705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596a40ad05e286347a1426a40940d5d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobsPerSecond: 2
+  mobsPerSecond: 0.1
   spawnWaitTime: 0
 --- !u!114 &909289027
 MonoBehaviour:
@@ -3723,7 +3723,7 @@ MonoBehaviour:
   limbSpeed: 10
   limbSpread: 45
   splatProp: 1
-  health: 12
+  health: 20
   affects: 
   players: {fileID: 919202794}
 --- !u!61 &909289028
@@ -3758,7 +3758,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0053567886, y: -0.07767391}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3769,7 +3769,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.80715466, y: 0.7803707}
   m_EdgeRadius: 0
 --- !u!50 &909289029
 Rigidbody2D:
@@ -4343,7 +4343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596a40ad05e286347a1426a40940d5d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobsPerSecond: 1
+  mobsPerSecond: 0
   spawnWaitTime: 0
 --- !u!114 &1028168508
 MonoBehaviour:
@@ -4361,7 +4361,7 @@ MonoBehaviour:
   limbSpeed: 10
   limbSpread: 45
   splatProp: 1.1
-  health: 20
+  health: 30
   affects: 
   players: {fileID: 919202794}
 --- !u!95 &1028168509
@@ -4493,10 +4493,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.05142498, y: -0.012856007}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4507,7 +4507,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2.35}
+  m_Size: {x: 1.105742, y: 2.0671644}
   m_EdgeRadius: 0
 --- !u!1 &1042447539
 GameObject:
@@ -8639,7 +8639,7 @@ Tilemap:
       - {fileID: -727991476, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: 320087227, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: -474964340, guid: 3037628c76454664798a2c475ca22a35, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 1
   - first: {x: -9, y: 8, z: 0}
