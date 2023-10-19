@@ -37,13 +37,7 @@ public class GameManagerBattle : MonoBehaviour
            
             tRounds.text = "Rounds:" + "\n" + roundCounter[roundIndex];
             tDrops.text = "Crowd Drops:" + "\n" + dropChoice[dropIndex];
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                inBattle = true;
-                startBattle();
-                tRounds.ClearMesh();
-                tDrops.ClearMesh();
-            }
+            
         }
 
     }

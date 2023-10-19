@@ -15,6 +15,7 @@ public class SplatterController : MonoBehaviour
     private int[,] splatterStruct; //data representation of the grid
     private List<(int,int)> structUpdate; //which tiles have been updated since the last frame
     public Tilemap splatterMap; //the tilemap being updated
+    public TileBase[] startingColors; 
     public TileBase[] colors; //the colors of the splatters
     public GameObject crowd; //the crowd object that refelects the arena paint ratio states
 
@@ -25,7 +26,10 @@ public class SplatterController : MonoBehaviour
         structUpdate =  new List<(int,int)>();    
     }
 
-
+    public void SetColors(int[] newColors)
+    {
+        
+    }
     float[] ArrayCount() //finds the amount of each paint splatter color.
     {
         float[] newD = new float[4];

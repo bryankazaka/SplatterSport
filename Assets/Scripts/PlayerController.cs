@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public int colour = BLUE;
     public int weapon = ROLLER;
+    public int playerNum; //0 for player 1, 1 for player 2 ect
     public float speed;
     public float damageMult = 1.00f;
     public float attackSpeed = 1.00f;
