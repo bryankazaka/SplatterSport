@@ -16,7 +16,7 @@ public class WeaponController : MonoBehaviour
     private float maxRange ;
     public float minWeaponRange = 0.5f;
     public float attackRange = 0.5f;
-    public float attackSpeed = 1.00f;
+    public float attackSpeed;
     private float startAttackTime;
     private bool isAttacking;
     private Transform playerTransform;
@@ -35,6 +35,7 @@ public class WeaponController : MonoBehaviour
     public PlayerInput playerInput;
     public bool isMouse;
     private Vector2 joystickDirection;
+    private  Vector3 target;
 
     private void Awake()
     {
@@ -48,12 +49,13 @@ public class WeaponController : MonoBehaviour
         maxRange = attackRange;
         playerInput = GetComponentInParent<PlayerInput>();
         isMouse = playerInput.currentControlScheme == "Keyboard";
+        animator.SetFloat("Speed",attackSpeed);
     }
     
 
     private void FixedUpdate()
     {
-        Vector3 target;
+       
         if (isMouse)
         {
             Vector3 mouse = Camera.main.ScreenToWorldPoint( Mouse.current.position.ReadValue());
@@ -62,7 +64,18 @@ public class WeaponController : MonoBehaviour
         }
         else
         {
-            target = new Vector3(joystickDirection.x,joystickDirection.y,0); 
+            var tempTarget = new Vector3(joystickDirection.x,joystickDirection.y,0);
+            if (!(tempTarget == new Vector3(0,0,0)))
+            {
+                target = tempTarget;
+            }
+            else
+            {
+                target = new(1,0,0);
+            }
+
+            // Add The vector of the aim here Cameron _________________________________________________________
+            
         }
        
         float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
@@ -147,32 +160,28 @@ public class WeaponController : MonoBehaviour
         {
             case BRUSH:
                 weapon = new Brush(colour);
-                animator.SetInteger("Weapon",BRUSH);
-                animator.SetInteger("Colour",colour);
+                // setWeaponType.Set(BRUSH);
                 //set colour of weapon
                 break;
             case PENCIL:
                 weapon = new Pencil(colour);
-                animator.SetInteger("Weapon",PENCIL);
-                animator.SetInteger("Colour",colour);
+                // setWeaponType.Set(PENCIL);
                 //set colour of weapon
                 break;
             case ROLLER:
                 weapon = new Roller(colour);
-                animator.SetInteger("Weapon",ROLLER);
-                animator.SetInteger("Colour",colour);
+                // setWeaponType.Set(ROLLER);
                 //set colour of weapon
                 break;
             default:
                 weapon = new Brush(colour);
-                animator.SetInteger("Weapon",BRUSH);
-                animator.SetInteger("Colour",colour);
+                // setWeaponType.Set(BRUSH);
                 break;
         }
 
         attackRange = weapon.getRange();
         //attackSpeed = weapon.getAttackSpeed();
-        animator.SetFloat("Speed",attackSpeed);
+        
     }
     
     private void damageEnemy(Collider2D hit)
