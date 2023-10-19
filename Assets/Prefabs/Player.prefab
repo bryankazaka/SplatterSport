@@ -154,7 +154,7 @@ MonoBehaviour:
   weaponRange: 5
   minWeaponRange: 0.5
   attackRange: 1.09
-  attackSpeed: 1
+  attackSpeed: 2
   attackPoint: {fileID: 5944297718631748012}
   enemyLayers:
     serializedVersion: 2
