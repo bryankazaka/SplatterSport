@@ -28,10 +28,11 @@ public class WeaponController : MonoBehaviour
     public Vector3 screenPosition;
     public Vector3 worldPosition;
     private Weapon weapon;
-    private SetWeaponType setWeaponType;
+    // private SetWeaponType setWeaponType;
     private PlayerController playerController;
     private List<Collider2D> hitEnemies = new List<Collider2D>();
-    public InputActionAsset inputActionAsset;
+
+    public PlayerInput playerInput;
     private bool isMouse;
 
 
@@ -42,18 +43,26 @@ public class WeaponController : MonoBehaviour
         sRenderer = GetComponent<SpriteRenderer>();
         playerTransform = transform.parent;
         animator = GetComponent<Animator>();
-        setWeaponType = GetComponent<SetWeaponType>();
+        // setWeaponType = GetComponent<SetWeaponType>();
         initWeapon(playerController.colour,playerController.weapon);
         maxRange = attackRange;
+        playerInput = GetComponentInParent<PlayerInput>();
+        foreach (var device in playerInput.devices)
+        {
+            if (device.GetType() == typeof(Keyboard))
+            {
+                
+            }
+        }
+        
 
-
-    
     }
-     
+    
 
     private void FixedUpdate()
     {
         Vector3 target;
+        isMouse = true;
         if (isMouse)
         {
             Vector3 mouse = Camera.main.ScreenToWorldPoint( Mouse.current.position.ReadValue());
@@ -143,22 +152,22 @@ public class WeaponController : MonoBehaviour
         {
             case BRUSH:
                 weapon = new Brush(colour);
-                setWeaponType.Set(BRUSH);
+                // setWeaponType.Set(BRUSH);
                 //set colour of weapon
                 break;
             case PENCIL:
                 weapon = new Pencil(colour);
-                setWeaponType.Set(PENCIL);
+                // setWeaponType.Set(PENCIL);
                 //set colour of weapon
                 break;
             case ROLLER:
                 weapon = new Roller(colour);
-                setWeaponType.Set(ROLLER);
+                // setWeaponType.Set(ROLLER);
                 //set colour of weapon
                 break;
             default:
                 weapon = new Brush(colour);
-                setWeaponType.Set(BRUSH);
+                // setWeaponType.Set(BRUSH);
                 break;
         }
 
