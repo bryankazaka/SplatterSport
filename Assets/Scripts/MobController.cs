@@ -18,6 +18,7 @@ public class MobController : MonoBehaviour
     private int color;     //Which affects alter the mob and its limbs {StickySplatter, Lead Limbs... ect} 
     private Vector3 target; 
     private Vector3 dir;         //The Direction the Mob is moving in
+    private int deAggro = 1;
     private Transform[] limbs;   //The limb objects of the mob
     public Transform players;
     private float knockBackSpeed;
@@ -88,11 +89,15 @@ public class MobController : MonoBehaviour
         foreach (Transform player in players)
         {
             ;
-            if (dist < (player.position - transform.position).magnitude 
-                && !player.gameObject.GetComponent<PlayerMovement>().isStunned)
+            if (dist < (player.position - transform.position).magnitude)
             {
                 dist = (player.position - transform.position).magnitude;
+                deAggro = 1;
                 target = player.position;
+                 if (player.gameObject.GetComponent<PlayerMovement>().isStunned)
+                 {
+                    deAggro = -1;
+                 }
             }
         }
         
@@ -104,7 +109,9 @@ public class MobController : MonoBehaviour
         }
         else
         {
-            dir = Vector3.Normalize(target - transform.position);
+            
+            dir = deAggro * Vector3.Normalize(target - transform.position);
+            
             transform.position += dir * speed * 1/60;
         }
 
