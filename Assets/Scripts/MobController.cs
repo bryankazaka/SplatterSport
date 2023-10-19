@@ -85,11 +85,11 @@ public class MobController : MonoBehaviour
     void Update()
     {
         
-        float dist = 0.0f;
+        float dist = 100.0f;
         foreach (Transform player in players)
         {
-            ;
-            if (dist < (player.position - transform.position).magnitude)
+            
+            if (dist > (player.position - transform.position).magnitude)
             {
                 dist = (player.position - transform.position).magnitude;
                 deAggro = 1;
@@ -98,6 +98,7 @@ public class MobController : MonoBehaviour
                  {
                     deAggro = -1;
                  }
+                
             }
         }
         
