@@ -62,8 +62,7 @@ public class WeaponController : MonoBehaviour
         }
         else
         {
-            target = new Vector3(joystickDirection.x,joystickDirection.y,0); // Add The vector of the aim here Cameron _________________________________________________________
-            Debug.Log(target);
+            target = new Vector3(joystickDirection.x,joystickDirection.y,0); 
         }
        
         float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
@@ -148,22 +147,26 @@ public class WeaponController : MonoBehaviour
         {
             case BRUSH:
                 weapon = new Brush(colour);
-                // setWeaponType.Set(BRUSH);
+                animator.SetInteger("Weapon",BRUSH);
+                animator.SetInteger("Colour",colour);
                 //set colour of weapon
                 break;
             case PENCIL:
                 weapon = new Pencil(colour);
-                // setWeaponType.Set(PENCIL);
+                animator.SetInteger("Weapon",PENCIL);
+                animator.SetInteger("Colour",colour);
                 //set colour of weapon
                 break;
             case ROLLER:
                 weapon = new Roller(colour);
-                // setWeaponType.Set(ROLLER);
+                animator.SetInteger("Weapon",ROLLER);
+                animator.SetInteger("Colour",colour);
                 //set colour of weapon
                 break;
             default:
                 weapon = new Brush(colour);
-                // setWeaponType.Set(BRUSH);
+                animator.SetInteger("Weapon",BRUSH);
+                animator.SetInteger("Colour",colour);
                 break;
         }
 
