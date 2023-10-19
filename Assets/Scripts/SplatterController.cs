@@ -74,7 +74,7 @@ public class SplatterController : MonoBehaviour
         
         }
     }
-    return winner-1;
+    return winner;
   }  
 
    

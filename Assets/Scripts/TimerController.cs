@@ -61,12 +61,15 @@ public class TimerController : MonoBehaviour
         
         if (pos.x < -13) // when the timer runs out destroy the object {add end round function here}
         {
-            EndRound();
+            
+            CancelInvoke(nameof(Light));
+            StartCoroutine( EndRound());
         }
     }
 
-    void EndRound()
+    IEnumerator EndRound()
     {
+        yield return new WaitForSeconds(1.0f);
         gameObject.GetComponentInParent<GameManagerBattle>().EndRound();
     }
 

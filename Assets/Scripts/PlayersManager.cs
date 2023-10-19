@@ -18,7 +18,7 @@ public class PlayersManager : MonoBehaviour
     {
         foreach (Transform player in transform)
         {
-            var playObj = player.GetComponent<PlayerController>();
+            PlayerController playObj = player.GetComponent<PlayerController>();
             splattermap.GetComponent<SplatterController>().SetColor(playObj.playerNum,playObj.colour);
         }
     }
