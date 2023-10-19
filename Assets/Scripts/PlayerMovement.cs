@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         playerController = GetComponent<PlayerController>();
+        animator = GetComponent<Animator>();
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         stunDirect = collision.gameObject.transform.position;
         startStun = Time.time;
         isStunned = true;
+        animator.SetBool("Stunned",true);
     }
     //function that runs every frame (like update) but is better for physics stuff
     void Update()
@@ -40,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         if (isStunned && (Time.time - startStun) > playerController.stunTime)
         {
             isStunned = false;
+            animator.SetBool("Stunned", false);
         }
     }
 
