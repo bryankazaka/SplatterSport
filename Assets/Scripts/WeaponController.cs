@@ -160,30 +160,34 @@ public class WeaponController : MonoBehaviour
         {
             case BRUSH:
                 weapon = new Brush(colour);
-                // setWeaponType.Set(BRUSH);
+                animator.SetInteger("Weapon",BRUSH);
+                animator.SetInteger("Colour",colour);
                 //set colour of weapon
                 break;
             case PENCIL:
                 weapon = new Pencil(colour);
-                // setWeaponType.Set(PENCIL);
+                animator.SetInteger("Weapon",PENCIL);
+                animator.SetInteger("Colour",colour);
                 //set colour of weapon
                 break;
             case ROLLER:
                 weapon = new Roller(colour);
-                // setWeaponType.Set(ROLLER);
+                animator.SetInteger("Weapon",ROLLER);
+                animator.SetInteger("Colour",colour);
                 //set colour of weapon
                 break;
             default:
                 weapon = new Brush(colour);
-                // setWeaponType.Set(BRUSH);
+                animator.SetInteger("Weapon",BRUSH);
+                animator.SetInteger("Colour",colour);
                 break;
         }
 
         attackRange = weapon.getRange();
         //attackSpeed = weapon.getAttackSpeed();
-        
+        animator.SetFloat("Speed",attackSpeed);
     }
-    
+
     private void damageEnemy(Collider2D hit)
     {
    
