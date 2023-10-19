@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,18 +24,12 @@ public class PlayerController : MonoBehaviour
     private WeaponController weaponController;
     private SpriteRenderer spriteRenderer;
 
-    // public PlayerController()
-    // {
-    //     //defaults
-    //     this.colour = GREEN;
-    //     this.weapon = BRUSH;
-    //
-    // }
-    // public PlayerController(int colour, int weapon)
-    // {
-    //     this.colour = colour;
-    //     this.weapon = weapon;
-    // }
+
+    private void Awake()
+    {
+        gameObject.transform.parent =  GameObject.Find("GameManager").transform.Find("PlayersManager").transform;
+    }
+
     void Start()
     {
         var colors = new Color32[4];

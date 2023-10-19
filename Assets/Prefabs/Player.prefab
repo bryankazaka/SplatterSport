@@ -162,7 +162,7 @@ MonoBehaviour:
   newAnimatorController: {fileID: 22100000, guid: 6c4a08ef33e2c4e83892d6230d6d7554, type: 2}
   screenPosition: {x: 0, y: 0, z: 0}
   worldPosition: {x: 0, y: 0, z: 0}
-  inputActionAsset: {fileID: 0}
+  playerInput: {fileID: 0}
 --- !u!1 &2916640441131587830
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,6 +331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colour: 0
   weapon: 0
+  playerNum: 0
   speed: 0
   damageMult: 1
   attackSpeed: 1
@@ -338,7 +339,8 @@ MonoBehaviour:
   knockBack: 1
   stunTime: 1
   leadLimbs: 0
-  isMouse: 0
+  isMouse: 1
+  playersManager: {fileID: 0}
 --- !u!114 &3910508675127121185
 MonoBehaviour:
   m_ObjectHideFlags: 0
