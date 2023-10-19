@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    public bool isStunned = false;
     public Rigidbody2D rb;
     public Animator animator;
     private PlayerController playerController;
@@ -17,24 +18,31 @@ public class PlayerMovement : MonoBehaviour
     {
         playerController = GetComponent<PlayerController>();
     }
-    public void OnMove(InputAction.CallbackContext ctx) => movement = ctx.ReadValue<Vector2>();
+
+    public void OnMove(InputAction.CallbackContext ctx)
+    {
+        movement.x = ctx.ReadValue<Vector2>().x;
+        movement.y = ctx.ReadValue<Vector2>().y;
+        // movement.z = 0; 
+    } 
 
     //function that runs every frame (like update) but is better for physics stuff
     void Update()
     {
-
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-
-        animator.SetFloat("Horizontal", movement.x); 
-        animator.SetFloat("Vertical", movement.y); 
-        animator.SetFloat("Speed", movement.sqrMagnitude);
+        if (!isStunned)
+        {
+            animator.SetFloat("Horizontal", movement.x); 
+            animator.SetFloat("Vertical", movement.y); 
+            animator.SetFloat("Speed", movement.sqrMagnitude);
+        }
     }
 
     void FixedUpdate()
     {
         //Movement
+        print(movement);
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
 
     }
+    
 }

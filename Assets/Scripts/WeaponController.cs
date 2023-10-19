@@ -123,16 +123,16 @@ public class WeaponController : MonoBehaviour
         }
         
        
-        if (Input.GetButtonDown("Fire1") || Input.GetButton("Fire1"))
-        {
-
-            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Swing")) // if I press and its not attacking attack
-            {
-                Attack();
-                          
-            }          
-           
-        }
+        // if (Input.GetButtonDown("Fire1") || Input.GetButton("Fire1"))
+        // {
+        //
+        //     if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Swing")) // if I press and its not attacking attack
+        //     {
+        //         Attack();
+        //                   
+        //     }          
+        //    
+        // }
 
     }
 
@@ -182,6 +182,18 @@ public class WeaponController : MonoBehaviour
         startAttackTime = Time.time;      
 
     }
+
+    public void OnAttack(InputAction.CallbackContext ctx)
+    {
+        print("success");
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Swing")) // if I press and its not attacking attack
+        {
+            print("attack");
+            Attack();
+                          
+        }   
+    }
+
 
     void OnDrawGizmosSelected()
     {
