@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public float knockBack = 1.00f;
     public float stunTime = 1.00f;
     public bool leadLimbs = false;
+    public bool isMouse = false;
 
     private PlayerMovement playerMovement;
     private WeaponController weaponController;

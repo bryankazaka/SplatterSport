@@ -19,7 +19,6 @@ public class WeaponController : MonoBehaviour
     public float attackSpeed = 1.00f;
     private float startAttackTime;
     private bool isAttacking;
-    private bool attackHold;
     private Transform playerTransform;
     public Transform attackPoint;
     public LayerMask enemyLayers;
@@ -33,11 +32,13 @@ public class WeaponController : MonoBehaviour
     private PlayerController playerController;
     private List<Collider2D> hitEnemies = new List<Collider2D>();
     public InputActionAsset inputActionAsset;
+    private bool isMouse;
 
 
     private void Awake()
     {
         playerController = GetComponentInParent<PlayerController>();
+        isMouse = playerController.isMouse;
         sRenderer = GetComponent<SpriteRenderer>();
         playerTransform = transform.parent;
         animator = GetComponent<Animator>();
@@ -53,7 +54,7 @@ public class WeaponController : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 target;
-        if (Input.mousePresent)
+        if (isMouse)
         {
             Vector3 mouse = Camera.main.ScreenToWorldPoint( Mouse.current.position.ReadValue());
             mouse = new Vector3(mouse.x,mouse.y,0);
@@ -61,7 +62,7 @@ public class WeaponController : MonoBehaviour
         }
         else
         {
-            target = new(0,0,0); // Add The vector of the aim here Cameron
+            target = new(0,0,0); // Add The vector of the aim here Cameron _________________________________________________________
         }
        
         float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
