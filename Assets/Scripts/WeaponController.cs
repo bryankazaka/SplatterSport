@@ -119,7 +119,7 @@ public class WeaponController : MonoBehaviour
             {
                 startAttackTime = Time.time;                
             }               
-            Debug.Log( MathF.Sin((Time.time - startAttackTime)/lenA * math.PI));       
+              
             attackRange = MathF.Sin((Time.time - startAttackTime)/lenA * math.PI) * maxRange;  
 
         }
@@ -130,7 +130,11 @@ public class WeaponController : MonoBehaviour
             }
 
         }
-        
+        var attackHeld = playerInput.actions["Attack"];
+        if (attackHeld.IsPressed())
+        {
+            Attack();
+        }
        
         // if (Input.GetButtonDown("Fire1") || Input.GetButton("Fire1"))
         // {
@@ -186,21 +190,22 @@ public class WeaponController : MonoBehaviour
 
     public void Attack()
     {
-        
-        animator.SetTrigger("Attack");
-        startAttackTime = Time.time;      
+         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Swing")) // if I press and its not attacking attack
+        {
+            animator.SetTrigger("Attack");
+            startAttackTime = Time.time;      
+        }
 
     }
 
     public void OnAttack(InputAction.CallbackContext ctx)
     {
-        print("success");
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Swing")) // if I press and its not attacking attack
-        {
-            print("attack");
-            Attack();
+        
+        
+            
+        Attack();
                           
-        }   
+         
     }
 
 
