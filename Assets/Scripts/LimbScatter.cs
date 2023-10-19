@@ -71,7 +71,7 @@ public class LimbScatter : MonoBehaviour
         }
         else
         {
-            speed -= 1/speed/4; //reduce the speed of the limb 
+            speed -= 1/speed/3; //reduce the speed of the limb 
         }
         
        

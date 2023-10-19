@@ -18,6 +18,7 @@ public class GameManagerBattle : MonoBehaviour
     public AudioClip btn_click;
 
     private AudioSource audioSource;
+    private int[] playerPoints;
 
     private bool inBattle = false;
 
@@ -85,6 +86,20 @@ public class GameManagerBattle : MonoBehaviour
     {
         gameObject.GetComponentInChildren<MainSpawner>().enabled = true;
         gameObject.GetComponentInChildren<PlayersManager>().StartGame();
+       
+        //reset the braziers
+    }
+
+    public void EndRound()
+    {
+        //create the point for the player
+        //count the points then we win or goes to player upgrade
+        //clear the map         
+        //start the upgrade for losing players
+        
+       
+
+        
     }
     public void dropsTextBackwards()
     {
