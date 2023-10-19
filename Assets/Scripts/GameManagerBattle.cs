@@ -85,7 +85,8 @@ public class GameManagerBattle : MonoBehaviour
     public void startBattle()
     {
         gameObject.GetComponentInChildren<MainSpawner>().enabled = true;
-        gameObject.GetComponentInChildren<PlayersController>().StartGame();
+        gameObject.GetComponentInChildren<PlayersManager>().StartGame();
+       
         //reset the braziers
     }
 
