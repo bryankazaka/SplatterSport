@@ -14,12 +14,12 @@ public class GameManagerBattle : MonoBehaviour
     private string[] dropChoice = new string[] {"Enabled", "Disabled"};
     private int roundIndex = 0;
     private int dropIndex = 0;
+    private int[] playerColors;
 
     public AudioClip btn_highlight;
     public AudioClip btn_click;
 
     private AudioSource audioSource;
-    private int[] playerPoints;
 
     private bool inBattle = false;
 
@@ -43,6 +43,7 @@ public class GameManagerBattle : MonoBehaviour
         tDrops.text = "Crowd Drops:" + "\n";
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.volume = 0.3f;  
+        playerColors = new int[4];
         colors = new Color32[4];
         colors[0] =  new Color32(0x00,0xB0,0xF6,0xFF); //blue
         colors[1] =  new Color32(0xFF,0xF3,0x00,0xFF); //yellow
@@ -111,11 +112,23 @@ public class GameManagerBattle : MonoBehaviour
     public void EndRound()
     {
         int winner = gameObject.GetComponentInChildren<SplatterController>().getWinner();
+        gameObject.GetComponentInChildren<WallController>().winPoint(winner);
+        gameObject.GetComponentInChildren<WallController>().UpdateWall(playerColors);
         //create the point for the player
         //count the points then we win or goes to player upgrade
         //clear the map         
         //start the upgrade for losing players
+        
+       
+
+        
     }
+    public void addPlayer(int player,int color)
+    {
+        playerColors[player] = color;
+    }
+
+
     public void dropsTextBackwards()
     {
         if(dropIndex !=0)
