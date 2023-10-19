@@ -33,8 +33,8 @@ public class WeaponController : MonoBehaviour
     private List<Collider2D> hitEnemies = new List<Collider2D>();
 
     public PlayerInput playerInput;
-    private bool isMouse;
-
+    public bool isMouse;
+    private Vector2 joystickDirection;
 
     private void Awake()
     {
@@ -47,22 +47,13 @@ public class WeaponController : MonoBehaviour
         initWeapon(playerController.colour,playerController.weapon);
         maxRange = attackRange;
         playerInput = GetComponentInParent<PlayerInput>();
-        foreach (var device in playerInput.devices)
-        {
-            if (device.GetType() == typeof(Keyboard))
-            {
-                
-            }
-        }
-        
-
+        isMouse = playerInput.currentControlScheme == "Keyboard";
     }
     
 
     private void FixedUpdate()
     {
         Vector3 target;
-        isMouse = true;
         if (isMouse)
         {
             Vector3 mouse = Camera.main.ScreenToWorldPoint( Mouse.current.position.ReadValue());
@@ -71,7 +62,8 @@ public class WeaponController : MonoBehaviour
         }
         else
         {
-            target = new(0,0,0); // Add The vector of the aim here Cameron _________________________________________________________
+            target = new Vector3(joystickDirection.x,joystickDirection.y,0); // Add The vector of the aim here Cameron _________________________________________________________
+            Debug.Log(target);
         }
        
         float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
@@ -198,16 +190,8 @@ public class WeaponController : MonoBehaviour
 
     }
 
-    public void OnAttack(InputAction.CallbackContext ctx)
-    {
-        
-        
-            
-        Attack();
-                          
-         
-    }
-
+    public void OnAttack(InputAction.CallbackContext ctx) => Attack();
+    public void OnAim(InputAction.CallbackContext ctx) => joystickDirection = ctx.ReadValue<Vector2>();
 
     void OnDrawGizmosSelected()
     {
