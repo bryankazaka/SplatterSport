@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayersManager : MonoBehaviour
 {
     [SerializeField] private int numberOfPlayers = 0;
+    public GameObject splattermap;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,11 @@ public class PlayersManager : MonoBehaviour
 
     public void StartGame()
     {
-        
+        foreach (Transform player in transform)
+        {
+            var playObj = player.GetComponent<PlayerController>();
+            splattermap.GetComponent<SplatterController>().SetColor(playObj.playerNum,playObj.colour);
+        }
     }
 
     public void OnJoin(PlayerInput pi)

@@ -9960,7 +9960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splatterMap: {fileID: 1538564808}
-  colors:
+  startingColors:
   - {fileID: 0}
   - {fileID: 11400000, guid: 441e05e10c230ae4698cc1e9e3f02b67, type: 2}
   - {fileID: 11400000, guid: 5575fad9581cfa04db019d72f6b8d285, type: 2}

@@ -86,6 +86,7 @@ public class GameManagerBattle : MonoBehaviour
 
     public void EndRound()
     {
+        int winner = gameObject.GetComponentInChildren<SplatterController>().getWinner();
         //create the point for the player
         //count the points then we win or goes to player upgrade
         //clear the map         
