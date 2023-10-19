@@ -29,13 +29,13 @@ public class TimerController : MonoBehaviour
         {
             if (!litUp)
             {
-                Debug.Log("Round End");
+                
                 litUp= true;
                 Vector3Int TempPos = new(12,8,0); // the leftmost position of the braziers
                 for (int i = 0; i < 26; i++)
                 {
                     
-                    Debug.Log(brazierStates[0].name);
+                   
                     
                    
                     timerMap.SetTile(TempPos,brazierStates[0]);
