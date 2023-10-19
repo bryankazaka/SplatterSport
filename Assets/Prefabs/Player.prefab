@@ -158,7 +158,7 @@ MonoBehaviour:
   attackPoint: {fileID: 5944297718631748012}
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   newAnimatorController: {fileID: 22100000, guid: 6c4a08ef33e2c4e83892d6230d6d7554, type: 2}
   screenPosition: {x: 0, y: 0, z: 0}
   worldPosition: {x: 0, y: 0, z: 0}
