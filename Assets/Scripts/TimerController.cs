@@ -23,6 +23,12 @@ public class TimerController : MonoBehaviour
          //repeat the animation
     }
 
+    public void StartAgain()
+    {
+        startUp = Time.time;
+        litUp = false;
+        pos = new Vector3Int(12,8,0);
+    }
     private void Update() 
     {
         if (Time.time - startUp > 0.7f)
