@@ -50,6 +50,7 @@ public class WeaponController : MonoBehaviour
         playerInput = GetComponentInParent<PlayerInput>();
         isMouse = playerInput.currentControlScheme == "Keyboard";
         animator.SetFloat("Speed",attackSpeed);
+       
     }
     
 
@@ -105,9 +106,11 @@ public class WeaponController : MonoBehaviour
         
 
         transform.rotation = Quaternion.Euler(0, 0, angle);
-
-
-        if (animator.GetCurrentAnimatorStateInfo(0).shortNameHash == Animator.StringToHash("Swing"))
+       
+        Debug.Log(animator.GetCurrentAnimatorStateInfo(0).IsTag("Swing"));
+        
+        
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Swing"))
         {
             
             List<Collider2D> currentHits = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers).ToList();
@@ -198,7 +201,7 @@ public class WeaponController : MonoBehaviour
 
     public void Attack()
     {
-         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Swing")) // if I press and its not attacking attack
+         if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("Swing")) // if I press and its not attacking attack
         {
             animator.SetTrigger("Attack");
             startAttackTime = Time.time;      
@@ -218,18 +221,5 @@ public class WeaponController : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
-     float GetAnimationClipLengthByName(string clipName)
-    {
-        float length = 0f;
-        AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0); // Layer 0
-        foreach (var info in clipInfo)
-        {
-            if (info.clip.name == clipName)
-            {
-                length = info.clip.length;
-                break;
-            }
-        }
-        return length;
-    }
+
 }
