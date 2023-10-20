@@ -105,6 +105,7 @@ public class GameManagerBattle : MonoBehaviour
     {
         gameObject.GetComponentInChildren<MainSpawner>().enabled = true;
         gameObject.GetComponentInChildren<PlayersManager>().StartGame();
+        gameObject.GetComponentInChildren<TimerController>().StartAgain();
        
         //reset the braziers
     }
@@ -114,6 +115,8 @@ public class GameManagerBattle : MonoBehaviour
         int winner = gameObject.GetComponentInChildren<SplatterController>().getWinner();
         gameObject.GetComponentInChildren<WallController>().winPoint(winner);
         gameObject.GetComponentInChildren<WallController>().UpdateWall(playerColors);
+        gameObject.GetComponentInChildren<CrowdController>().CrowdReset();
+        gameObject.GetComponentInChildren<TimerController>().StartAgain();
         //create the point for the player
         //count the points then we win or goes to player upgrade
         //clear the map         

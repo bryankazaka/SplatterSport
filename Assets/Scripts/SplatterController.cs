@@ -12,7 +12,8 @@ using UnityEngine.UIElements;
 public class SplatterController : MonoBehaviour
 {
     // Start is called before the first frame update
-    private int[,] splatterStruct; //data representation of the grid
+    private int[,] splatterStruct;//data representation of the grid
+    private int[,] splatterClearStruct; //data rep of an empty grid
     private List<(int,int)> structUpdate; //which tiles have been updated since the last frame
     public Tilemap splatterMap; //the tilemap being updated
     public TileBase[] startingColors; 
@@ -22,7 +23,8 @@ public class SplatterController : MonoBehaviour
     
     void Start()
     {
-        splatterStruct = new int[128,52];       
+        splatterStruct = new int[128,52]; 
+        splatterClearStruct = splatterStruct;      
         structUpdate =  new List<(int,int)>();
         colors = startingColors;    
     }
@@ -74,11 +76,9 @@ public class SplatterController : MonoBehaviour
         
         }
     }
+    SplatterReset();
     return winner;
   }  
-
-   
-
     public void Propagate(Vector3Int cellPos, float stren,int color) //Splatter Propagation Code
     {
         
@@ -217,4 +217,10 @@ public class SplatterController : MonoBehaviour
     {
         return (pos.Item1 -64,-pos.Item2+11);
     }
+    public void SplatterReset()
+    {
+        splatterStruct = splatterClearStruct;
+        splatterMap.ClearAllTiles();
+    }
 }
+    
