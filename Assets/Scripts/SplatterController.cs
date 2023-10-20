@@ -220,8 +220,23 @@ public class SplatterController : MonoBehaviour
     }
     public void SplatterReset()
     {
-        splatterStruct = splatterClearStruct;
+        ClearList();
         splatterMap.ClearAllTiles();
+        foreach (float item in ArrayCount() )
+        {
+            Debug.Log(item);
+        }
+    }
+
+    public void ClearList()
+    {
+        for (int i = 0; i < 128; i++)
+        {
+            for (int j = 0; j < 52; j++)
+            {
+                splatterStruct[i,j] = 0;
+            }
+        }
     }
 }
     
