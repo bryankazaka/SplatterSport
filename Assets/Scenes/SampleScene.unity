@@ -741,7 +741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &155477851
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1294,7 +1294,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 188661260}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 633817220}
+        m_TargetAssemblyTypeName: GameManagerBattle, Assembly-CSharp
+        m_MethodName: playerFourNext
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &188661260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3149,7 +3161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &524502189
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3893,10 +3905,23 @@ MonoBehaviour:
   playerTwoColour: {fileID: 54598816}
   playerThreeColour: {fileID: 939825833}
   playerFourColour: {fileID: 1731606466}
-  playerOneCount: 0
-  playerTwoCount: 0
-  playerThreeCount: 0
-  playerFourCount: 0
+  weapons:
+  - {fileID: -635234882, guid: b02d27539908ea84fb49d003aef43921, type: 3}
+  - {fileID: 161796116, guid: 1edf1374dc46ae04881c71f9c2d68304, type: 3}
+  - {fileID: 1145533502, guid: 227d669f1b4a7854cb8def3e0c9fb14b, type: 3}
+  - {fileID: 158054084, guid: 719f411de0b76954c9046f11214caf7a, type: 3}
+  - {fileID: -1463000865, guid: 9cdee194ef6235742ad36e6fe020fc94, type: 3}
+  - {fileID: -1687993730, guid: f855c5c0538f9f646a175bae6eb60357, type: 3}
+  - {fileID: -1811503066, guid: c671bca37a513104ebddc2595296572b, type: 3}
+  - {fileID: -1327487878, guid: 9da5237b441eb734fa19686610409ffd, type: 3}
+  - {fileID: -635234882, guid: b02d27539908ea84fb49d003aef43921, type: 3}
+  - {fileID: 1371556081, guid: ac70e0c594df8344390da8fb8babef07, type: 3}
+  - {fileID: 1663614731, guid: f5911b901cec1f541b1758b62b63844f, type: 3}
+  - {fileID: -742498558, guid: 16e30d539d5c8294d8d70733020d655c, type: 3}
+  playerOneNextButtonText: {fileID: 1341220977}
+  playerTwoNextButtonText: {fileID: 492589143}
+  playerThreeNextButtonText: {fileID: 1048630012}
+  playerFourNextButtonText: {fileID: 353580638}
 --- !u!4 &633817221
 Transform:
   m_ObjectHideFlags: 0
@@ -5749,7 +5774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &948078815
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11075,7 +11100,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1076948440}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 633817220}
+        m_TargetAssemblyTypeName: GameManagerBattle, Assembly-CSharp
+        m_MethodName: playerThreeNext
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1076948440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11196,7 +11233,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1077919968}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 633817220}
+        m_TargetAssemblyTypeName: GameManagerBattle, Assembly-CSharp
+        m_MethodName: playerTwoNext
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1077919968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11317,7 +11366,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1115638073}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 633817220}
+        m_TargetAssemblyTypeName: GameManagerBattle, Assembly-CSharp
+        m_MethodName: playerOneNext
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1115638073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12748,7 +12809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1529060189
 MonoBehaviour:
   m_ObjectHideFlags: 0

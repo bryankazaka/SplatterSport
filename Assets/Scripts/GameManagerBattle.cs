@@ -25,6 +25,11 @@ public class GameManagerBattle : MonoBehaviour
 
     private string[] playerModes = new string[] {"colour", "colour", "colour", "colour"};
 
+    private int [] playerOneCharacter = new int[2];
+    private int [] playerTwoCharacter = new int[2];
+    private int [] playerThreeCharacter = new int[2];
+    private int [] playerFourCharacter = new int[2];
+
     private Color32[] colors;
 
     public GameObject playerOneColour;
@@ -32,10 +37,19 @@ public class GameManagerBattle : MonoBehaviour
     public GameObject playerThreeColour;
     public GameObject playerFourColour;
 
-    public int playerOneCount;
-    public int playerTwoCount;
-    public int playerThreeCount;
-    public int playerFourCount;
+
+
+    private int playerOneCount;
+    private int playerTwoCount;
+    private int playerThreeCount;
+    private int playerFourCount;
+
+    public Sprite [] weapons;
+
+    public TextMeshProUGUI playerOneNextButtonText;
+    public TextMeshProUGUI playerTwoNextButtonText;
+    public TextMeshProUGUI playerThreeNextButtonText;
+    public TextMeshProUGUI playerFourNextButtonText;
 
     void Start()
     {
@@ -49,6 +63,10 @@ public class GameManagerBattle : MonoBehaviour
         colors[1] =  new Color32(0xFF,0xF3,0x00,0xFF); //yellow
         colors[2] =  new Color32(0x15,0xFF,0x08,0xFF); //green
         colors[3] =  new Color32(0xFF,0x00,0x8E,0xFF); //pink
+        playerOneColour.gameObject.GetComponent<Image>().color = colors[0];
+        playerTwoColour.gameObject.GetComponent<Image>().color = colors[0];
+        playerThreeColour.gameObject.GetComponent<Image>().color = colors[0];
+        playerFourColour.gameObject.GetComponent<Image>().color = colors[0];
         playerOneCount = 0;
         playerTwoCount = 0;
         playerThreeCount = 0;
@@ -147,17 +165,32 @@ public class GameManagerBattle : MonoBehaviour
     
     public void playerOneRight()
     {
-        if(playerOneCount==3)
-        {
-            playerOneCount = 0;
-        }
-        else
-        {
-            playerOneCount++;
-        }
+        
         if(playerModes[0].CompareTo("colour") == 0)
         {
+            if(playerOneCount==3)
+            {
+                playerOneCount = 0;
+            }
+            else
+            {
+                playerOneCount++;
+            }
             playerOneColour.gameObject.GetComponent<Image>().color = colors[playerOneCount];
+        }
+        if(playerModes[0].CompareTo("weapon") == 0)
+        {
+            if(playerOneCount + 3 > 11)
+            {
+                playerOneCount = playerOneCount % 3;
+            }
+            else
+            {
+                playerOneCount += 3;
+            }
+            Debug.Log(playerOneCount);
+            playerOneColour.gameObject.GetComponent<Image>().sprite = weapons[playerOneCount];
+
         }
     }
 
@@ -274,5 +307,107 @@ public class GameManagerBattle : MonoBehaviour
             playerFourColour.gameObject.GetComponent<Image>().color = colors[playerFourCount];
         }
     }
+
+    public void playerOneNext()
+    {
+        if(playerModes[0].CompareTo("colour") == 0)
+        {
+            playerModes[0] = "weapon";
+            playerOneNextButtonText.text = "Done";
+            switch(playerOneCount)
+            {
+                case 0:
+                    playerOneCount = 0;
+                    break;
+                case 1:
+                    playerOneCount = 3;
+                    break;
+                case 2:
+                    playerOneCount = 6;
+                    break;
+                case 3:
+                    playerOneCount = 9;
+                    break;
+            }
+            playerOneColour.gameObject.GetComponent<Image>().sprite = weapons[playerOneCount];
+
+        }
+    }
+
+    public void playerTwoNext()
+    {
+        if (playerModes[1].CompareTo("colour") == 0)
+        {
+            playerModes[1] = "weapon";
+            playerTwoNextButtonText.text = "Done";
+            switch (playerTwoCount)
+            {
+                case 0:
+                    playerTwoCount = 0;
+                    break;
+                case 1:
+                    playerTwoCount = 3;
+                    break;
+                case 2:
+                    playerTwoCount = 6;
+                    break;
+                case 3:
+                    playerTwoCount = 9;
+                    break;
+            }
+            playerTwoColour.gameObject.GetComponent<Image>().sprite = weapons[playerTwoCount];
+        }
+    }
+
+    public void playerThreeNext()
+    {
+        if (playerModes[2].CompareTo("colour") == 0)
+        {
+            playerModes[2] = "weapon";
+            playerThreeNextButtonText.text = "Done";
+            switch (playerThreeCount)
+            {
+                case 0:
+                    playerThreeCount = 0;
+                    break;
+                case 1:
+                    playerThreeCount = 3;
+                    break;
+                case 2:
+                    playerThreeCount = 6;
+                    break;
+                case 3:
+                    playerThreeCount = 9;
+                    break;
+            }
+            playerThreeColour.gameObject.GetComponent<Image>().sprite = weapons[playerThreeCount];
+        }
+    }
+
+    public void playerFourNext()
+    {
+        if (playerModes[3].CompareTo("colour") == 0)
+        {
+            playerModes[3] = "weapon";
+            playerFourNextButtonText.text = "Done";
+            switch (playerFourCount)
+            {
+                case 0:
+                    playerFourCount = 0;
+                    break;
+                case 1:
+                    playerFourCount = 3;
+                    break;
+                case 2:
+                    playerFourCount = 6;
+                    break;
+                case 3:
+                    playerFourCount = 9;
+                    break;
+            }
+            playerFourColour.gameObject.GetComponent<Image>().sprite = weapons[playerFourCount];
+        }
+    }
+
 
 }
