@@ -23,7 +23,7 @@ public class WeaponController : MonoBehaviour
     public Transform attackPoint;
     public LayerMask enemyLayers;
     private Animator animator;
-    public RuntimeAnimatorController newAnimatorController;
+
     private SpriteRenderer sRenderer;
     public Vector3 screenPosition;
     public Vector3 worldPosition;
@@ -39,19 +39,28 @@ public class WeaponController : MonoBehaviour
 
     private void Awake()
     {
-        playerController = GetComponentInParent<PlayerController>();
-        isMouse = playerController.isMouse;
+        
+        
         sRenderer = GetComponent<SpriteRenderer>();
         playerTransform = transform.parent;
         animator = GetComponent<Animator>();
         // setWeaponType = GetComponent<SetWeaponType>();
-        initWeapon(playerController.colour,playerController.weapon);
         maxRange = attackRange;
         playerInput = GetComponentInParent<PlayerInput>();
         isMouse = playerInput.currentControlScheme == "Keyboard";
         animator.SetFloat("Speed",attackSpeed);
+         
+       
     }
-    
+
+    private void Start()
+    {
+        playerController = GetComponentInParent<PlayerController>();
+        Debug.Log(playerController.getPlayerColour() +" | "+playerController.getPlayerWeapon() );
+        initWeapon(playerController.getPlayerColour(),playerController.getPlayerWeapon());
+        animator = GetComponent<Animator>();
+
+    }
 
     private void FixedUpdate()
     {
@@ -102,12 +111,10 @@ public class WeaponController : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
         }
-        
-
+       
         transform.rotation = Quaternion.Euler(0, 0, angle);
-
-
-        if (animator.GetCurrentAnimatorStateInfo(0).shortNameHash == Animator.StringToHash("Swing"))
+        
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Swing"))
         {
             
             List<Collider2D> currentHits = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers).ToList();
@@ -139,51 +146,62 @@ public class WeaponController : MonoBehaviour
         {
             Attack();
         }
-       
-        // if (Input.GetButtonDown("Fire1") || Input.GetButton("Fire1"))
-        // {
-        //
-        //     if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Swing")) // if I press and its not attacking attack
-        //     {
-        //         Attack();
-        //                   
-        //     }          
-        //    
-        // }
 
+       
+        
+        
+    }
+
+    private void Update()     
+    {
+     if (Input.GetButtonUp("Fire1") && isMouse)
+        {
+            isAttacking = false;
+        }
+
+
+        if ((Input.GetButtonDown("Fire1") || isAttacking) && isMouse)
+        {  
+            isAttacking = true;
+            Attack();
+        }    
     }
 
     public void initWeapon(int colour, int weaponType)
     {
-        // setWeaponType = GetComponent<SetWeaponType>();
+       
         switch (weaponType)
         {
             case BRUSH:
                 weapon = new Brush(colour);
-                // setWeaponType.Set(BRUSH);
+                animator.SetInteger("Weapon",BRUSH);
+                animator.SetInteger("Colour",colour);
                 //set colour of weapon
                 break;
             case PENCIL:
                 weapon = new Pencil(colour);
-                // setWeaponType.Set(PENCIL);
+                animator.SetInteger("Weapon",PENCIL);
+                animator.SetInteger("Colour",colour);
                 //set colour of weapon
                 break;
             case ROLLER:
                 weapon = new Roller(colour);
-                // setWeaponType.Set(ROLLER);
+                animator.SetInteger("Weapon",ROLLER);
+                animator.SetInteger("Colour",colour);
                 //set colour of weapon
                 break;
             default:
                 weapon = new Brush(colour);
-                // setWeaponType.Set(BRUSH);
+                animator.SetInteger("Weapon",BRUSH);
+                animator.SetInteger("Colour",colour);
                 break;
         }
 
         attackRange = weapon.getRange();
         //attackSpeed = weapon.getAttackSpeed();
-        
+        animator.SetFloat("Speed",attackSpeed);
     }
-    
+
     private void damageEnemy(Collider2D hit)
     {
    
@@ -194,7 +212,7 @@ public class WeaponController : MonoBehaviour
 
     public void Attack()
     {
-         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Swing")) // if I press and its not attacking attack
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("Swing")) // if I press and its not attacking attack
         {
             animator.SetTrigger("Attack");
             startAttackTime = Time.time;      
@@ -202,7 +220,11 @@ public class WeaponController : MonoBehaviour
 
     }
 
-    public void OnAttack(InputAction.CallbackContext ctx) => Attack();
+    public void OnAttack(InputAction.CallbackContext ctx)
+    {
+        
+        Attack();
+    }
     public void OnAim(InputAction.CallbackContext ctx) => joystickDirection = ctx.ReadValue<Vector2>();
 
     void OnDrawGizmosSelected()
@@ -214,18 +236,5 @@ public class WeaponController : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
-     float GetAnimationClipLengthByName(string clipName)
-    {
-        float length = 0f;
-        AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0); // Layer 0
-        foreach (var info in clipInfo)
-        {
-            if (info.clip.name == clipName)
-            {
-                length = info.clip.length;
-                break;
-            }
-        }
-        return length;
-    }
+
 }

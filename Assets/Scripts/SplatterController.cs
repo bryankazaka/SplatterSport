@@ -12,24 +12,27 @@ using UnityEngine.UIElements;
 public class SplatterController : MonoBehaviour
 {
     // Start is called before the first frame update
-    private int[,] splatterStruct; //data representation of the grid
+    private int[,] splatterStruct;//data representation of the grid
+    private int[,] splatterClearStruct; //data rep of an empty grid
     private List<(int,int)> structUpdate; //which tiles have been updated since the last frame
     public Tilemap splatterMap; //the tilemap being updated
     public TileBase[] startingColors; 
     private TileBase[] colors; //the colors of the splatters
     public GameObject crowd; //the crowd object that refelects the arena paint ratio states
+    private int[] playerColors;
 
     
     void Start()
     {
-        splatterStruct = new int[128,52];       
+        splatterStruct = new int[128,52]; 
+        splatterClearStruct = splatterStruct;      
         structUpdate =  new List<(int,int)>();
         colors = startingColors;    
     }
 
-    public void SetColor(int player, int color)
+    public void SetColor(int[] ColorPlayer)
     {
-        colors[player+1] = startingColors[color+1];
+        playerColors = ColorPlayer; //index is color value is player
     }
     float[] ArrayCount() //finds the amount of each paint splatter color.
     {
@@ -74,11 +77,9 @@ public class SplatterController : MonoBehaviour
         
         }
     }
-    return winner-1;
+    SplatterReset();
+    return playerColors[winner];
   }  
-
-   
-
     public void Propagate(Vector3Int cellPos, float stren,int color) //Splatter Propagation Code
     {
         
@@ -217,4 +218,10 @@ public class SplatterController : MonoBehaviour
     {
         return (pos.Item1 -64,-pos.Item2+11);
     }
+    public void SplatterReset()
+    {
+        splatterStruct = splatterClearStruct;
+        splatterMap.ClearAllTiles();
+    }
 }
+    

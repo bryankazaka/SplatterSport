@@ -93,5 +93,11 @@ public class CrowdController : MonoBehaviour
         
     }
 
+    public void CrowdReset()
+    {
+        float[]  baseC = {1.0f,1.0f,1.0f,1.0f};
+        updateCrowd(baseC);
+    }
+
     
 }

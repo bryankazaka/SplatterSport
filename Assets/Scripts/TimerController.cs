@@ -23,6 +23,12 @@ public class TimerController : MonoBehaviour
          //repeat the animation
     }
 
+    public void StartAgain()
+    {
+        startUp = Time.time;
+        litUp = false;
+        pos = new Vector3Int(12,8,0);
+    }
     private void Update() 
     {
         if (Time.time - startUp > 0.7f)
@@ -61,12 +67,15 @@ public class TimerController : MonoBehaviour
         
         if (pos.x < -13) // when the timer runs out destroy the object {add end round function here}
         {
-            EndRound();
+            
+            CancelInvoke(nameof(Light));
+            StartCoroutine( EndRound());
         }
     }
 
-    void EndRound()
+    IEnumerator EndRound()
     {
+        yield return new WaitForSeconds(1.0f);
         gameObject.GetComponentInParent<GameManagerBattle>().EndRound();
     }
 
