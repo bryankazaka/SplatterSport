@@ -23,7 +23,7 @@ public class WeaponController : MonoBehaviour
     public Transform attackPoint;
     public LayerMask enemyLayers;
     private Animator animator;
-    public RuntimeAnimatorController newAnimatorController;
+
     private SpriteRenderer sRenderer;
     public Vector3 screenPosition;
     public Vector3 worldPosition;
@@ -39,8 +39,8 @@ public class WeaponController : MonoBehaviour
 
     private void Awake()
     {
-        playerController = GetComponentInParent<PlayerController>();
-        isMouse = playerController.isMouse;
+        
+        
         sRenderer = GetComponent<SpriteRenderer>();
         playerTransform = transform.parent;
         animator = GetComponent<Animator>();
@@ -55,6 +55,8 @@ public class WeaponController : MonoBehaviour
 
     private void Start()
     {
+        playerController = GetComponentInParent<PlayerController>();
+        Debug.Log(playerController.getPlayerColour() +" | "+playerController.getPlayerWeapon() );
         initWeapon(playerController.getPlayerColour(),playerController.getPlayerWeapon());
         animator = GetComponent<Animator>();
 
@@ -144,22 +146,30 @@ public class WeaponController : MonoBehaviour
         {
             Attack();
         }
+
        
-        if (Input.GetButtonDown("Fire1") && isMouse)
+        
+        
+    }
+
+    private void Update()     
+    {
+     if (Input.GetButtonUp("Fire1") && isMouse)
         {
-           
-            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Swing")) // if I press and its not attacking attack
-            {
-                Attack();
-                          
-            }          
-           
+            isAttacking = false;
         }
 
+
+        if ((Input.GetButtonDown("Fire1") || isAttacking) && isMouse)
+        {  
+            isAttacking = true;
+            Attack();
+        }    
     }
 
     public void initWeapon(int colour, int weaponType)
     {
+       
         switch (weaponType)
         {
             case BRUSH:

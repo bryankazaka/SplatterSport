@@ -27,21 +27,21 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         gameObject.transform.parent =  GameObject.Find("GameManager").transform.Find("PlayersManager").transform;
-        
+        setPlayerWeapon(ROLLER);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        setPlayerColour(getFreeCol());
     }
 
     void Start()
-    {
-        bool[] num = GetComponentInParent<PlayersManager>().numbersTaken;
-        bool[] col = GetComponentInParent<PlayersManager>().colorsTaken;
-        
+    {        
         playerMovement = GetComponent<PlayerMovement>();
         weaponController = GetComponentInChildren<WeaponController>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        var randomT = UnityEngine.Random.Range(0,4);
+        
+        
         playerNum = getFreeNum();
-        setPlayerColour(getFreeCol());
-        setPlayerWeapon(ROLLER);
+        
+       
+        Debug.Log(colour+ " | "+weapon);
         GetComponentInParent<GameManagerBattle>().addPlayer(playerNum,colour);
     }
 
@@ -74,29 +74,29 @@ public class PlayerController : MonoBehaviour
             return getFreeCol();
          }
     }
-    public void setPlayerColour(int colour)
+    public void setPlayerColour(int colourNew)
     {
-        this.colour = colour;
+        colour = colourNew;
         var colours = new Color32[4];
         colours[BLUE] =  new Color32(0x00,0xB0,0xF6,0xFF); //blue
         colours[YELLOW] =  new Color32(0xFF,0xF3,0x00,0xFF); //yellow
         colours[GREEN] =  new Color32(0x15,0xFF,0x08,0xFF); //green
         colours[PINK] =  new Color32(0xFF,0x00,0x8E,0xFF); //pink
-        spriteRenderer.color = colours[colour];
+        spriteRenderer.color = colours[colourNew];
     }
 
-    public void setPlayerWeapon(int weapon)
+    public void setPlayerWeapon(int weaponNew)
     {
-        this.weapon = weapon;
+        weapon = weaponNew;
     }
 
     public int getPlayerColour()
     {
-        return this.colour;
+        return colour;
     }
 
     public int getPlayerWeapon()
     {
-        return this.weapon;
+        return weapon;
     }
 }
