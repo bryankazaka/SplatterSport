@@ -144,16 +144,16 @@ public class WeaponController : MonoBehaviour
             Attack();
         }
        
-        // if (Input.GetButtonDown("Fire1") || Input.GetButton("Fire1"))
-        // {
-        //
-        //     if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Swing")) // if I press and its not attacking attack
-        //     {
-        //         Attack();
-        //                   
-        //     }          
-        //    
-        // }
+        if (Input.GetButtonDown("Fire1") && isMouse)
+        {
+            Debug.Log("attack mouse registerd");
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Swing")) // if I press and its not attacking attack
+            {
+                Attack();
+                          
+            }          
+           
+        }
 
     }
 
