@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private float startStun;
     private Vector2 stunDirect;
     private PlayerController playerController;
+    private Vector2 screenBounds;
 
     Vector2 movement;
 
@@ -20,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     {
         playerController = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
+        
+        screenBounds = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0));
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -54,7 +57,13 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Horizontal", movement.x); 
             animator.SetFloat("Vertical", movement.y); 
             animator.SetFloat("Speed", movement.sqrMagnitude);
-            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+            Vector2 newPosition = rb.position + movement * moveSpeed * Time.fixedDeltaTime;
+            
+            // Clamp the player's position within the screen boundaries
+            newPosition.x = Mathf.Clamp(newPosition.x, -screenBounds.x, screenBounds.x);
+            newPosition.y = Mathf.Clamp(newPosition.y, -screenBounds.y, 3);
+            
+            rb.MovePosition(newPosition);
         }
         else
         {
