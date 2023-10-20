@@ -49,12 +49,14 @@ public class WeaponController : MonoBehaviour
         playerInput = GetComponentInParent<PlayerInput>();
         isMouse = playerInput.currentControlScheme == "Keyboard";
         animator.SetFloat("Speed",attackSpeed);
+         
        
     }
 
     private void Start()
     {
         initWeapon(playerController.getPlayerColour(),playerController.getPlayerWeapon());
+        animator = GetComponent<Animator>();
 
     }
 
@@ -107,8 +109,7 @@ public class WeaponController : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
         }
-        
-
+       
         transform.rotation = Quaternion.Euler(0, 0, angle);
         
         if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Swing"))
@@ -146,7 +147,7 @@ public class WeaponController : MonoBehaviour
        
         if (Input.GetButtonDown("Fire1") && isMouse)
         {
-            Debug.Log("attack mouse registerd");
+           
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Swing")) // if I press and its not attacking attack
             {
                 Attack();
@@ -201,7 +202,7 @@ public class WeaponController : MonoBehaviour
 
     public void Attack()
     {
-         if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("Swing")) // if I press and its not attacking attack
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("Swing")) // if I press and its not attacking attack
         {
             animator.SetTrigger("Attack");
             startAttackTime = Time.time;      
@@ -211,7 +212,7 @@ public class WeaponController : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext ctx)
     {
-        Debug.Log("AttackRegistered");
+        
         Attack();
     }
     public void OnAim(InputAction.CallbackContext ctx) => joystickDirection = ctx.ReadValue<Vector2>();

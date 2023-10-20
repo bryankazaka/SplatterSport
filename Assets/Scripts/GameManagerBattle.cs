@@ -64,6 +64,10 @@ public class GameManagerBattle : MonoBehaviour
             tDrops.text = "Crowd Drops:" + "\n" + dropChoice[dropIndex];
             
         }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            StartBattle();
+        }
 
     }
 
@@ -101,11 +105,12 @@ public class GameManagerBattle : MonoBehaviour
         }
     }
 
-    public void startBattle()
+    public void StartBattle()
     {
         gameObject.GetComponentInChildren<MainSpawner>().enabled = true;
+        gameObject.GetComponentInChildren<TimerController>().enabled = true;
         gameObject.GetComponentInChildren<PlayersManager>().StartGame();
-        gameObject.GetComponentInChildren<TimerController>().StartAgain();
+       // gameObject.GetComponentInChildren<TimerController>().StartAgain();
        
         //reset the braziers
     }
@@ -117,9 +122,7 @@ public class GameManagerBattle : MonoBehaviour
         gameObject.GetComponentInChildren<WallController>().UpdateWall(playerColors);
         gameObject.GetComponentInChildren<CrowdController>().CrowdReset();
         gameObject.GetComponentInChildren<TimerController>().StartAgain();
-        //create the point for the player
-        //count the points then we win or goes to player upgrade
-        //clear the map         
+              
         //start the upgrade for losing players
         
        

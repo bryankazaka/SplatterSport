@@ -19,6 +19,7 @@ public class SplatterController : MonoBehaviour
     public TileBase[] startingColors; 
     private TileBase[] colors; //the colors of the splatters
     public GameObject crowd; //the crowd object that refelects the arena paint ratio states
+    private int[] playerColors;
 
     
     void Start()
@@ -29,9 +30,9 @@ public class SplatterController : MonoBehaviour
         colors = startingColors;    
     }
 
-    public void SetColor(int player, int color)
+    public void SetColor(int[] ColorPlayer)
     {
-        colors[player+1] = startingColors[color+1];
+        playerColors = ColorPlayer; //index is color value is player
     }
     float[] ArrayCount() //finds the amount of each paint splatter color.
     {
@@ -77,7 +78,7 @@ public class SplatterController : MonoBehaviour
         }
     }
     SplatterReset();
-    return winner;
+    return playerColors[winner];
   }  
     public void Propagate(Vector3Int cellPos, float stren,int color) //Splatter Propagation Code
     {

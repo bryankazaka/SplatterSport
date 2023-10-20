@@ -22,6 +22,7 @@ public class WallController : MonoBehaviour
             for (int j = 0; j < gamePoints[i]; j++)
             {
                 Vector3Int tilePos = new(positions[i]+j,3,0);
+                Debug.Log("Player " + i + "on a wall");
                 wall.SetTile(tilePos,banners[players[i]]);
             
             
@@ -30,7 +31,7 @@ public class WallController : MonoBehaviour
     }
     public void winPoint(int player)
     {
-        
+        Debug.Log("Player " + player + "won a point");
         gamePoints[player] +=1;
     }
 }

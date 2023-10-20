@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public int colour;
     public int weapon;
-    public int playerNum; //0 for player 1, 1 for player 2 ect
+    public int playerNum = 0; //0 for player 1, 1 for player 2 ect
     public float speed;
     public float damageMult = 1.00f;
     public float attackSpeed;
@@ -32,15 +32,48 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        bool[] num = GetComponentInParent<PlayersManager>().numbersTaken;
+        bool[] col = GetComponentInParent<PlayersManager>().colorsTaken;
         
-        GetComponentInParent<GameManagerBattle>().addPlayer(playerNum,colour);
         playerMovement = GetComponent<PlayerMovement>();
         weaponController = GetComponentInChildren<WeaponController>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        setPlayerColour(GREEN);
+        var randomT = UnityEngine.Random.Range(0,4);
+        playerNum = getFreeNum();
+        setPlayerColour(getFreeCol());
         setPlayerWeapon(ROLLER);
+        GetComponentInParent<GameManagerBattle>().addPlayer(playerNum,colour);
     }
 
+    private int getFreeNum()
+    {
+         bool[] num = GetComponentInParent<PlayersManager>().numbersTaken;
+         var randomT = UnityEngine.Random.Range(0,4);
+         if (!num[randomT])
+         {
+            GetComponentInParent<PlayersManager>().numbersTaken[randomT] = true;
+            return randomT;
+         }
+         else
+         {
+            return getFreeNum();
+         }
+    }
+
+    private int getFreeCol()
+    {
+         bool[] num = GetComponentInParent<PlayersManager>().colorsTaken;
+         var randomT = UnityEngine.Random.Range(0,4);
+         if (!num[randomT])
+         {
+            GetComponentInParent<PlayersManager>().colorsTaken[randomT] = true;
+            return randomT;
+         }
+         else
+         {
+            return getFreeCol();
+         }
+    }
     public void setPlayerColour(int colour)
     {
         this.colour = colour;
