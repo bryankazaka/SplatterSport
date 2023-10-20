@@ -45,13 +45,17 @@ public class WeaponController : MonoBehaviour
         playerTransform = transform.parent;
         animator = GetComponent<Animator>();
         // setWeaponType = GetComponent<SetWeaponType>();
-        initWeapon(playerController.colour,playerController.weapon);
         maxRange = attackRange;
         playerInput = GetComponentInParent<PlayerInput>();
         isMouse = playerInput.currentControlScheme == "Keyboard";
         animator.SetFloat("Speed",attackSpeed);
     }
-    
+
+    private void Start()
+    {
+        initWeapon(playerController.getPlayerColour(),playerController.getPlayerWeapon());
+
+    }
 
     private void FixedUpdate()
     {
@@ -155,7 +159,8 @@ public class WeaponController : MonoBehaviour
 
     public void initWeapon(int colour, int weaponType)
     {
-        // setWeaponType = GetComponent<SetWeaponType>();
+        print("here");
+        print(colour + " " + weaponType);
         switch (weaponType)
         {
             case BRUSH:
