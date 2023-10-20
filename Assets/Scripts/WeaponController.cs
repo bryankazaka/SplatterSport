@@ -110,9 +110,6 @@ public class WeaponController : MonoBehaviour
         
 
         transform.rotation = Quaternion.Euler(0, 0, angle);
-       
-        Debug.Log(animator.GetCurrentAnimatorStateInfo(0).IsTag("Swing"));
-        
         
         if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Swing"))
         {
@@ -162,8 +159,6 @@ public class WeaponController : MonoBehaviour
 
     public void initWeapon(int colour, int weaponType)
     {
-        print("here");
-        print(colour + " " + weaponType);
         switch (weaponType)
         {
             case BRUSH:
@@ -214,7 +209,11 @@ public class WeaponController : MonoBehaviour
 
     }
 
-    public void OnAttack(InputAction.CallbackContext ctx) => Attack();
+    public void OnAttack(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("AttackRegistered");
+        Attack();
+    }
     public void OnAim(InputAction.CallbackContext ctx) => joystickDirection = ctx.ReadValue<Vector2>();
 
     void OnDrawGizmosSelected()
