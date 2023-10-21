@@ -8,9 +8,13 @@ public class MainSpawner : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
-        foreach (Transform mob in transform) // Initiates the mobspawning script for each mob in gameObject Mobs
+       
+    }
+    public void StartRound()
+    {
+         foreach (Transform mob in transform) // Initiates the mobspawning script for each mob in gameObject Mobs
         {
-            mob.GetComponent<MobSpawner>().Start();
+            mob.GetComponent<MobSpawner>().StartRound();
             
         }
     }

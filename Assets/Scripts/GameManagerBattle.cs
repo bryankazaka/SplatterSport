@@ -126,10 +126,10 @@ public class GameManagerBattle : MonoBehaviour
 
     public void StartBattle()
     {
-        GetComponentInChildren<MainSpawner>().enabled = true;
+        GetComponentInChildren<MainSpawner>().StartRound();
         GetComponentInChildren<TimerController>().enabled = true;
         GetComponentInChildren<PlayersManager>().StartGame();
-       // gameObject.GetComponentInChildren<TimerController>().StartAgain();
+        GetComponentInChildren<TimerController>().StartAgain();
        
         //reset the braziers
     }

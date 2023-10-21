@@ -33,7 +33,7 @@ public class LimbScatter : MonoBehaviour
         colors[1] =  new Color32(0xFF,0xF3,0x00,0xFF);
         colors[2] =  new Color32(0x15,0xFF,0x08,0xFF);
         colors[3] =  new Color32(0xFF,0x00,0x8E,0xFF);
-        
+        transform.parent =  GameObject.Find("Mobs").transform; 
         var SpriteRender = transform.GetComponent<SpriteRenderer>();
         SpriteRender.enabled = true;
         SpriteRender.color = colors[color];

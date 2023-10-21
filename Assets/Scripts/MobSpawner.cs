@@ -9,15 +9,16 @@ public class MobSpawner : MonoBehaviour
     public float spawnWaitTime; //how long before mobs being to spawn 
 
     // Start is called before the first frame update
-    public void Start()
+    public void StartRound()
     {
-        mobsPerSecond = 1.0f/mobsPerSecond; 
-        InvokeRepeating(nameof(Spawn), spawnWaitTime, mobsPerSecond); //repeats the instantiation of another mob object
+        float newmobsPerSecond = 1.0f/mobsPerSecond; 
+        InvokeRepeating(nameof(Spawn), spawnWaitTime, newmobsPerSecond); //repeats the instantiation of another mob object
     }
 
-    // Update is called once per frame
+    
     public void EndRound()
     {
+        
         CancelInvoke(nameof(Spawn));
     }
 
