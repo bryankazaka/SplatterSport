@@ -16,9 +16,9 @@ public class MobSpawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void EndRound()
     {
-        
+        CancelInvoke(nameof(Spawn));
     }
 
     void Spawn() //spawns a mob and enables the rendering and controller
@@ -26,6 +26,7 @@ public class MobSpawner : MonoBehaviour
         Transform mobClone = Instantiate(transform,position: SpawnPoint(), transform.rotation);
         mobClone.GetComponent<MobController>().enabled = true;
         mobClone.GetComponent<SpriteRenderer>().enabled = true;
+        mobClone.parent =  GameObject.Find("GameManager").transform.Find("Mobs").transform; 
        
     }
     

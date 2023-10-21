@@ -15,4 +15,13 @@ public class MainSpawner : MonoBehaviour
         }
     }
 
+    public void EndRound()
+    {
+        foreach (Transform mob in transform) // Initiates the mobspawning script for each mob in gameObject Mobs
+        {
+            mob.GetComponent<MobSpawner>().EndRound();
+            
+        }
+    }
+
 }

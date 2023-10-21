@@ -58,11 +58,12 @@ public class GameManagerBattle : MonoBehaviour
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.volume = 0.3f;  
         playerColors = new int[4];
-        colors = new Color32[4];
+        colors = new Color32[5];
         colors[0] =  new Color32(0x00,0xB0,0xF6,0xFF); //blue
         colors[1] =  new Color32(0xFF,0xF3,0x00,0xFF); //yellow
         colors[2] =  new Color32(0x15,0xFF,0x08,0xFF); //green
         colors[3] =  new Color32(0xFF,0x00,0x8E,0xFF); //pink
+        colors[4] =  new Color32(0xFF,0xFF,0xFF,0xFF); //white
         playerOneColour.gameObject.GetComponent<Image>().color = colors[0];
         playerTwoColour.gameObject.GetComponent<Image>().color = colors[0];
         playerThreeColour.gameObject.GetComponent<Image>().color = colors[0];
@@ -125,9 +126,9 @@ public class GameManagerBattle : MonoBehaviour
 
     public void StartBattle()
     {
-        gameObject.GetComponentInChildren<MainSpawner>().enabled = true;
-        gameObject.GetComponentInChildren<TimerController>().enabled = true;
-        gameObject.GetComponentInChildren<PlayersManager>().StartGame();
+        GetComponentInChildren<MainSpawner>().enabled = true;
+        GetComponentInChildren<TimerController>().enabled = true;
+        GetComponentInChildren<PlayersManager>().StartGame();
        // gameObject.GetComponentInChildren<TimerController>().StartAgain();
        
         //reset the braziers
@@ -135,11 +136,13 @@ public class GameManagerBattle : MonoBehaviour
 
     public void EndRound()
     {
-        int winner = gameObject.GetComponentInChildren<SplatterController>().getWinner();
-        gameObject.GetComponentInChildren<WallController>().winPoint(winner);
-        gameObject.GetComponentInChildren<WallController>().UpdateWall(playerColors);
-        gameObject.GetComponentInChildren<CrowdController>().CrowdReset();
-        gameObject.GetComponentInChildren<TimerController>().StartAgain();
+        int winner = GetComponentInChildren<SplatterController>().getWinner();
+        GetComponentInChildren<WallController>().winPoint(winner);
+        GetComponentInChildren<WallController>().UpdateWall(playerColors);
+        GetComponentInChildren<CrowdController>().CrowdReset();
+        GetComponentInChildren<MainSpawner>().EndRound();
+        GetComponentInChildren<MobsManager>().EndRound();
+        
               
         //start the upgrade for losing players
         
@@ -188,8 +191,9 @@ public class GameManagerBattle : MonoBehaviour
             {
                 playerOneCount += 3;
             }
-            Debug.Log(playerOneCount);
+            
             playerOneColour.gameObject.GetComponent<Image>().sprite = weapons[playerOneCount];
+
 
         }
     }
@@ -223,6 +227,7 @@ public class GameManagerBattle : MonoBehaviour
         if(playerModes[2].CompareTo("colour") == 0)
         {
             playerThreeColour.gameObject.GetComponent<Image>().color = colors[playerThreeCount];
+            
         }
     }
 
@@ -330,6 +335,7 @@ public class GameManagerBattle : MonoBehaviour
                     break;
             }
             playerOneColour.gameObject.GetComponent<Image>().sprite = weapons[playerOneCount];
+            playerOneColour.gameObject.GetComponent<Image>().color = colors[4];
 
         }
     }
@@ -356,6 +362,7 @@ public class GameManagerBattle : MonoBehaviour
                     break;
             }
             playerTwoColour.gameObject.GetComponent<Image>().sprite = weapons[playerTwoCount];
+            playerTwoColour.gameObject.GetComponent<Image>().color = colors[4];
         }
     }
 
@@ -381,6 +388,7 @@ public class GameManagerBattle : MonoBehaviour
                     break;
             }
             playerThreeColour.gameObject.GetComponent<Image>().sprite = weapons[playerThreeCount];
+            playerThreeColour.gameObject.GetComponent<Image>().color = colors[4];
         }
     }
 
@@ -406,6 +414,7 @@ public class GameManagerBattle : MonoBehaviour
                     break;
             }
             playerFourColour.gameObject.GetComponent<Image>().sprite = weapons[playerFourCount];
+            playerFourColour.gameObject.GetComponent<Image>().color = colors[4];
         }
     }
 
