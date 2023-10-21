@@ -13,12 +13,12 @@ public class MobController : MonoBehaviour
     public float    splatProp;   //The propagation strength of the Mob
     public float    health;      //The amount of hit points the mob has
    private float maxHealth;
-    public bool[]   affects;
+    public bool[]   affects; //Which affects alter the mob and its limbs {StickySplatter, Lead Limbs... ect} 
     private Color32[] colors;
-    private int color;     //Which affects alter the mob and its limbs {StickySplatter, Lead Limbs... ect} 
+    private int color;     
     private Vector3 target; 
     private Vector3 dir;         //The Direction the Mob is moving in
-    private int deAggro = 1;
+    private float deAggro = 1;
     private Transform[] limbs;   //The limb objects of the mob
     public Transform players;
     private float knockBackSpeed;
@@ -92,11 +92,11 @@ public class MobController : MonoBehaviour
             if (dist > (player.position - transform.position).magnitude)
             {
                 dist = (player.position - transform.position).magnitude;
-                deAggro = 1;
+                deAggro = 1.0f;
                 target = player.position;
-                 if (player.gameObject.GetComponent<PlayerMovement>().isStunned)
+                 if (player.gameObject.GetComponent<PlayerMovement>().isStunned && dist < 3)
                  {
-                    deAggro = -1;
+                    deAggro = -0.1f;
                  }
                 
             }
