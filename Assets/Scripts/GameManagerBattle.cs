@@ -26,6 +26,7 @@ public class GameManagerBattle : MonoBehaviour
     private int roundIndex = 0;
     private int dropIndex = 0;
     private int[] playerColors;
+    private GameObject[] players;
 
     public AudioClip btn_highlight;
     public AudioClip btn_click;
@@ -77,6 +78,7 @@ public class GameManagerBattle : MonoBehaviour
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.volume = 0.3f;  
         playerColors = new int[4];
+        players = new GameObject[4];
         colors = new Color32[5];
         colors[0] =  new Color32(0x00,0xB0,0xF6,0xFF); //blue
         colors[1] =  new Color32(0xFF,0xF3,0x00,0xFF); //yellow
@@ -108,16 +110,15 @@ public class GameManagerBattle : MonoBehaviour
 
     void Update()
     {
-        if (!inBattle)
-        {
-           
-            tRounds.text = "Rounds:" + "\n" + roundCounter[roundIndex];
-            tDrops.text = "Crowd Drops:" + "\n" + dropChoice[dropIndex];
+        
+        tRounds.text = "Rounds:" + "\n" + roundCounter[roundIndex];
+        tDrops.text = "Crowd Drops:" + "\n" + dropChoice[dropIndex];
             
-        }
-        if (Input.GetKey(KeyCode.Space))
+        
+        if (Input.GetKey(KeyCode.Space) && !inBattle)
         {
             StartBattle();
+            inBattle = true;
         }
 
     }
@@ -162,6 +163,7 @@ public class GameManagerBattle : MonoBehaviour
         GetComponentInChildren<TimerController>().enabled = true;
         GetComponentInChildren<PlayersManager>().StartGame();
         GetComponentInChildren<TimerController>().StartAgain();
+        
        
         //reset the braziers
     }
@@ -176,11 +178,30 @@ public class GameManagerBattle : MonoBehaviour
         GetComponentInChildren<CrowdController>().CrowdReset();
         GetComponentInChildren<MainSpawner>().EndRound();
         GetComponentInChildren<MobsManager>().EndRound();
+        inBattle = false;
         //start the upgrade for losing players       
     }
-    public void addPlayer(int player,int color)
+    public void addPlayer(GameObject player)
     {
-        playerColors[player] = color;
+        PlayerController play = player.GetComponent<PlayerController>();
+        players[play.playerNum] = player;
+        playerColors[play.playerNum] = play.getPlayerColour();
+        switch (play.playerNum)
+        {            
+           case 0:
+            GameObject.Find("pOneCircle").GetComponent<Button>().onClick.Invoke();
+           break;
+           case 1:
+            GameObject.Find("pTwoCircle").GetComponent<Button>().onClick.Invoke();
+           break;
+           case 2:
+            GameObject.Find("pThreeCircle").GetComponent<Button>().onClick.Invoke();
+           break;
+           case 3:
+            GameObject.Find("pFourCircle").GetComponent<Button>().onClick.Invoke();
+           break;
+
+        }
     }
 
 
@@ -208,6 +229,7 @@ public class GameManagerBattle : MonoBehaviour
                 playerOneCount++;
             }
             playerOneColour.gameObject.GetComponent<Image>().color = colors[playerOneCount];
+            players[0].GetComponent<PlayerController>().setPlayerColour(playerOneCount);
         }
         if(playerModes[0].CompareTo("weapon") == 0)
         {
@@ -221,6 +243,10 @@ public class GameManagerBattle : MonoBehaviour
                 playerOneCount += 4;
             }
             playerOneColour.gameObject.GetComponent<Image>().sprite = weapons[playerOneCount];
+            int tempNum = (playerOneCount - playerOneCount%4)/4;
+            players[0].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
+            players[0].GetComponentInChildren<WeaponController>().initWeapon(
+                players[0].GetComponent<PlayerController>().getPlayerColour(),tempNum);
         }
     }
 
@@ -237,6 +263,7 @@ public class GameManagerBattle : MonoBehaviour
                 playerTwoCount++;
             }
             playerTwoColour.gameObject.GetComponent<Image>().color = colors[playerTwoCount];
+            players[1].GetComponent<PlayerController>().setPlayerColour(playerTwoCount);
         }
         else if (playerModes[1].CompareTo("weapon") == 0)
         {
@@ -250,6 +277,10 @@ public class GameManagerBattle : MonoBehaviour
                 playerTwoCount += 4;
             }
             playerTwoColour.gameObject.GetComponent<Image>().sprite = weapons[playerTwoCount];
+            int tempNum = (playerTwoCount - playerTwoCount%4)/4;
+            players[1].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
+            players[1].GetComponentInChildren<WeaponController>().initWeapon(
+                players[1].GetComponent<PlayerController>().getPlayerColour(),tempNum);
         }
     }
 
@@ -266,6 +297,7 @@ public class GameManagerBattle : MonoBehaviour
                 playerThreeCount++;
             }
             playerThreeColour.gameObject.GetComponent<Image>().color = colors[playerThreeCount];
+            players[2].GetComponent<PlayerController>().setPlayerColour(playerThreeCount);
         }
         else if (playerModes[2].CompareTo("weapon") == 0)
         {
@@ -279,6 +311,10 @@ public class GameManagerBattle : MonoBehaviour
                 playerThreeCount += 4;
             }
             playerThreeColour.gameObject.GetComponent<Image>().sprite = weapons[playerThreeCount];
+            int tempNum = (playerThreeCount - playerThreeCount%4)/4;
+            players[2].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
+            players[2].GetComponentInChildren<WeaponController>().initWeapon(
+                players[2].GetComponent<PlayerController>().getPlayerColour(),tempNum);
         }
     }
 
@@ -295,6 +331,7 @@ public class GameManagerBattle : MonoBehaviour
                 playerFourCount++;
             }
             playerFourColour.gameObject.GetComponent<Image>().color = colors[playerFourCount];
+            players[3].GetComponent<PlayerController>().setPlayerColour(playerFourCount);
         }
         else if (playerModes[3].CompareTo("weapon") == 0)
         {
@@ -308,6 +345,10 @@ public class GameManagerBattle : MonoBehaviour
                 playerFourCount += 4;
             }
             playerFourColour.gameObject.GetComponent<Image>().sprite = weapons[playerFourCount];
+            int tempNum = (playerFourCount - playerFourCount%4)/4;
+            players[3].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
+            players[3].GetComponentInChildren<WeaponController>().initWeapon(
+                players[3].GetComponent<PlayerController>().getPlayerColour(),tempNum);
         }
     }
 
@@ -327,6 +368,7 @@ public class GameManagerBattle : MonoBehaviour
                 playerOneCount--;
             }
             playerOneColour.gameObject.GetComponent<Image>().color = colors[playerOneCount];
+            players[0].GetComponent<PlayerController>().setPlayerColour(playerOneCount);
         }
         else if (playerModes[0].CompareTo("weapon") == 0)
         {
@@ -340,6 +382,9 @@ public class GameManagerBattle : MonoBehaviour
                 playerOneCount -= 4;
             }
             playerOneColour.gameObject.GetComponent<Image>().sprite = weapons[playerOneCount];
+            players[0].GetComponent<PlayerController>().setPlayerWeapon(playerOneCount);
+            players[0].GetComponentInChildren<WeaponController>().initWeapon(
+                players[0].GetComponent<PlayerController>().getPlayerColour(),playerOneCount);
         }
     }
 
@@ -358,6 +403,7 @@ public class GameManagerBattle : MonoBehaviour
                 playerTwoCount--;
             }
             playerTwoColour.gameObject.GetComponent<Image>().color = colors[playerTwoCount];
+            players[1].GetComponent<PlayerController>().setPlayerColour(playerTwoCount);
         }
         else if (playerModes[1].CompareTo("weapon") == 0)
         {
@@ -371,6 +417,10 @@ public class GameManagerBattle : MonoBehaviour
                 playerTwoCount -= 4;
             }
             playerTwoColour.gameObject.GetComponent<Image>().sprite = weapons[playerTwoCount];
+            int tempNum = (playerTwoCount - playerTwoCount%4)/4;
+            players[1].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
+            players[1].GetComponentInChildren<WeaponController>().initWeapon(
+                players[1].GetComponent<PlayerController>().getPlayerColour(),tempNum);
         }
     }
 
@@ -387,6 +437,7 @@ public class GameManagerBattle : MonoBehaviour
                 playerThreeCount--;
             }
             playerThreeColour.gameObject.GetComponent<Image>().color = colors[playerThreeCount];
+            players[2].GetComponent<PlayerController>().setPlayerColour(playerThreeCount);
         }
         else if (playerModes[2].CompareTo("weapon") == 0)
         {
@@ -400,6 +451,10 @@ public class GameManagerBattle : MonoBehaviour
                 playerThreeCount -= 4;
             }
             playerThreeColour.gameObject.GetComponent<Image>().sprite = weapons[playerThreeCount];
+            int tempNum = (playerThreeCount - playerThreeCount%4)/4;
+            players[2].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
+            players[2].GetComponentInChildren<WeaponController>().initWeapon(
+                players[2].GetComponent<PlayerController>().getPlayerColour(),tempNum);
         }
     }
 
@@ -416,6 +471,7 @@ public class GameManagerBattle : MonoBehaviour
                 playerFourCount--;
             }
             playerFourColour.gameObject.GetComponent<Image>().color = colors[playerFourCount];
+            players[3].GetComponent<PlayerController>().setPlayerColour(playerFourCount);
         }
         else if (playerModes[3].CompareTo("weapon") == 0)
         {
@@ -429,6 +485,10 @@ public class GameManagerBattle : MonoBehaviour
                 playerFourCount -= 4;
             }
             playerFourColour.gameObject.GetComponent<Image>().sprite = weapons[playerFourCount];
+            int tempNum = (playerFourCount - playerFourCount%4)/4;
+            players[3].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
+            players[3].GetComponentInChildren<WeaponController>().initWeapon(
+                players[3].GetComponent<PlayerController>().getPlayerColour(),tempNum);
         }
     }
 
@@ -506,11 +566,6 @@ public class GameManagerBattle : MonoBehaviour
         {
             playerFour = new Player(playerFourCount % 4, playerFourCount);
         }
-        
-    }
-
-    public void addPlayers()
-    {
         
     }
 

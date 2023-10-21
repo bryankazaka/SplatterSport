@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         gameObject.transform.parent =  GameObject.Find("GameManager").transform.Find("PlayersManager").transform;
-        setPlayerWeapon(ROLLER);
         spriteRenderer = GetComponent<SpriteRenderer>();
         setPlayerColour(getFreeCol());
     }
@@ -36,13 +35,8 @@ public class PlayerController : MonoBehaviour
     {        
         playerMovement = GetComponent<PlayerMovement>();
         weaponController = GetComponentInChildren<WeaponController>();
-        
-        
         playerNum = getFreeNum();
-        
-       
-        Debug.Log(colour+ " | "+weapon);
-        GetComponentInParent<GameManagerBattle>().addPlayer(playerNum,colour);
+        GetComponentInParent<GameManagerBattle>().addPlayer(gameObject);
     }
 
     private int getFreeNum(int numP = -1)

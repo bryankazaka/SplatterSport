@@ -12,10 +12,7 @@ public class PlayersManager : MonoBehaviour
     public bool[] numbersTaken = {false,false,false,false};
     public bool[] colorsTaken = {false,false,false,false};
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   
 
     
     public void StartGame()
