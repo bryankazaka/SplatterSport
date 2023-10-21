@@ -45,18 +45,18 @@ public class PlayerController : MonoBehaviour
         GetComponentInParent<GameManagerBattle>().addPlayer(playerNum,colour);
     }
 
-    private int getFreeNum()
+    private int getFreeNum(int numP = -1)
     {
          bool[] num = GetComponentInParent<PlayersManager>().numbersTaken;
-         var randomT = UnityEngine.Random.Range(0,4);
-         if (!num[randomT])
+         numP += 1;
+         if (!num[numP])
          {
-            GetComponentInParent<PlayersManager>().numbersTaken[randomT] = true;
-            return randomT;
+            GetComponentInParent<PlayersManager>().numbersTaken[numP] = true;
+            return numP;
          }
          else
          {
-            return getFreeNum();
+            return getFreeNum(numP);
          }
     }
 
