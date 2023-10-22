@@ -41,16 +41,17 @@ public class WeaponController : MonoBehaviour
     {
            
         
-         
+        
        
+        weapon = new Brush(0);
     }
 
     private void Start()
     {
-        playerController = GetComponentInParent<PlayerController>();
-       
+    
+        playerController = GetComponentInParent<PlayerController>();       
         playerTransform = transform.parent;
-        animator = GetComponent<Animator>();          
+                 
         maxRange = attackRange;
         playerInput = GetComponentInParent<PlayerInput>();
         isMouse = playerInput.currentControlScheme == "Keyboard";        
@@ -61,7 +62,7 @@ public class WeaponController : MonoBehaviour
 
     private void FixedUpdate()
     {
-       
+      
         if (isMouse)
         {
             Vector3 mouse = Camera.main.ScreenToWorldPoint( Mouse.current.position.ReadValue());
@@ -145,21 +146,27 @@ public class WeaponController : MonoBehaviour
             Attack();
         } 
        
-        
-        
+
+       
     }
 
-    private void Update()     
+    private void  Update()     
     {
-        Debug.Log(gameObject.GetComponent<SpriteRenderer>().sprite);
+        if (gameObject.GetComponent<SpriteRenderer>().sprite == null)
+        {
+            Debug.Log(animator.GetCurrentAnimatorStateInfo(0).fullPathHash);
+        }
+        
+      
     }
 
     public void initWeapon(int colour, int weaponType, Sprite spriteT)
     {
-        Debug.Log("Set to: "+spriteT.name);
-        
+         
         
         gameObject.GetComponent<SpriteRenderer>().sprite = spriteT;
+       
+        animator = GetComponent<Animator>();
         switch (weaponType)
         {
             case BRUSH:
@@ -217,7 +224,7 @@ public class WeaponController : MonoBehaviour
         {
             isAttacking = false;
         }
-        Debug.Log(isAttacking);
+       
         
     }
     public void OnAim(InputAction.CallbackContext ctx) => joystickDirection = ctx.ReadValue<Vector2>();
