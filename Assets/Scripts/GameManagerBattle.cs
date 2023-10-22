@@ -803,6 +803,7 @@ public class GameManagerBattle : MonoBehaviour
 
     private void backToMain()
     {
-        SceneManager.GetActiveScene().buildIndex-1;
+        int previousSceneIndex = SceneManager.GetActiveScene().buildIndex - 1;
+        SceneManager.LoadScene(previousSceneIndex);
     }
 }
