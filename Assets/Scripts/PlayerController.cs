@@ -45,7 +45,14 @@ public class PlayerController : MonoBehaviour
         playerNum = getFreeNum();
         GetComponentInParent<GameManagerBattle>().addPlayer(gameObject);
     }
-
+    public void CreateWeapon(Sprite init)
+    {
+        foreach (Transform weaponT in transform)
+        {
+            weaponT.gameObject.SetActive(true);
+            weaponT.gameObject.GetComponent<WeaponController>().initWeapon(colour,weapon,init);
+        }
+    }
     private int getFreeNum(int numP = -1)
     {
          bool[] num = GetComponentInParent<PlayersManager>().numbersTaken;
@@ -106,7 +113,7 @@ public class PlayerController : MonoBehaviour
         
         if (ctx.performed && !isDone)
         {
-            
+            Debug.Log("select");
             GetComponentInParent<GameManagerBattle>().PlayerNext(getPlayerNumber());
         }
        

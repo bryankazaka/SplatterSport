@@ -24,7 +24,7 @@ public class PlayersManager : MonoBehaviour
         {
             PlayerController playObj = player.GetComponent<PlayerController>();
             player.gameObject.GetComponent<PlayerMovement>().enabled = true;
-            playObj.isDone = true;
+            playObj.FinishChar();
             colorPlayers[playObj.colour] = playObj.playerNum;
             GetComponentInParent<GameManagerBattle>().updatePlayer(player.gameObject);
         }
