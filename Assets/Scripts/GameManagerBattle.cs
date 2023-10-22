@@ -96,8 +96,10 @@ public class GameManagerBattle : MonoBehaviour
     public GameObject boardUp;
     public GameObject boardDrop;
 
+    public TextMeshProUGUI tWinner;
 
-    
+    public GameObject endGame;
+
     void Start()
     {
         tRounds.text = "Rounds:" + "\n";
@@ -232,17 +234,14 @@ public class GameManagerBattle : MonoBehaviour
 
     public void StartBattle()
     {
+
         GetComponentInChildren<MainSpawner>().StartRound();
         GetComponentInChildren<TimerController>().enabled = true;
         GetComponentInChildren<PlayersManager>().StartGame();
         GetComponentInChildren<TimerController>().StartAgain();
-        
-       
-        
+
     }
     
-
-
     public void EndRound()
     {
         winner = GetComponentInChildren<SplatterController>().getWinner();
@@ -252,8 +251,11 @@ public class GameManagerBattle : MonoBehaviour
         GetComponentInChildren<MainSpawner>().EndRound();
         GetComponentInChildren<MobsManager>().EndRound();
         inBattle = false;
+        tWinner.text = "Winner: Player " + winner.ToString();
+        endGame.SetActive(true);
         //start the upgrade for losing players       
     }
+
     public void addPlayer(GameObject player)
     {
         PlayerController play = player.GetComponent<PlayerController>();
@@ -274,7 +276,6 @@ public class GameManagerBattle : MonoBehaviour
            case 3:
             GameObject.Find("pFourCircle").GetComponent<Button>().onClick.Invoke();
            break;
-
         }
     }
 
@@ -282,8 +283,7 @@ public class GameManagerBattle : MonoBehaviour
      {        
         PlayerController play = player.GetComponent<PlayerController>();
         players[play.playerNum] = player;
-        playerColors[play.playerNum] = play.getPlayerColour(); // [playernum] = color
-       
+        playerColors[play.playerNum] = play.getPlayerColour(); // [playernum] = color    
      }
 
 
@@ -794,5 +794,10 @@ public class GameManagerBattle : MonoBehaviour
     public void upBoard()
     {
         boardDrop.gameObject.SetActive(true);
+    }
+
+    private void backToMain()
+    {
+        SceneManager.GetActiveScene().buildIndex-1;
     }
 }
