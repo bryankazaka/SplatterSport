@@ -58,6 +58,11 @@ public class GameManagerBattle : MonoBehaviour
 
     public Sprite [] weapons;
 
+    public Button playerOneButton;
+    public Button playerTwoButton;
+    public Button playerThreeButton;
+    public Button playerFourButton;
+
     public TextMeshProUGUI playerOneNextButtonText;
     public TextMeshProUGUI playerTwoNextButtonText;
     public TextMeshProUGUI playerThreeNextButtonText;
@@ -503,12 +508,14 @@ public class GameManagerBattle : MonoBehaviour
                 playerOneNextButtonText.text = "Done";
                 playerOneColour.gameObject.GetComponent<Image>().sprite = weapons[playerOneCount];
                 takenColours.Add(playerOneCount);
+                playerOneButton.gameObject.SetActive(false);
             }
         }
+        /*
         if(playerModes[0].CompareTo("weapon") == 0)
         {
             playerOne = new Player(playerOneCount % 4, playerOneCount);
-        }
+        }*/
          
     }
 
@@ -522,12 +529,13 @@ public class GameManagerBattle : MonoBehaviour
                 playerTwoNextButtonText.text = "Done";
                 playerTwoColour.gameObject.GetComponent<Image>().sprite = weapons[playerTwoCount];
                 takenColours.Add(playerTwoCount);
+                playerTwoButton.gameObject.SetActive(false);
             }
         }
-        if(playerModes[1].CompareTo("weapon") == 0)
+        /*if(playerModes[1].CompareTo("weapon") == 0)
         {
             playerTwo = new Player(playerTwoCount % 4, playerTwoCount);
-        }
+        }*/
         
     }
 
@@ -541,12 +549,14 @@ public class GameManagerBattle : MonoBehaviour
                 playerThreeNextButtonText.text = "Done";
                 playerThreeColour.gameObject.GetComponent<Image>().sprite = weapons[playerThreeCount];
                 takenColours.Add(playerThreeCount);
+                playerThreeButton.gameObject.SetActive(false);
             }
         }
+        /*
         if(playerModes[2].CompareTo("weapon") == 0)
         {
             playerThree = new Player(playerThreeCount % 4, playerThreeCount);
-        }
+        }*/
         
     }
 
@@ -560,12 +570,14 @@ public class GameManagerBattle : MonoBehaviour
                 playerFourNextButtonText.text = "Done";
                 playerFourColour.gameObject.GetComponent<Image>().sprite = weapons[playerFourCount];
                 takenColours.Add(playerFourCount);
+                playerFourButton.gameObject.SetActive(false);
             }
         }
+        /*
         if(playerModes[3].CompareTo("weapon") == 0)
         {
             playerFour = new Player(playerFourCount % 4, playerFourCount);
-        }
+        }*/
         
     }
 
