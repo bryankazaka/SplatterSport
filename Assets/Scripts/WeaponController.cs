@@ -37,13 +37,11 @@ public class WeaponController : MonoBehaviour
     public bool isMouse;
     private Vector2 joystickDirection;
     private  Vector3 target;
+    public AudioClip attackSound;
 
     private void Awake()
     {
            
-        
-        
-       
         weapon = new Brush(0);
     }
 
@@ -199,7 +197,7 @@ public class WeaponController : MonoBehaviour
     {
         if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("Swing")) // if I press and its not attacking attack
         {
-            audioSource.Play();
+            audioSource.PlayOneShot(attackSound, 0.5f);
             animator.SetTrigger("Attack");
             startAttackTime = Time.time;      
         }
