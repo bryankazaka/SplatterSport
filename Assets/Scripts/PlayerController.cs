@@ -115,6 +115,7 @@ public class PlayerController : MonoBehaviour
     }
     public void setPlayerWeapon(int weaponNew)
     {
+        Debug.Log("Weapon Change " +  weaponNew);
         weapon = weaponNew;
     }
 

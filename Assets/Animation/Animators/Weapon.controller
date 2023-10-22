@@ -198,7 +198,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Pink_Brush_Idle
+  m_Name: Pink_Brush_Swing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -670,7 +670,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Blue_Brush_Idle
+  m_Name: Blue_Brush_Swing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -744,7 +744,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Green_Roller_Idle
+  m_Name: Green_Roller_Swing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -835,7 +835,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Blue_Roller_Idle
+  m_Name: Blue_Roller_Swing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -942,7 +942,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Yellow_Pencil_Idle
+  m_Name: Yellow_Pencil_Swing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1219,7 +1219,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Yellow_Brush_Idle
+  m_Name: Yellow_Brush_Swing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1644,7 +1644,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Green_Brush_Idle
+  m_Name: Green_Brush_Swing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1804,7 +1804,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Blue_Pencil_Idle
+  m_Name: Blue_Pencil_Swing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1858,7 +1858,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Pink_Roller_Idle
+  m_Name: Pink_Roller_Swing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1915,7 +1915,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Pink_Pencil_Idle
+  m_Name: Pink_Pencil_Swing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1994,7 +1994,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Yellow_Roller_Idle
+  m_Name: Yellow_Roller_Swing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -2021,7 +2021,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Green_Pencil_Idle
+  m_Name: Green_Pencil_Swing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:

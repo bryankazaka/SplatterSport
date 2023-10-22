@@ -24,7 +24,7 @@ public class WeaponController : MonoBehaviour
     public LayerMask enemyLayers;
     private Animator animator;
 
-    private SpriteRenderer sRenderer;
+    
     public Vector3 screenPosition;
     public Vector3 worldPosition;
     private Weapon weapon;
@@ -39,7 +39,7 @@ public class WeaponController : MonoBehaviour
 
     private void Awake()
     {
-     animator = GetComponent<Animator>();         
+           
         
          
        
@@ -48,13 +48,13 @@ public class WeaponController : MonoBehaviour
     private void Start()
     {
         playerController = GetComponentInParent<PlayerController>();
-        sRenderer = GetComponent<SpriteRenderer>();
+       
         playerTransform = transform.parent;
-                
+        animator = GetComponent<Animator>();          
         maxRange = attackRange;
         playerInput = GetComponentInParent<PlayerInput>();
         isMouse = playerInput.currentControlScheme == "Keyboard";        
-        //initWeapon(playerController.getPlayerColour(),playerController.getPlayerWeapon());
+        
         
 
     }
@@ -141,7 +141,7 @@ public class WeaponController : MonoBehaviour
         
         if (isAttacking && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Swing"))
         {
-            Debug.Log("attacking");
+            
             Attack();
         } 
        
@@ -151,15 +151,15 @@ public class WeaponController : MonoBehaviour
 
     private void Update()     
     {
-        
+        Debug.Log(gameObject.GetComponent<SpriteRenderer>().sprite);
     }
 
-    public void initWeapon(int colour, int weaponType, Sprite sprite)
+    public void initWeapon(int colour, int weaponType, Sprite spriteT)
     {
-        Debug.Log("newWeapon");
-       
+        Debug.Log("Set to: "+spriteT.name);
         
-        sRenderer.sprite = sprite;
+        
+        gameObject.GetComponent<SpriteRenderer>().sprite = spriteT;
         switch (weaponType)
         {
             case BRUSH:
