@@ -50,7 +50,6 @@ public class GameManagerBattle : MonoBehaviour
     public GameObject playerFourColour;
 
 
-
     private int playerOneCount;
     private int playerTwoCount;
     private int playerThreeCount;
@@ -76,6 +75,11 @@ public class GameManagerBattle : MonoBehaviour
     private Player playerTwo;
     private Player playerThree;
     private Player playerFour;
+
+    public GameObject losersPanel; 
+    public int winner;
+
+    public Sprite [] upgrades;
 
     void Start()
     {
@@ -178,7 +182,7 @@ public class GameManagerBattle : MonoBehaviour
 
     public void EndRound()
     {
-        int winner = GetComponentInChildren<SplatterController>().getWinner();
+        winner = GetComponentInChildren<SplatterController>().getWinner();
         GetComponentInChildren<WallController>().winPoint(winner);
         GetComponentInChildren<WallController>().UpdateWall(playerColors);
         GetComponentInChildren<CrowdController>().CrowdReset();
@@ -589,6 +593,47 @@ public class GameManagerBattle : MonoBehaviour
             playerFour = new Player(playerFourCount % 4, playerFourCount);
         }*/
         
+    }
+
+    public void displayLosers()
+    {
+        Debug.Log(winner);
+        GameObject[] panels = 
+        {
+            losersPanel.transform.Find("pOnePanel").gameObject,
+            losersPanel.transform.Find("pTwoPanel").gameObject,
+            losersPanel.transform.Find("pThreePanel").gameObject,
+            losersPanel.transform.Find("pFourPanel").gameObject
+        };
+
+        for (int i = 0; i < panels.Length; i++)
+        {
+            if (i + 1 != winner)
+            {
+                panels[i].SetActive(true);
+            }
+            else
+            {
+                panels[i].SetActive(false);
+            }
+        }
+    }
+
+    private List<int> randomUpgradeIndexes()
+    {
+        int count = 10;
+        List<int> numbers = new List<int>();
+        List<int> availableNumbers = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+        for (int i = 0; i < count; i++)
+        {
+            int index = Random.Range(0, availableNumbers.Count);
+            numbers.Add(availableNumbers[index]);
+            availableNumbers.RemoveAt(index);
+        }
+
+        return numbers;
+
     }
 
 
