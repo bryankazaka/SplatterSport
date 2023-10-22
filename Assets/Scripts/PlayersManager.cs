@@ -23,6 +23,8 @@ public class PlayersManager : MonoBehaviour
         foreach (Transform player in transform)
         {
             PlayerController playObj = player.GetComponent<PlayerController>();
+            player.gameObject.GetComponent<PlayerMovement>().enabled = true;
+            playObj.isDone = true;
             colorPlayers[playObj.colour] = playObj.playerNum;
             GetComponentInParent<GameManagerBattle>().updatePlayer(player.gameObject);
         }
@@ -31,12 +33,9 @@ public class PlayersManager : MonoBehaviour
 
     public void OnJoin(PlayerInput pi)
     {
+        
         numberOfPlayers++;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

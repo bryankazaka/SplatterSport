@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     const int BLUE = 0, YELLOW = 1, GREEN = 2, PINK = 3;
     private const int BRUSH = 0, PENCIL = 1, ROLLER = 2;
 
-    private bool bugfix = false; //a bool im using to solve an issue with controllers
+
     public int colour;
     public int weapon;
     public int playerNum = 0; //0 for player 1, 1 for player 2 ect
@@ -87,41 +87,30 @@ public class PlayerController : MonoBehaviour
     }
     public void OnChooseL(InputAction.CallbackContext ctx)
     {   
-       
-        if (!bugfix)
+       if (ctx.performed && !isDone)
         {             
-            GetComponentInParent<GameManagerBattle>().playerSelect(getPlayerNumber(),true);   
-            bugfix = !bugfix;
-        }
-        else
-        {
-            bugfix = !bugfix;
-        }
-        
+            GetComponentInParent<GameManagerBattle>().playerSelect(getPlayerNumber(),true);                   
+        }  
     }
 
     public void OnChooseR(InputAction.CallbackContext ctx)
-    {   
-       
-        if (!bugfix)
+    {      
+        if (ctx.performed && !isDone)
         {             
-            GetComponentInParent<GameManagerBattle>().playerSelect(getPlayerNumber(),false);   
-            bugfix = !bugfix;
-        }
-        else
-        {
-            bugfix = !bugfix;
-        }
-        
+            GetComponentInParent<GameManagerBattle>().playerSelect(getPlayerNumber(),false);                   
+        }           
     }
 
     public void OnSelect(InputAction.CallbackContext ctx)
     {
-        if (ctx.duration == 0 && !isDone)
+        
+        if (ctx.performed && !isDone)
         {
-            Debug.Log("selected");
+            
             GetComponentInParent<GameManagerBattle>().PlayerNext(getPlayerNumber());
         }
+       
+        
         
     }
     public void setPlayerWeapon(int weaponNew)

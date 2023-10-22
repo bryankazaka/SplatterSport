@@ -39,8 +39,7 @@ public class WeaponController : MonoBehaviour
 
     private void Awake()
     {
-     animator = GetComponent<Animator>();   
-        
+     animator = GetComponent<Animator>();         
         
          
        
@@ -139,12 +138,12 @@ public class WeaponController : MonoBehaviour
             }
 
         }
-        var attackHeld = playerInput.actions["Attack"];
-        if (attackHeld.IsPressed())
+        
+        if (isAttacking && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Swing"))
         {
+            Debug.Log("attacking");
             Attack();
-        }
-
+        } 
        
         
         
@@ -152,22 +151,15 @@ public class WeaponController : MonoBehaviour
 
     private void Update()     
     {
-     if (Input.GetButtonUp("Fire1") && isMouse)
-        {
-            isAttacking = false;
-        }
-
-
-    if ((Input.GetButtonDown("Fire1") || isAttacking) && isMouse)
-        {  
-            isAttacking = true;
-            Attack();
-        }    
+        
     }
 
-    public void initWeapon(int colour, int weaponType)
+    public void initWeapon(int colour, int weaponType, Sprite sprite)
     {
-      
+        Debug.Log("newWeapon");
+       
+        
+        sRenderer.sprite = sprite;
         switch (weaponType)
         {
             case BRUSH:
@@ -189,10 +181,10 @@ public class WeaponController : MonoBehaviour
                 //set colour of weapon
                 break;
         }
-
-        attackRange = weapon.getRange();
+         attackRange = weapon.getRange();
         attackSpeed = weapon.getAttackSpeed();
         animator.SetFloat("Speed",attackSpeed);
+        
     }
 
     private void damageEnemy(Collider2D hit)
@@ -216,7 +208,17 @@ public class WeaponController : MonoBehaviour
     public void OnAttack(InputAction.CallbackContext ctx)
     {
         
-        Attack();
+       
+        if (ctx.started)
+        {
+            isAttacking = true;
+        }
+        if (ctx.canceled)
+        {
+            isAttacking = false;
+        }
+        Debug.Log(isAttacking);
+        
     }
     public void OnAim(InputAction.CallbackContext ctx) => joystickDirection = ctx.ReadValue<Vector2>();
 

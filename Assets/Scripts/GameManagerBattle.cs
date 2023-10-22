@@ -238,7 +238,7 @@ public class GameManagerBattle : MonoBehaviour
         GetComponentInChildren<TimerController>().StartAgain();
         
        
-        //reset the braziers
+        
     }
     
 
@@ -328,7 +328,7 @@ public class GameManagerBattle : MonoBehaviour
             int tempNum = (playerOneCount - playerOneCount%4)/4;
             players[0].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
             players[0].GetComponentInChildren<WeaponController>().initWeapon(
-                players[0].GetComponent<PlayerController>().getPlayerColour(),tempNum);
+                players[0].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerOneCount]);
         }
     }
 
@@ -362,7 +362,7 @@ public class GameManagerBattle : MonoBehaviour
             int tempNum = (playerTwoCount - playerTwoCount%4)/4;
             players[1].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
             players[1].GetComponentInChildren<WeaponController>().initWeapon(
-                players[1].GetComponent<PlayerController>().getPlayerColour(),tempNum);
+                players[1].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerTwoCount]);
         }
     }
 
@@ -396,7 +396,7 @@ public class GameManagerBattle : MonoBehaviour
             int tempNum = (playerThreeCount - playerThreeCount%4)/4;
             players[2].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
             players[2].GetComponentInChildren<WeaponController>().initWeapon(
-                players[2].GetComponent<PlayerController>().getPlayerColour(),tempNum);
+                players[2].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerThreeCount]);
         }
     }
 
@@ -430,7 +430,7 @@ public class GameManagerBattle : MonoBehaviour
             int tempNum = (playerFourCount - playerFourCount%4)/4;
             players[3].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
             players[3].GetComponentInChildren<WeaponController>().initWeapon(
-                players[3].GetComponent<PlayerController>().getPlayerColour(),tempNum);
+                players[3].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerFourCount]);
         }
     }
 
@@ -465,9 +465,9 @@ public class GameManagerBattle : MonoBehaviour
             }
             playerOneColour.gameObject.GetComponent<Image>().sprite = weapons[playerOneCount];
             int tempNum = (playerOneCount - playerOneCount%4)/4;
-            players[1].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
-            players[1].GetComponentInChildren<WeaponController>().initWeapon(
-                players[1].GetComponent<PlayerController>().getPlayerColour(),tempNum);
+            players[0].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
+            players[0].GetComponentInChildren<WeaponController>().initWeapon(
+                players[0].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerOneCount]);
         }
     }
 
@@ -503,7 +503,7 @@ public class GameManagerBattle : MonoBehaviour
             int tempNum = (playerTwoCount - playerTwoCount%4)/4;
             players[1].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
             players[1].GetComponentInChildren<WeaponController>().initWeapon(
-                players[1].GetComponent<PlayerController>().getPlayerColour(),tempNum);
+                players[1].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerTwoCount]);
         }
     }
 
@@ -537,7 +537,7 @@ public class GameManagerBattle : MonoBehaviour
             int tempNum = (playerThreeCount - playerThreeCount%4)/4;
             players[2].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
             players[2].GetComponentInChildren<WeaponController>().initWeapon(
-                players[2].GetComponent<PlayerController>().getPlayerColour(),tempNum);
+                players[2].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerThreeCount]);
         }
     }
 
@@ -571,7 +571,7 @@ public class GameManagerBattle : MonoBehaviour
             int tempNum = (playerFourCount - playerFourCount%4)/4;
             players[3].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
             players[3].GetComponentInChildren<WeaponController>().initWeapon(
-                players[3].GetComponent<PlayerController>().getPlayerColour(),tempNum);
+                players[3].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerFourCount]);
         }
     }
 
@@ -604,15 +604,17 @@ public class GameManagerBattle : MonoBehaviour
                 playerModes[0] = "weapon";
                 playerOneNextButtonText.text = "Done";
                 playerOneColour.gameObject.GetComponent<Image>().sprite = weapons[playerOneCount];
+                playerOneColour.gameObject.GetComponent<Image>().color = colors[4];
                 takenColours.Add(playerOneCount);
-                playerOneButton.gameObject.SetActive(false);
+                
+            }
+            else
+            if(playerModes[0].CompareTo("weapon") == 0)
+            {
+                GameObject.Find("pOnePanel").SetActive(false);
             }
         }
-        /*
-        if(playerModes[0].CompareTo("weapon") == 0)
-        {
-            playerOne = new Player(playerOneCount % 4, playerOneCount);
-        }*/
+        
          
     }
 
@@ -625,15 +627,16 @@ public class GameManagerBattle : MonoBehaviour
                 playerModes[1] = "weapon";
                 playerTwoNextButtonText.text = "Done";
                 playerTwoColour.gameObject.GetComponent<Image>().sprite = weapons[playerTwoCount];
+                playerTwoColour.gameObject.GetComponent<Image>().color = colors[4];
                 takenColours.Add(playerTwoCount);
                 playerTwoButton.gameObject.SetActive(false);
             }
         }
-        /*if(playerModes[1].CompareTo("weapon") == 0)
+        else
+        if(playerModes[1].CompareTo("weapon") == 0)
         {
-            playerTwo = new Player(playerTwoCount % 4, playerTwoCount);
-            
-        }*/
+            GameObject.Find("pTwoPanel").SetActive(false);            
+        }
         
     }
 
@@ -646,16 +649,17 @@ public class GameManagerBattle : MonoBehaviour
                 playerModes[2] = "weapon";
                 playerThreeNextButtonText.text = "Done";
                 playerThreeColour.gameObject.GetComponent<Image>().sprite = weapons[playerThreeCount];
+                playerThreeColour.gameObject.GetComponent<Image>().color = colors[4];
                 takenColours.Add(playerThreeCount);
                 playerThreeButton.gameObject.SetActive(false);
             }
         }
-        /*
+        else
         if(playerModes[2].CompareTo("weapon") == 0)
         {
-            playerThree = new Player(playerThreeCount % 4, playerThreeCount);
+             GameObject.Find("pThreePanel").SetActive(false);
             
-        }*/
+        }
         
     }
 
@@ -668,22 +672,24 @@ public class GameManagerBattle : MonoBehaviour
                 playerModes[3] = "weapon";
                 playerFourNextButtonText.text = "Done";
                 playerFourColour.gameObject.GetComponent<Image>().sprite = weapons[playerFourCount];
+                playerFourColour.gameObject.GetComponent<Image>().color = colors[4];
                 takenColours.Add(playerFourCount);
                 playerFourButton.gameObject.SetActive(false);
             }
+            else
+            if(playerModes[3].CompareTo("weapon") == 0)
+            {
+                GameObject.Find("pFourPanel").SetActive(false);
+            
+            }
         }
-        /*
-        if(playerModes[3].CompareTo("weapon") == 0)
-        {
-            playerFour = new Player(playerFourCount % 4, playerFourCount);
-           
-        }*/
+        
         
     }
 
     public void displayLosers()
     {
-        Debug.Log(winner);
+        
         GameObject[] panels = 
         {
             losersPanel.transform.Find("pOnePanel").gameObject,
