@@ -7,6 +7,7 @@ public class boardUpDisappear : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        makeDisappear();
     }
 
     // Update is called once per frame
@@ -14,7 +15,6 @@ public class boardUpDisappear : MonoBehaviour
     {
         
     }
-
     public void makeDisappear()
     {
         StartCoroutine(Disappear());
