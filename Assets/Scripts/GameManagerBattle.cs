@@ -52,7 +52,6 @@ public class GameManagerBattle : MonoBehaviour
     public GameObject playerFourColour;
 
 
-
     private int playerOneCount;
     private int playerTwoCount;
     private int playerThreeCount;
@@ -60,6 +59,11 @@ public class GameManagerBattle : MonoBehaviour
 
     public Sprite [] weapons;
     private string[] colorsT = {"blue","yellow","green","pink"};
+
+    public Button playerOneButton;
+    public Button playerTwoButton;
+    public Button playerThreeButton;
+    public Button playerFourButton;
 
     public TextMeshProUGUI playerOneNextButtonText;
     public TextMeshProUGUI playerTwoNextButtonText;
@@ -73,6 +77,11 @@ public class GameManagerBattle : MonoBehaviour
     private Player playerTwo;
     private Player playerThree;
     private Player playerFour;
+
+    public GameObject losersPanel; 
+    public int winner;
+
+    public Sprite [] upgrades;
 
     void Start()
     {
@@ -221,7 +230,7 @@ public class GameManagerBattle : MonoBehaviour
 
     public void EndRound()
     {
-        int winner = GetComponentInChildren<SplatterController>().getWinner();
+        winner = GetComponentInChildren<SplatterController>().getWinner();
         GetComponentInChildren<WallController>().winPoint(winner);
         GetComponentInChildren<WallController>().UpdateWall(playerColors);
         GetComponentInChildren<CrowdController>().CrowdReset();
@@ -581,12 +590,14 @@ public class GameManagerBattle : MonoBehaviour
                 playerOneNextButtonText.text = "Done";
                 playerOneColour.gameObject.GetComponent<Image>().sprite = weapons[playerOneCount];
                 takenColours.Add(playerOneCount);
+                playerOneButton.gameObject.SetActive(false);
             }
         }
+        /*
         if(playerModes[0].CompareTo("weapon") == 0)
         {
             playerOne = new Player(playerOneCount % 4, playerOneCount);
-        }
+        }*/
          
     }
 
@@ -600,13 +611,14 @@ public class GameManagerBattle : MonoBehaviour
                 playerTwoNextButtonText.text = "Done";
                 playerTwoColour.gameObject.GetComponent<Image>().sprite = weapons[playerTwoCount];
                 takenColours.Add(playerTwoCount);
+                playerTwoButton.gameObject.SetActive(false);
             }
         }
-        if(playerModes[1].CompareTo("weapon") == 0)
+        /*if(playerModes[1].CompareTo("weapon") == 0)
         {
             playerTwo = new Player(playerTwoCount % 4, playerTwoCount);
             
-        }
+        }*/
         
     }
 
@@ -620,13 +632,15 @@ public class GameManagerBattle : MonoBehaviour
                 playerThreeNextButtonText.text = "Done";
                 playerThreeColour.gameObject.GetComponent<Image>().sprite = weapons[playerThreeCount];
                 takenColours.Add(playerThreeCount);
+                playerThreeButton.gameObject.SetActive(false);
             }
         }
+        /*
         if(playerModes[2].CompareTo("weapon") == 0)
         {
             playerThree = new Player(playerThreeCount % 4, playerThreeCount);
             
-        }
+        }*/
         
     }
 
@@ -640,14 +654,57 @@ public class GameManagerBattle : MonoBehaviour
                 playerFourNextButtonText.text = "Done";
                 playerFourColour.gameObject.GetComponent<Image>().sprite = weapons[playerFourCount];
                 takenColours.Add(playerFourCount);
+                playerFourButton.gameObject.SetActive(false);
             }
         }
+        /*
         if(playerModes[3].CompareTo("weapon") == 0)
         {
             playerFour = new Player(playerFourCount % 4, playerFourCount);
            
-        }
+        }*/
         
+    }
+
+    public void displayLosers()
+    {
+        Debug.Log(winner);
+        GameObject[] panels = 
+        {
+            losersPanel.transform.Find("pOnePanel").gameObject,
+            losersPanel.transform.Find("pTwoPanel").gameObject,
+            losersPanel.transform.Find("pThreePanel").gameObject,
+            losersPanel.transform.Find("pFourPanel").gameObject
+        };
+
+        for (int i = 0; i < panels.Length; i++)
+        {
+            if (i + 1 != winner)
+            {
+                panels[i].SetActive(true);
+            }
+            else
+            {
+                panels[i].SetActive(false);
+            }
+        }
+    }
+
+    private List<int> randomUpgradeIndexes()
+    {
+        int count = 10;
+        List<int> numbers = new List<int>();
+        List<int> availableNumbers = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+        for (int i = 0; i < count; i++)
+        {
+            int index = Random.Range(0, availableNumbers.Count);
+            numbers.Add(availableNumbers[index]);
+            availableNumbers.RemoveAt(index);
+        }
+
+        return numbers;
+
     }
 
 
