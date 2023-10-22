@@ -152,13 +152,13 @@ public class WeaponController : MonoBehaviour
 
     private void Update()     
     {
-     if (Input.GetButtonUp("Fire1") && isMouse)
+        if (Input.GetButtonUp("Fire1") && isMouse)
         {
             isAttacking = false;
         }
 
 
-    if ((Input.GetButtonDown("Fire1") || isAttacking) && isMouse)
+        if ((Input.GetButtonDown("Fire1") || isAttacking) && isMouse)
         {  
             isAttacking = true;
             Attack();
@@ -215,8 +215,11 @@ public class WeaponController : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext ctx)
     {
+        if (ctx.performed)
+        {
+            Attack();
+        }
         
-        Attack();
     }
     public void OnAim(InputAction.CallbackContext ctx) => joystickDirection = ctx.ReadValue<Vector2>();
 

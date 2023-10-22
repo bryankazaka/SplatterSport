@@ -87,41 +87,30 @@ public class PlayerController : MonoBehaviour
     }
     public void OnChooseL(InputAction.CallbackContext ctx)
     {   
-       
-        if (!bugfix)
+       if (ctx.performed && !isDone)
         {             
-            GetComponentInParent<GameManagerBattle>().playerSelect(getPlayerNumber(),true);   
-            bugfix = !bugfix;
-        }
-        else
-        {
-            bugfix = !bugfix;
-        }
-        
+            GetComponentInParent<GameManagerBattle>().playerSelect(getPlayerNumber(),true);                   
+        }  
     }
 
     public void OnChooseR(InputAction.CallbackContext ctx)
-    {   
-       
-        if (!bugfix)
+    {      
+        if (ctx.performed && !isDone)
         {             
-            GetComponentInParent<GameManagerBattle>().playerSelect(getPlayerNumber(),false);   
-            bugfix = !bugfix;
-        }
-        else
-        {
-            bugfix = !bugfix;
-        }
-        
+            GetComponentInParent<GameManagerBattle>().playerSelect(getPlayerNumber(),false);                   
+        }           
     }
 
     public void OnSelect(InputAction.CallbackContext ctx)
     {
-        if (ctx.duration == 0 && !isDone)
+        
+        if (ctx.performed && !isDone)
         {
             Debug.Log("selected");
             GetComponentInParent<GameManagerBattle>().PlayerNext(getPlayerNumber());
         }
+       
+        
         
     }
     public void setPlayerWeapon(int weaponNew)
