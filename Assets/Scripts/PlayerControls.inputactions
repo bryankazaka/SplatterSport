@@ -153,7 +153,7 @@
                     "name": "",
                     "id": "a48daa04-6ea3-46bc-b368-e131bde5a1e7",
                     "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
+                    "interactions": "Hold(duration=10000)",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Attack",

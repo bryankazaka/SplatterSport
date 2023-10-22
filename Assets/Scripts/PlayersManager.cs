@@ -33,13 +33,9 @@ public class PlayersManager : MonoBehaviour
 
     public void OnJoin(PlayerInput pi)
     {
-        Debug.Log("Joined");
+        
         numberOfPlayers++;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     const int BLUE = 0, YELLOW = 1, GREEN = 2, PINK = 3;
     private const int BRUSH = 0, PENCIL = 1, ROLLER = 2;
 
-    private bool bugfix = false; //a bool im using to solve an issue with controllers
+
     public int colour;
     public int weapon;
     public int playerNum = 0; //0 for player 1, 1 for player 2 ect
@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
         
         if (ctx.performed && !isDone)
         {
-            Debug.Log("selected");
+            
             GetComponentInParent<GameManagerBattle>().PlayerNext(getPlayerNumber());
         }
        
