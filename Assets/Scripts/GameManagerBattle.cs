@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;  
 using TMPro;  
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using Unity.VisualScripting;
 
 public class Player
 {
@@ -141,7 +143,53 @@ public class GameManagerBattle : MonoBehaviour
             roundIndex++;
         }
     }
-
+    public void playerSelect(int playerNum, bool left)
+    {
+        
+        switch (playerNum)
+        {
+            case 0:
+                if (left)
+                {
+                    playerOneLeft();
+                }
+                else
+                {
+                    playerOneRight();
+                }
+                break;
+            case 1:
+                if (left)
+                {
+                    playerTwoLeft();
+                }
+                else
+                {   
+                    playerTwoRight();
+                }
+                break;
+            case 2:
+                if (left)
+                {
+                    playerThreeLeft();
+                }
+                else
+                {
+                    playerThreeRight();
+                }
+                break;
+            case 3:
+                if (left)
+                {
+                    playerFourLeft();
+                }
+                else
+                {
+                    playerFourRight();
+                }
+                break; 
+        }
+    }
     public void roundsTextBackwards()
     {
         if(roundIndex !=0)
@@ -392,9 +440,10 @@ public class GameManagerBattle : MonoBehaviour
                 playerOneCount -= 4;
             }
             playerOneColour.gameObject.GetComponent<Image>().sprite = weapons[playerOneCount];
-            players[0].GetComponent<PlayerController>().setPlayerWeapon(playerOneCount);
-            players[0].GetComponentInChildren<WeaponController>().initWeapon(
-                players[0].GetComponent<PlayerController>().getPlayerColour(),playerOneCount);
+            int tempNum = (playerOneCount - playerOneCount%4)/4;
+            players[1].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
+            players[1].GetComponentInChildren<WeaponController>().initWeapon(
+                players[1].GetComponent<PlayerController>().getPlayerColour(),tempNum);
         }
     }
 
@@ -502,6 +551,25 @@ public class GameManagerBattle : MonoBehaviour
         }
     }
 
+    public void PlayerNext(int playerNum)
+    {
+        switch (playerNum)
+        {            
+           case 0:
+            playerOneNext();
+           break;
+           case 1:
+            playerTwoNext();
+           break;
+           case 2:
+            playerThreeNext();
+           break;
+           case 3:
+            playerFourNext();
+           break;
+
+        }
+    }
 
     public void playerOneNext()
     {
@@ -537,6 +605,7 @@ public class GameManagerBattle : MonoBehaviour
         if(playerModes[1].CompareTo("weapon") == 0)
         {
             playerTwo = new Player(playerTwoCount % 4, playerTwoCount);
+            
         }
         
     }
@@ -556,6 +625,7 @@ public class GameManagerBattle : MonoBehaviour
         if(playerModes[2].CompareTo("weapon") == 0)
         {
             playerThree = new Player(playerThreeCount % 4, playerThreeCount);
+            
         }
         
     }
@@ -575,6 +645,7 @@ public class GameManagerBattle : MonoBehaviour
         if(playerModes[3].CompareTo("weapon") == 0)
         {
             playerFour = new Player(playerFourCount % 4, playerFourCount);
+           
         }
         
     }

@@ -20,8 +20,8 @@ public class CrowdController : MonoBehaviour
     void Start()
     {
         crowd = new float[42];
-        float[]  baseC = {1.0f,1.0f,1.0f,1.0f};
-        updateCrowd(baseC);
+        
+        CrowdReset();
         for (int i = 0; i < 42; i++)
         {
             //change the crowd ratios and set the tiles
@@ -95,9 +95,12 @@ public class CrowdController : MonoBehaviour
 
     public void CrowdReset()
     {
-        float[]  baseC = {1.0f,1.0f,1.0f,1.0f};
-        updateCrowd(baseC);
+        for (int i = 0; i < crowd.Length; i++)
+        {
+            crowd[i] = 4.0f;
+        }
     }
 
+    
     
 }

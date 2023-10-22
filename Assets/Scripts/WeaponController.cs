@@ -39,7 +39,7 @@ public class WeaponController : MonoBehaviour
 
     private void Awake()
     {
-        
+     animator = GetComponent<Animator>();   
         
         
          
@@ -51,7 +51,7 @@ public class WeaponController : MonoBehaviour
         playerController = GetComponentInParent<PlayerController>();
         sRenderer = GetComponent<SpriteRenderer>();
         playerTransform = transform.parent;
-        animator = GetComponent<Animator>();        
+                
         maxRange = attackRange;
         playerInput = GetComponentInParent<PlayerInput>();
         isMouse = playerInput.currentControlScheme == "Keyboard";        
@@ -81,7 +81,7 @@ public class WeaponController : MonoBehaviour
                 target = new(1,0,0);
             }
 
-            // Add The vector of the aim here Cameron _________________________________________________________
+           
             
         }
        
@@ -158,7 +158,7 @@ public class WeaponController : MonoBehaviour
         }
 
 
-        if ((Input.GetButtonDown("Fire1") || isAttacking) && isMouse)
+    if ((Input.GetButtonDown("Fire1") || isAttacking) && isMouse)
         {  
             isAttacking = true;
             Attack();
@@ -188,15 +188,10 @@ public class WeaponController : MonoBehaviour
                 animator.SetInteger("Colour",colour);
                 //set colour of weapon
                 break;
-            default:
-                weapon = new Brush(colour);
-                animator.SetInteger("Weapon",BRUSH);
-                animator.SetInteger("Colour",colour);
-                break;
         }
 
         attackRange = weapon.getRange();
-        //attackSpeed = weapon.getAttackSpeed();
+        attackSpeed = weapon.getAttackSpeed();
         animator.SetFloat("Speed",attackSpeed);
     }
 

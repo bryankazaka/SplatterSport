@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     const int BLUE = 0, YELLOW = 1, GREEN = 2, PINK = 3;
     private const int BRUSH = 0, PENCIL = 1, ROLLER = 2;
 
+    private bool bugfix = false; //a bool im using to solve an issue with controllers
     public int colour;
     public int weapon;
     public int playerNum = 0; //0 for player 1, 1 for player 2 ect
@@ -20,8 +22,10 @@ public class PlayerController : MonoBehaviour
     public bool leadLimbs = false;
     public bool isMouse = false;
 
+    public bool isDone = false;
+
     private PlayerMovement playerMovement;
-    private WeaponController weaponController;
+    
     private SpriteRenderer spriteRenderer;
 
     private void Awake()
@@ -30,11 +34,14 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         setPlayerColour(getFreeCol());
     }
-
+    public void FinishChar()
+    {
+        isDone = true;
+    }
     void Start()
     {        
         playerMovement = GetComponent<PlayerMovement>();
-        weaponController = GetComponentInChildren<WeaponController>();
+        
         playerNum = getFreeNum();
         GetComponentInParent<GameManagerBattle>().addPlayer(gameObject);
     }
@@ -78,7 +85,45 @@ public class PlayerController : MonoBehaviour
         colours[PINK] =  new Color32(0xFF,0x00,0x8E,0xFF); //pink
         spriteRenderer.color = colours[colourNew];
     }
+    public void OnChooseL(InputAction.CallbackContext ctx)
+    {   
+       
+        if (!bugfix)
+        {             
+            GetComponentInParent<GameManagerBattle>().playerSelect(getPlayerNumber(),true);   
+            bugfix = !bugfix;
+        }
+        else
+        {
+            bugfix = !bugfix;
+        }
+        
+    }
 
+    public void OnChooseR(InputAction.CallbackContext ctx)
+    {   
+       
+        if (!bugfix)
+        {             
+            GetComponentInParent<GameManagerBattle>().playerSelect(getPlayerNumber(),false);   
+            bugfix = !bugfix;
+        }
+        else
+        {
+            bugfix = !bugfix;
+        }
+        
+    }
+
+    public void OnSelect(InputAction.CallbackContext ctx)
+    {
+        if (ctx.duration == 0 && !isDone)
+        {
+            Debug.Log("selected");
+            GetComponentInParent<GameManagerBattle>().PlayerNext(getPlayerNumber());
+        }
+        
+    }
     public void setPlayerWeapon(int weaponNew)
     {
         weapon = weaponNew;
@@ -92,5 +137,10 @@ public class PlayerController : MonoBehaviour
     public int getPlayerWeapon()
     {
         return weapon;
+    }
+
+    public int getPlayerNumber()
+    {
+        return playerNum;
     }
 }

@@ -40,6 +40,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ChooseL",
+                    "type": "Button",
+                    "id": "dd9a2bda-73ed-42d0-af15-1c585b3bcaea",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChooseR",
+                    "type": "Button",
+                    "id": "61bb41f5-8ae7-43bc-b7f2-cfe6277098ef",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -113,7 +131,7 @@
                     "name": "",
                     "id": "bff06adf-ea5d-4976-b798-47996afd6030",
                     "path": "<Gamepad>/buttonSouth",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Select",
@@ -150,6 +168,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55da55b6-0ce0-49df-ab6b-4b2adb5a27eb",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "Hold(duration=1,pressPoint=1)",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ChooseL",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55625698-9f45-45f1-a67a-646901f64234",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "Hold(duration=1,pressPoint=1)",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ChooseR",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

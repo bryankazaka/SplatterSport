@@ -2299,7 +2299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &402401536
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5900,6 +5900,8 @@ MonoBehaviour:
     rgba: 4278779669
   - serializedVersion: 2
     rgba: 4287496447
+  - serializedVersion: 2
+    rgba: 4284118925
   crowdHMap: {fileID: 261509364}
   heads:
   - {fileID: 11400000, guid: faed33998bb93a6478f9bc6c6b55f658, type: 2}
@@ -10304,7 +10306,7 @@ Tilemap:
       - {fileID: -727991476, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: 320087227, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: -474964340, guid: 3037628c76454664798a2c475ca22a35, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 1
   - first: {x: 5, y: 8, z: 0}
@@ -10346,7 +10348,7 @@ Tilemap:
       - {fileID: -727991476, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: 320087227, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: -474964340, guid: 3037628c76454664798a2c475ca22a35, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 1
   - first: {x: 8, y: 8, z: 0}
@@ -20382,7 +20384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1931355710
 RectTransform:
   m_ObjectHideFlags: 0
