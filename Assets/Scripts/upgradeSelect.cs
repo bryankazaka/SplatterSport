@@ -21,7 +21,13 @@ public class upgradeSelect : MonoBehaviour
     void OnEnable() 
     {
         gameManager.gameObject.GetComponent<GameManagerBattle>().displayLosers();
+        gameManager.gameObject.GetComponent<GameManagerBattle>().genUpgrades();
+        gameManager.gameObject.GetComponent<GameManagerBattle>().dropBoard();
     }
 
-    
+    void OnDisable() 
+    {
+        gameManager.gameObject.GetComponent<GameManagerBattle>().upBoard();
+    }
+  
 }
