@@ -592,16 +592,18 @@ public class GameManagerBattle : MonoBehaviour
                 playerOneColour.gameObject.GetComponent<Image>().sprite = weapons[playerOneCount];
                 playerOneColour.gameObject.GetComponent<Image>().color = colors[4];
                 takenColours.Add(playerOneCount);
+                players[0].GetComponent<PlayerController>().setPlayerColour(playerOneCount);
                 
         }
         else
         if(playerModes[0].CompareTo("weapon") == 0)
         {
-                Debug.Log("here");
+               
                 int tempNum = (playerOneCount - playerOneCount%4)/4;
                 players[0].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
                 players[0].gameObject.GetComponent<PlayerController>().CreateWeapon(weapons[playerOneCount]);
                 GameObject.Find("pOnePanel").SetActive(false);
+                
                 playerModes[0]= "ready";
             
         }
@@ -619,6 +621,7 @@ public class GameManagerBattle : MonoBehaviour
                 playerTwoColour.gameObject.GetComponent<Image>().sprite = weapons[playerTwoCount];
                 playerTwoColour.gameObject.GetComponent<Image>().color = colors[4];
                 takenColours.Add(playerTwoCount);
+                players[1].GetComponent<PlayerController>().setPlayerColour(playerTwoCount);
               
             }
             else
@@ -627,7 +630,8 @@ public class GameManagerBattle : MonoBehaviour
                 int tempNum = (playerTwoCount - playerTwoCount%4)/4;
                 players[1].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
                 players[1].gameObject.GetComponent<PlayerController>().CreateWeapon(weapons[playerTwoCount]);
-                GameObject.Find("pTwoPanel").SetActive(false);            
+                GameObject.Find("pTwoPanel").SetActive(false);
+                playerModes[1]= "ready";            
             }
         
         
@@ -644,6 +648,7 @@ public class GameManagerBattle : MonoBehaviour
                 playerThreeColour.gameObject.GetComponent<Image>().sprite = weapons[playerThreeCount];
                 playerThreeColour.gameObject.GetComponent<Image>().color = colors[4];
                 takenColours.Add(playerThreeCount);
+                players[2].GetComponent<PlayerController>().setPlayerColour(playerThreeCount);
                 
             }
             else
@@ -653,6 +658,7 @@ public class GameManagerBattle : MonoBehaviour
                 players[2].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
                 players[2].gameObject.GetComponent<PlayerController>().CreateWeapon(weapons[playerThreeCount]);
                 GameObject.Find("pThreePanel").SetActive(false);
+                playerModes[2]= "ready";
                 
             }
         
@@ -670,6 +676,7 @@ public class GameManagerBattle : MonoBehaviour
                 playerFourColour.gameObject.GetComponent<Image>().sprite = weapons[playerFourCount];
                 playerFourColour.gameObject.GetComponent<Image>().color = colors[4];
                 takenColours.Add(playerFourCount);
+                players[3].GetComponent<PlayerController>().setPlayerColour(playerFourCount);
               
             }
             else
@@ -679,7 +686,7 @@ public class GameManagerBattle : MonoBehaviour
                 players[3].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
                 players[3].gameObject.GetComponent<PlayerController>().CreateWeapon(weapons[playerFourCount]);
                 GameObject.Find("pFourPanel").SetActive(false);
-            
+                playerModes[3]= "ready";
             }
         
         
