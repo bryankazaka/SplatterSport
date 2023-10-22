@@ -99,11 +99,17 @@ public class GameManagerBattle : MonoBehaviour
     public TextMeshProUGUI tWinner;
 
     public GameObject endGame;
+    
+    private List<string> tutorialPrompts;
 
+    public GameObject speechBubbleOne;
+    public GameObject speechBubbleTwo;
+
+    public GameObject tutorialObj;
     void Start()
     {
         tRounds.text = "Points to win:" + "\n";
-        tDrops.text = "Crowd Drops:" + "\n";
+        tDrops.text = "Tutorial:" + "\n";
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.volume = 0.3f;  
         playerColors = new int[4];
@@ -123,12 +129,68 @@ public class GameManagerBattle : MonoBehaviour
         playerThreeCount = 0;
         playerFourCount = 0;
         takenColours = new List<int> {};
+        tutorialPrompts = new List<string> {"Try pressing ↑↓←→ or using the analogue on your controller rookie!", "Ever heard of left clicking or pressing RT/R2 to attack!?", "Come on! Hit mobs and splash more than your opponent!", "Keep an eye on the braziers on the top of the screen, thats your time limit!", "If you win a round i'll drop a banner for you!"};
     }
 
     void Awake()
     {
         StartCoroutine(turnOneCharSelect());
     }
+
+    IEnumerator tutorial()
+    {
+        yield return new WaitForSeconds(1.4f);
+        if (!speechBubbleOne.activeInHierarchy)
+        {
+            speechBubbleOne.SetActive(true);
+            speechBubbleOne.transform.Find("tCrowd").gameObject.GetComponent<TextMeshProUGUI>().text = tutorialPrompts[0];
+        }
+
+        yield return new WaitForSeconds(5.4f);
+        if (speechBubbleOne.activeInHierarchy)
+            speechBubbleOne.SetActive(false);
+        
+        if (!speechBubbleTwo.activeInHierarchy)
+        {
+            speechBubbleTwo.SetActive(true);
+            speechBubbleTwo.transform.Find("tCrowd").gameObject.GetComponent<TextMeshProUGUI>().text = tutorialPrompts[1];
+        }
+
+        yield return new WaitForSeconds(5.4f);
+        if (speechBubbleTwo.activeInHierarchy)
+            speechBubbleTwo.SetActive(false);
+        
+        if (!speechBubbleOne.activeInHierarchy)
+        {
+            speechBubbleOne.SetActive(true);
+            speechBubbleOne.transform.Find("tCrowd").gameObject.GetComponent<TextMeshProUGUI>().text = tutorialPrompts[2];
+        }
+
+        yield return new WaitForSeconds(5.4f);
+        if (speechBubbleOne.activeInHierarchy)
+            speechBubbleOne.SetActive(false);
+        
+        if (!speechBubbleTwo.activeInHierarchy)
+        {
+            speechBubbleTwo.SetActive(true);
+            speechBubbleTwo.transform.Find("tCrowd").gameObject.GetComponent<TextMeshProUGUI>().text = tutorialPrompts[3];
+        }
+
+        yield return new WaitForSeconds(5.4f);
+        if (speechBubbleTwo.activeInHierarchy)
+            speechBubbleTwo.SetActive(false);
+        
+        if (!speechBubbleOne.activeInHierarchy)
+        {
+            speechBubbleOne.SetActive(true);
+            speechBubbleOne.transform.Find("tCrowd").gameObject.GetComponent<TextMeshProUGUI>().text = tutorialPrompts[4];
+        }
+
+        yield return new WaitForSeconds(5.4f);
+        if (speechBubbleOne.activeInHierarchy)
+            speechBubbleOne.SetActive(false);
+    }
+
 
 
     IEnumerator turnOneCharSelect()
@@ -141,7 +203,7 @@ public class GameManagerBattle : MonoBehaviour
     {
         
         tRounds.text = "Points to win:" + "\n" + roundCounter[roundIndex];
-        tDrops.text = "Crowd Drops:" + "\n" + dropChoice[dropIndex];
+        tDrops.text = "Tutorial:" + "\n" + dropChoice[dropIndex];
             
         
         if (Input.GetKey(KeyCode.Space) && !inBattle)
@@ -239,6 +301,11 @@ public class GameManagerBattle : MonoBehaviour
         GetComponentInChildren<TimerController>().enabled = true;
         GetComponentInChildren<PlayersManager>().StartGame();
         GetComponentInChildren<TimerController>().StartAgain();
+        if(dropIndex==0)
+        {
+            tutorialObj.gameObject.SetActive(true);
+            StartCoroutine(tutorial());
+        }
 
     }
     
@@ -804,7 +871,7 @@ public class GameManagerBattle : MonoBehaviour
 
     IEnumerator backToMainDelay()
     {
-        yield return new WaitForSeconds(0.517f);
+        yield return new WaitForSeconds(0.417f);
         int previousSceneIndex = SceneManager.GetActiveScene().buildIndex - 1;
         SceneManager.LoadScene(previousSceneIndex);
     }
