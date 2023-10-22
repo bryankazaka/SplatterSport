@@ -32,6 +32,7 @@ public class GameManagerBattle : MonoBehaviour
 
     public AudioClip btn_highlight;
     public AudioClip btn_click;
+    public AudioClip battle_theme;
 
     private AudioSource audioSource;
 
@@ -102,10 +103,12 @@ public class GameManagerBattle : MonoBehaviour
 
     void Start()
     {
-        tRounds.text = "Rounds:" + "\n";
+        tRounds.text = "Points to win:" + "\n";
         tDrops.text = "Crowd Drops:" + "\n";
         audioSource = gameObject.GetComponent<AudioSource>();
-        audioSource.volume = 0.3f;  
+        audioSource.volume = 0.3f;
+        audioSource.clip = battle_theme;
+        audioSource.Play();
         playerColors = new int[4];
         players = new GameObject[4];
         colors = new Color32[5];
@@ -140,7 +143,7 @@ public class GameManagerBattle : MonoBehaviour
     void Update()
     {
         
-        tRounds.text = "Rounds:" + "\n" + roundCounter[roundIndex];
+        tRounds.text = "Points to win:" + "\n" + roundCounter[roundIndex];
         tDrops.text = "Crowd Drops:" + "\n" + dropChoice[dropIndex];
             
         
@@ -801,9 +804,16 @@ public class GameManagerBattle : MonoBehaviour
        
     }
 
-    private void backToMain()
+    public void backToMain()
     {
+        StartCoroutine(backToMainDelay());
+    }
+
+    IEnumerator backToMainDelay()
+    {
+        yield return new WaitForSeconds(0.517f);
         int previousSceneIndex = SceneManager.GetActiveScene().buildIndex - 1;
         SceneManager.LoadScene(previousSceneIndex);
     }
+
 }
