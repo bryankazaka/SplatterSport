@@ -103,7 +103,7 @@ public class GameManagerBattle : MonoBehaviour
 
     void Start()
     {
-        tRounds.text = "Rounds:" + "\n";
+        tRounds.text = "Points to win:" + "\n";
         tDrops.text = "Crowd Drops:" + "\n";
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.volume = 0.3f;
@@ -143,7 +143,7 @@ public class GameManagerBattle : MonoBehaviour
     void Update()
     {
         
-        tRounds.text = "Rounds:" + "\n" + roundCounter[roundIndex];
+        tRounds.text = "Points to win:" + "\n" + roundCounter[roundIndex];
         tDrops.text = "Crowd Drops:" + "\n" + dropChoice[dropIndex];
             
         
@@ -254,8 +254,9 @@ public class GameManagerBattle : MonoBehaviour
         GetComponentInChildren<MainSpawner>().EndRound();
         GetComponentInChildren<MobsManager>().EndRound();
         inBattle = false;
-        tWinner.text = "Winner: Player " + winner.ToString();
+        tWinner.text = "Winner: Player " + (winner+1).ToString();
         endGame.SetActive(true);
+        dropBoard();
         //start the upgrade for losing players       
     }
 
@@ -799,9 +800,16 @@ public class GameManagerBattle : MonoBehaviour
         boardDrop.gameObject.SetActive(true);
     }
 
-    private void backToMain()
+    public void backToMain()
     {
+        StartCoroutine(backToMainDelay());
+    }
+
+    IEnumerator backToMainDelay()
+    {
+        yield return new WaitForSeconds(0.517f);
         int previousSceneIndex = SceneManager.GetActiveScene().buildIndex - 1;
         SceneManager.LoadScene(previousSceneIndex);
     }
+
 }
