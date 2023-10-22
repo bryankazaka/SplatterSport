@@ -32,6 +32,7 @@ public class GameManagerBattle : MonoBehaviour
 
     public AudioClip btn_highlight;
     public AudioClip btn_click;
+    public AudioClip battle_theme;
 
     private AudioSource audioSource;
 
@@ -105,7 +106,9 @@ public class GameManagerBattle : MonoBehaviour
         tRounds.text = "Rounds:" + "\n";
         tDrops.text = "Crowd Drops:" + "\n";
         audioSource = gameObject.GetComponent<AudioSource>();
-        audioSource.volume = 0.3f;  
+        audioSource.volume = 0.3f;
+        audioSource.clip = battle_theme;
+        audioSource.Play();
         playerColors = new int[4];
         players = new GameObject[4];
         colors = new Color32[5];

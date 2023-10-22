@@ -23,6 +23,7 @@ public class WeaponController : MonoBehaviour
     public Transform attackPoint;
     public LayerMask enemyLayers;
     private Animator animator;
+    public AudioSource audioSource;
 
     
     public Vector3 screenPosition;
@@ -49,7 +50,8 @@ public class WeaponController : MonoBehaviour
     private void Start()
     {
     
-        playerController = GetComponentInParent<PlayerController>();       
+        playerController = GetComponentInParent<PlayerController>();
+        audioSource = GetComponent<AudioSource>();
         playerTransform = transform.parent;
                  
         maxRange = attackRange;
@@ -206,6 +208,7 @@ public class WeaponController : MonoBehaviour
     {
         if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("Swing")) // if I press and its not attacking attack
         {
+            audioSource.Play();
             animator.SetTrigger("Attack");
             startAttackTime = Time.time;      
         }
