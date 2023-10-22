@@ -239,6 +239,7 @@ public class GameManagerBattle : MonoBehaviour
         GetComponentInChildren<TimerController>().enabled = true;
         GetComponentInChildren<PlayersManager>().StartGame();
         GetComponentInChildren<TimerController>().StartAgain();
+        upBoard();
 
     }
     
@@ -251,9 +252,15 @@ public class GameManagerBattle : MonoBehaviour
         GetComponentInChildren<MainSpawner>().EndRound();
         GetComponentInChildren<MobsManager>().EndRound();
         inBattle = false;
-        tWinner.text = "Winner: Player " + winner.ToString();
-        endGame.SetActive(true);
+        dropBoard();
+       
         //start the upgrade for losing players       
+    }
+
+    public void EndGame(int winningPlayer)
+    {
+        tWinner.text = "Winner: Player " + winningPlayer;
+        endGame.SetActive(true);
     }
 
     public void addPlayer(GameObject player)
@@ -359,8 +366,6 @@ public class GameManagerBattle : MonoBehaviour
             playerTwoColour.gameObject.GetComponent<Image>().sprite = weapons[playerTwoCount];
             int tempNum = (playerTwoCount - playerTwoCount%4)/4;
             players[1].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
-            players[1].GetComponentInChildren<WeaponController>().initWeapon(
-                players[1].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerTwoCount]);
         }
     }
 
@@ -393,8 +398,6 @@ public class GameManagerBattle : MonoBehaviour
             playerThreeColour.gameObject.GetComponent<Image>().sprite = weapons[playerThreeCount];
             int tempNum = (playerThreeCount - playerThreeCount%4)/4;
             players[2].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
-            players[2].GetComponentInChildren<WeaponController>().initWeapon(
-                players[2].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerThreeCount]);
         }
     }
 
@@ -427,8 +430,6 @@ public class GameManagerBattle : MonoBehaviour
             playerFourColour.gameObject.GetComponent<Image>().sprite = weapons[playerFourCount];
             int tempNum = (playerFourCount - playerFourCount%4)/4;
             players[3].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
-            players[3].GetComponentInChildren<WeaponController>().initWeapon(
-                players[3].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerFourCount]);
         }
     }
 
@@ -498,8 +499,6 @@ public class GameManagerBattle : MonoBehaviour
             playerTwoColour.gameObject.GetComponent<Image>().sprite = weapons[playerTwoCount];
             int tempNum = (playerTwoCount - playerTwoCount%4)/4;
             players[1].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
-            players[1].GetComponentInChildren<WeaponController>().initWeapon(
-                players[1].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerTwoCount]);
         }
     }
 
@@ -532,8 +531,6 @@ public class GameManagerBattle : MonoBehaviour
             playerThreeColour.gameObject.GetComponent<Image>().sprite = weapons[playerThreeCount];
             int tempNum = (playerThreeCount - playerThreeCount%4)/4;
             players[2].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
-            players[2].GetComponentInChildren<WeaponController>().initWeapon(
-                players[2].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerThreeCount]);
         }
     }
 
@@ -624,14 +621,16 @@ public class GameManagerBattle : MonoBehaviour
                 playerTwoColour.gameObject.GetComponent<Image>().sprite = weapons[playerTwoCount];
                 playerTwoColour.gameObject.GetComponent<Image>().color = colors[4];
                 takenColours.Add(playerTwoCount);
-                playerTwoButton.gameObject.SetActive(false);
+              
+            }
+            else
+            if(playerModes[1].CompareTo("weapon") == 0)
+            {
+                players[1].gameObject.GetComponent<PlayerController>().CreateWeapon(weapons[playerTwoCount]);
+                GameObject.Find("pTwoPanel").SetActive(false);            
             }
         }
-        else
-        if(playerModes[1].CompareTo("weapon") == 0)
-        {
-            GameObject.Find("pTwoPanel").SetActive(false);            
-        }
+        
         
     }
 
@@ -646,15 +645,17 @@ public class GameManagerBattle : MonoBehaviour
                 playerThreeColour.gameObject.GetComponent<Image>().sprite = weapons[playerThreeCount];
                 playerThreeColour.gameObject.GetComponent<Image>().color = colors[4];
                 takenColours.Add(playerThreeCount);
-                playerThreeButton.gameObject.SetActive(false);
+                
+            }
+            else
+            if(playerModes[2].CompareTo("weapon") == 0)
+            {
+                players[2].gameObject.GetComponent<PlayerController>().CreateWeapon(weapons[playerThreeCount]);
+                GameObject.Find("pThreePanel").SetActive(false);
+                
             }
         }
-        else
-        if(playerModes[2].CompareTo("weapon") == 0)
-        {
-             GameObject.Find("pThreePanel").SetActive(false);
-            
-        }
+       
         
     }
 
@@ -669,11 +670,12 @@ public class GameManagerBattle : MonoBehaviour
                 playerFourColour.gameObject.GetComponent<Image>().sprite = weapons[playerFourCount];
                 playerFourColour.gameObject.GetComponent<Image>().color = colors[4];
                 takenColours.Add(playerFourCount);
-                playerFourButton.gameObject.SetActive(false);
+              
             }
             else
             if(playerModes[3].CompareTo("weapon") == 0)
             {
+                players[3].gameObject.GetComponent<PlayerController>().CreateWeapon(weapons[playerFourCount]);
                 GameObject.Find("pFourPanel").SetActive(false);
             
             }
@@ -788,12 +790,15 @@ public class GameManagerBattle : MonoBehaviour
 
     public void dropBoard()
     {
+        boardUp.gameObject.SetActive(false);
         boardDrop.gameObject.SetActive(true);
     }
 
     public void upBoard()
     {
-        boardDrop.gameObject.SetActive(true);
+        boardDrop.gameObject.SetActive(false);
+        boardUp.gameObject.SetActive(true);
+       
     }
 
     private void backToMain()
