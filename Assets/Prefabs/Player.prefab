@@ -163,6 +163,7 @@ MonoBehaviour:
   worldPosition: {x: 0, y: 0, z: 0}
   playerInput: {fileID: 0}
   isMouse: 0
+  attackSound: {fileID: 8300000, guid: 38102ae2298134feb82d5a50f213a6e7, type: 3}
 --- !u!82 &8525680111523179909
 AudioSource:
   m_ObjectHideFlags: 0
@@ -173,7 +174,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 38102ae2298134feb82d5a50f213a6e7, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
