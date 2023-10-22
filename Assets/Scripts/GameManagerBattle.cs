@@ -83,6 +83,21 @@ public class GameManagerBattle : MonoBehaviour
 
     public Sprite [] upgrades;
 
+    public GameObject playerOneUpgradeSprite;
+    public GameObject playerTwoUpgradeSprite;
+    public GameObject playerThreeUpgradeSprite;
+    public GameObject playerFourUpgradeSprite;
+
+    private List<int> playerOneUpgrades;
+    private List<int> playerTwoUpgrades;
+    private List<int> playerThreeUpgrades;
+    private List<int> playerFourUpgrades;
+
+    public GameObject boardUp;
+    public GameObject boardDrop;
+
+
+    
     void Start()
     {
         tRounds.text = "Rounds:" + "\n";
@@ -713,5 +728,76 @@ public class GameManagerBattle : MonoBehaviour
 
     }
 
+    public void genUpgrades()
+    {
+        playerOneCount = 0;
+        playerOneUpgrades = randomUpgradeIndexes();
+        playerOneUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerOneUpgrades[playerOneCount]];
 
+        playerTwoCount = 0;
+        playerTwoUpgrades = randomUpgradeIndexes();
+        playerTwoUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerTwoUpgrades[0]];
+
+        playerThreeCount = 0;
+        playerThreeUpgrades = randomUpgradeIndexes();
+        playerThreeUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerThreeUpgrades[0]];
+
+        playerFourCount = 0;
+        playerFourUpgrades = randomUpgradeIndexes();
+        playerFourUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerFourUpgrades[0]];
+    }
+
+    public void playerOneUpgradeRight()
+    {
+        playerOneCount = (playerOneCount + 1) % 3;
+        playerOneUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerOneUpgrades[playerOneCount]];
+    }
+    public void playerOneUpgradeLeft()
+    {
+        playerOneCount = (playerOneCount + 2) % 3;
+        playerOneUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerOneUpgrades[playerOneCount]];
+    }
+
+    public void playerTwoUpgradeRight()
+    {
+        playerTwoCount = (playerTwoCount + 1) % 3;
+        playerTwoUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerTwoUpgrades[playerTwoCount]];
+    }
+    public void playerTwoUpgradeLeft()
+    {
+        playerTwoCount = (playerTwoCount + 2) % 3;
+        playerTwoUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerTwoUpgrades[playerTwoCount]];
+    }
+
+    public void playerThreeUpgradeRight()
+    {
+        playerThreeCount = (playerThreeCount + 1) % 3;
+        playerThreeUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerThreeUpgrades[playerThreeCount]];
+    }
+    public void playerThreeUpgradeLeft()
+    {
+        playerThreeCount = (playerThreeCount + 2) % 3;
+        playerThreeUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerThreeUpgrades[playerThreeCount]];
+    }
+
+    public void playerFourUpgradeRight()
+    {
+        playerFourCount = (playerFourCount + 1) % 3;
+        playerFourUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerFourUpgrades[playerFourCount]];
+    }
+    public void playerFourUpgradeLeft()
+    {
+        playerFourCount = (playerFourCount + 2) % 3;
+        playerFourUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerFourUpgrades[playerFourCount]];
+    }
+
+    public void dropBoard()
+    {
+        boardDrop.gameObject.SetActive(true);
+    }
+
+    public void upBoard()
+    {
+        boardDrop.gameObject.SetActive(true);
+    }
 }

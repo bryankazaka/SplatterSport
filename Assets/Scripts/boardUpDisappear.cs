@@ -5,7 +5,7 @@ using UnityEngine;
 public class boardUpDisappear : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         makeDisappear();
     }
