@@ -222,10 +222,7 @@ public class SplatterController : MonoBehaviour
     {
         ClearList();
         splatterMap.ClearAllTiles();
-        foreach (float item in ArrayCount() )
-        {
-            Debug.Log(item);
-        }
+        
     }
 
     public void ClearList()

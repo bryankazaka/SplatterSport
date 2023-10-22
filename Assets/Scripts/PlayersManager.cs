@@ -12,17 +12,19 @@ public class PlayersManager : MonoBehaviour
     public bool[] numbersTaken = {false,false,false,false};
     public bool[] colorsTaken = {false,false,false,false};
     // Start is called before the first frame update
+    private string[] colors = {"blue","yellow","green","pink"};
    
 
     
     public void StartGame()
     {
         int[] colorPlayers = new int[4];
+       
         foreach (Transform player in transform)
         {
             PlayerController playObj = player.GetComponent<PlayerController>();
-            Debug.Log("Player " + playObj.playerNum + " with color " + playObj.colour);
             colorPlayers[playObj.colour] = playObj.playerNum;
+            GetComponentInParent<GameManagerBattle>().updatePlayer(player.gameObject);
         }
         splattermap.GetComponent<SplatterController>().SetColor(colorPlayers);
     }
