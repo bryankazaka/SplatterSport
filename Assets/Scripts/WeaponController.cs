@@ -167,7 +167,7 @@ public class WeaponController : MonoBehaviour
 
     public void initWeapon(int colour, int weaponType)
     {
-       Debug.Log(weaponType);
+      
         switch (weaponType)
         {
             case BRUSH:

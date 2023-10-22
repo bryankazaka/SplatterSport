@@ -57,6 +57,7 @@ public class GameManagerBattle : MonoBehaviour
     private int playerFourCount;
 
     public Sprite [] weapons;
+    private string[] colorsT = {"blue","yellow","green","pink"};
 
     public TextMeshProUGUI playerOneNextButtonText;
     public TextMeshProUGUI playerTwoNextButtonText;
@@ -185,7 +186,8 @@ public class GameManagerBattle : MonoBehaviour
     {
         PlayerController play = player.GetComponent<PlayerController>();
         players[play.playerNum] = player;
-        playerColors[play.playerNum] = play.getPlayerColour();
+        playerColors[play.playerNum] = play.getPlayerColour(); // [playernum] = color
+        
         switch (play.playerNum)
         {            
            case 0:
@@ -203,6 +205,14 @@ public class GameManagerBattle : MonoBehaviour
 
         }
     }
+
+     public void updatePlayer(GameObject player)
+     {        
+        PlayerController play = player.GetComponent<PlayerController>();
+        players[play.playerNum] = player;
+        playerColors[play.playerNum] = play.getPlayerColour(); // [playernum] = color
+       
+     }
 
 
     public void dropsTextBackwards()
