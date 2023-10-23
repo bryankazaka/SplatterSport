@@ -854,7 +854,12 @@ public class GameManagerBattle : MonoBehaviour
             losersPanel.transform.Find("pThreePanel").gameObject,
             losersPanel.transform.Find("pFourPanel").gameObject
         };
-        int lenPlayers = GetComponentInChildren<PlayersManager>().numPlayers; 
+        int lenPlayers = 0;
+        Transform players = GetComponentInChildren<PlayersManager>().transform;
+        foreach (Transform player in players)
+        {
+            lenPlayers++;
+        } 
         for (int i = 0; i < lenPlayers; i++)
         {
             

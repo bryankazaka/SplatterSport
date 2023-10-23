@@ -9,8 +9,8 @@ public class PlayerMovement : MonoBehaviour
     public bool isStunned = false;
     public Rigidbody2D rb;
     public Animator animator;
-    private float moveUp;
-    private float stunUp;
+    private float moveUp = 1.0f;
+    private float stunUp = 1.0f;
     private float startStun;
     private Vector2 stunDirect;
     private PlayerController playerController;
