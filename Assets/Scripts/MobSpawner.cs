@@ -23,13 +23,13 @@ public class MobSpawner : MonoBehaviour
         switch (gameObject.name)
         {
             case "bucketM":
-                mobBaseSpawnUnit = 0.3f;
+                mobBaseSpawnUnit = 0.4f;
                 break;
             case "canvasM":
-                mobBaseSpawnUnit = 0.1f;
+                mobBaseSpawnUnit = 0.2f;
                 break;
             case "statueM":
-                mobBaseSpawnUnit = 0.025f;
+                mobBaseSpawnUnit = 0.03f;
                 break;
         }
     }
