@@ -80,48 +80,48 @@ public class PlayerController : MonoBehaviour
                 upgrades[0] = upgrades[0]*0.25f;
                 break;
             case 1:
-                upgrades[1] += 0.3f;
+                upgrades[1] += 0.6f;
                 foreach (Transform weaponT in transform)
                 {                    
                     weaponT.gameObject.GetComponent<WeaponController>().upgradeSpeed(upgrades[1]);
                 }
-                upgrades[2] -= 0.2f;
+                upgrades[2] -= 0.3f;
                 damageMult = upgrades[2];
                 break;
             case 2:
-                upgrades[3] += 0.2f;
+                upgrades[3] += 0.3f;
                 break;
             case 3:
-                upgrades[4] += 0.2f;
+                upgrades[4] += 0.3f;
                 upgrades[5] *= 0.5f;
                 break;
             case 4:
-                upgrades[6] += 0.2f;
-                upgrades[7] += 0.2f;
+                upgrades[6] += 0.3f;
+                upgrades[7] += 0.3f;
                 break;
             case 5:
-                upgrades[2] += 0.2f;
+                upgrades[2] += 0.3f;
                 damageMult = upgrades[2];
                 break;
             case 6:
-                upgrades[8] += 0.2f;
-                upgrades[9] += 0.2f;
+                upgrades[8] += 0.3f;
+                upgrades[9] += 0.3f;
                 break;
             case 7:
-                upgrades[1] += 0.2f;
+                upgrades[1] += 0.3f;
                 foreach (Transform weaponT in transform)
                 {                    
                     weaponT.gameObject.GetComponent<WeaponController>().upgradeSpeed(upgrades[1]);
                 }
                 break;
             case 8:
-                upgrades[10] += 0.2f;
+                upgrades[10] += 0.3f;
                 playerMovement.upgradeMoveSpeed(upgrades[10]);
                 break;
             case 9:
-                upgrades[2] += 0.3f;
+                upgrades[2] += 0.6f;
                 damageMult = upgrades[2];
-                upgrades[1] -= 0.1f;
+                upgrades[1] -= 0.3f;
                 foreach (Transform weaponT in transform)
                 {                    
                     weaponT.gameObject.GetComponent<WeaponController>().upgradeSpeed(upgrades[1]);
