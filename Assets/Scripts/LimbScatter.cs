@@ -10,7 +10,7 @@ public class LimbScatter : MonoBehaviour
     private Vector3 direct; //direction of the limbs scattering
     private int spread; //spread in angles where the mob spreads to
     private int rotation; // the speed of the limbs rotation to simulate movement
-    private int resistance; //how much speed the limb loses when bouncing
+    private float resistance = 1.0f; //how much speed the limb loses when bouncing
     private float speed; // the speed if the limbs movement
     private float splatProp; // the propagation strenght of the limb
     private int color; // the color of the player who killed the mob
@@ -18,8 +18,9 @@ public class LimbScatter : MonoBehaviour
     public Tilemap splatterMap; // the map which the splatter is put on
     
     //function that is called to start the scattering process and get data from the parent mob
-    public void Scatter(Vector3 dir, float speedP, int spreadP, int colorP,float splatPropP) 
+    public void Scatter(Vector3 dir, float speedP, int spreadP, int colorP,float splatPropP, float falloff) 
     {
+        resistance *= falloff;
         spread = spreadP;
         transform.parent = null;
         speed = speedP;  
@@ -46,11 +47,13 @@ public class LimbScatter : MonoBehaviour
         //checkes if the next position is out of bounds and if it is bounces the limb
         if (math.abs(nextPos.y + 3.5)>= 6.5f )
         {
-            BounceY(); 
+            BounceY();
+            speed -= resistance; 
         }
         else if (math.abs(nextPos.x) >= 16.0f)
         {
             BounceX(); 
+            speed -= resistance; 
         }
         else
         {

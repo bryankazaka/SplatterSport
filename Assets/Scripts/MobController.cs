@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MobController : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class MobController : MonoBehaviour
     private Transform[] limbs;   //The limb objects of the mob
     public Transform players;
     private float knockBackSpeed;
+    private float resistance;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,16 +57,22 @@ public class MobController : MonoBehaviour
     
     public void takeDamage(GameObject Player, float damage)
     {
-        health -= damage;
+        PlayerController pC = Player.GetComponent<PlayerController>();
+        health -= damage ;
         
         color = Player.GetComponent<PlayerController>().colour;
         var SpriteRender = transform.GetComponent<SpriteRenderer>();
         
         if (health <= 0)
         {
+            
+            splatProp *= pC.upgrades[3];
+            limbSpeed *= pC.upgrades[4];
+            limbSpread = (int)System.Math.Round(limbSpread* pC.upgrades[7]);
             Splatter();
         }
-        knockBack(damage/5);
+        resistance = pC.upgrades[10];
+        knockBack(damage/5 * pC.upgrades[6]);
         var newCol =  colors[color];
         byte byteR = (byte)Mathf.Clamp(newCol.r - newCol.r*(health/maxHealth), 0f, 255f);
         byte byteG = (byte)Mathf.Clamp(newCol.g - newCol.g*(health/maxHealth), 0f, 255f);
@@ -76,7 +84,7 @@ public class MobController : MonoBehaviour
     {
         foreach (Transform limb in limbs)
             {
-                limb.GetComponent<LimbScatter>().Scatter(-dir,limbSpeed,limbSpread,color,splatProp);
+                limb.GetComponent<LimbScatter>().Scatter(-dir,limbSpeed,limbSpread,color,splatProp,resistance);
                 limb.GetComponent<LimbScatter>().enabled = true;
                 
             }

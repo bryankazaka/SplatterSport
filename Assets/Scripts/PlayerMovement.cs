@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Animator animator;
     private float moveUp;
+    private float stunUp;
     private float startStun;
     private Vector2 stunDirect;
     private PlayerController playerController;
@@ -26,9 +27,13 @@ public class PlayerMovement : MonoBehaviour
         screenBounds = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0));
     }
 
-    public void upgradeMoveSpeed(int upgrade)
+    public void upgradeMoveSpeed(float upgrade)
     {
         moveUp = upgrade;
+    }
+    public void upgradeStunTime(float upgrade)
+    {
+        stunUp = upgrade;
     }
     public void OnMove(InputAction.CallbackContext ctx)
     {
@@ -47,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     //function that runs every frame (like update) but is better for physics stuff
     void Update()
     {
-        if (isStunned && (Time.time - startStun) > playerController.stunTime)
+        if (isStunned && (Time.time - startStun) > (playerController.stunTime*stunUp))
         {
             isStunned = false;
             animator.SetBool("Stunned", false);

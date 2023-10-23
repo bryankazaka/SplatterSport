@@ -286,7 +286,6 @@ public class GameManagerBattle : MonoBehaviour
         }
         else
         {
-            Debug.Log("upgradeTime");
            switch (playerNum)
             {
             case 0:
@@ -339,6 +338,7 @@ public class GameManagerBattle : MonoBehaviour
         {
             upgradesActive[i] = false;
         }
+        Debug.Log("gameStart");
         GetComponentInChildren<MainSpawner>().StartRound();
         GetComponentInChildren<TimerController>().enabled = true;
         GetComponentInChildren<PlayersManager>().StartGame();
@@ -413,13 +413,18 @@ public class GameManagerBattle : MonoBehaviour
         }
     }
 
+    public void upgradePlayer(int upgrade, GameObject Player)
+    {
+        Player.GetComponent<PlayerController>().Upgrade(upgrade);
+    }
+
      public void updatePlayer(GameObject player)
      {        
         PlayerController play = player.GetComponent<PlayerController>();
         players[play.playerNum] = player;
         playerColors[play.playerNum] = play.getPlayerColour(); // [playernum] = color    
      }
-
+    
 
     public void dropsTextBackwards()
     {
@@ -706,24 +711,6 @@ public class GameManagerBattle : MonoBehaviour
             break;
             }
         }
-        else
-        {
-             switch (playerNum)
-            {            
-            case 0:
-                playerOneNext();
-            break;
-            case 1:
-                playerTwoNext();
-            break;
-            case 2:
-                playerThreeNext();
-            break;
-            case 3:
-                playerFourNext();
-            break;
-            }
-        }
             
     }
 
@@ -923,9 +910,6 @@ public class GameManagerBattle : MonoBehaviour
         if (upgradesActive[0]) 
             {playerOneCount = (playerOneCount + 2) % 3;
             playerOneUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerOneUpgrades[playerOneCount]];
-            Debug.Log(playerOneUpgrades[playerOneCount]);
-            Debug.Log(upgradeText.Count);
-            Debug.Log(upgradeText[0].Item2);
             playerUpDesc[0].GetComponent<TextMeshProUGUI>().text = upgradeText[playerOneUpgrades[playerOneCount]].Item2;
             playerUpDesc[4].GetComponent<TextMeshProUGUI>().text = upgradeText[playerOneUpgrades[playerOneCount]].Item1;}
     }
