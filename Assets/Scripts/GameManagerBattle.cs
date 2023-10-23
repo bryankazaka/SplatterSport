@@ -346,10 +346,10 @@ public class GameManagerBattle : MonoBehaviour
         {
             upgradesActive[i] = false;
         }
-        Debug.Log("gameStart");
         GetComponentInChildren<MainSpawner>().StartRound();
         GetComponentInChildren<TimerController>().enabled = true;
         GetComponentInChildren<PlayersManager>().StartGame();
+        GetComponentInChildren<WallController>().setWinningScore(int.Parse(roundCounter[roundIndex]));
         GetComponentInChildren<TimerController>().StartAgain();
         if(dropIndex==0)
         {

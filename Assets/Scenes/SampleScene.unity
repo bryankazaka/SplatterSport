@@ -7492,8 +7492,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  limbSpeed: 10
-  limbSpread: 45
+  limbSpeed: 6
+  limbSpread: 30
   splatProp: 1
   health: 20
   affects: 
@@ -8419,8 +8419,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  limbSpeed: 10
-  limbSpread: 45
+  limbSpeed: 6
+  limbSpread: 30
   splatProp: 1.1
   health: 30
   affects: 
@@ -14468,9 +14468,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  limbSpeed: 10
-  limbSpread: 45
-  splatProp: 1.1
+  limbSpeed: 6
+  limbSpread: 30
+  splatProp: 1.5
   health: 60
   affects: 
   players: {fileID: 919202794}
