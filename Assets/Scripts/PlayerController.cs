@@ -94,7 +94,8 @@ public class PlayerController : MonoBehaviour
     public void OnChooseL(InputAction.CallbackContext ctx)
     {   
        if (ctx.performed && !isDone)
-        {             
+        {    
+                     
             GetComponentInParent<GameManagerBattle>().playerSelect(getPlayerNumber(),true);                   
         }  
     }
@@ -102,7 +103,8 @@ public class PlayerController : MonoBehaviour
     public void OnChooseR(InputAction.CallbackContext ctx)
     {      
         if (ctx.performed && !isDone)
-        {             
+        {          
+            
             GetComponentInParent<GameManagerBattle>().playerSelect(getPlayerNumber(),false);                   
         }           
     }
@@ -112,7 +114,7 @@ public class PlayerController : MonoBehaviour
         
         if (ctx.performed && !isDone)
         {
-            Debug.Log("select");
+           
             GetComponentInParent<GameManagerBattle>().PlayerNext(getPlayerNumber());
         }
        
@@ -121,7 +123,7 @@ public class PlayerController : MonoBehaviour
     }
     public void setPlayerWeapon(int weaponNew)
     {
-        Debug.Log("Weapon Change " +  weaponNew);
+        
         weapon = weaponNew;
     }
 

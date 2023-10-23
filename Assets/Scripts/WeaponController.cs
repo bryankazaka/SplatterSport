@@ -211,15 +211,15 @@ public class WeaponController : MonoBehaviour
     public void OnAttack(InputAction.CallbackContext ctx)
     {
         
-       Debug.Log("Attack");
+       
         if (ctx.started)
         {
-            Debug.Log("MouseButtonDown");
+           
             isAttacking = true;
         }
         if (ctx.canceled)
         {
-             Debug.Log("MouseButtonUp");
+            
             isAttacking = false;
         }
        
