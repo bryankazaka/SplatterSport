@@ -256,15 +256,17 @@ public class GameManagerBattle : MonoBehaviour
         GetComponentInChildren<MobsManager>().EndRound();
         inBattle = false;
         dropBoard();
+        
+        displayLosers();
        
         //start the upgrade for losing players       
     }
 
-    public void EndGame(int winningPlayer)
+   /* public void EndGame(int winningPlayer)
     {
         tWinner.text = "Winner: Player " + winningPlayer;
         endGame.SetActive(true);
-    }
+    }*/
 
     public void addPlayer(GameObject player)
     {
@@ -695,7 +697,7 @@ public class GameManagerBattle : MonoBehaviour
 
     public void displayLosers()
     {
-        
+        GameObject.Find("upgradeSelect").SetActive(true);
         GameObject[] panels = 
         {
             losersPanel.transform.Find("pOnePanel").gameObject,
@@ -715,6 +717,7 @@ public class GameManagerBattle : MonoBehaviour
                 panels[i].SetActive(false);
             }
         }
+        genUpgrades();
     }
 
     private List<int> randomUpgradeIndexes()
@@ -742,15 +745,15 @@ public class GameManagerBattle : MonoBehaviour
 
         playerTwoCount = 0;
         playerTwoUpgrades = randomUpgradeIndexes();
-        playerTwoUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerTwoUpgrades[0]];
+        playerTwoUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerTwoUpgrades[playerTwoCount]];
 
         playerThreeCount = 0;
         playerThreeUpgrades = randomUpgradeIndexes();
-        playerThreeUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerThreeUpgrades[0]];
+        playerThreeUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerThreeUpgrades[ playerThreeCount]];
 
         playerFourCount = 0;
         playerFourUpgrades = randomUpgradeIndexes();
-        playerFourUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerFourUpgrades[0]];
+        playerFourUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerFourUpgrades[playerFourCount]];
     }
 
     public void playerOneUpgradeRight()

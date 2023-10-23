@@ -5264,7 +5264,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633817219}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -12156,7 +12156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbe1531ff7a18674cb5a78b9729a43b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerSeconds: 30
+  timerSeconds: 10
   brazierStates:
   - {fileID: 11400000, guid: 334b4dfafb5913046987fd0269e2d4d2, type: 2}
   - {fileID: 11400000, guid: 521dee116298d004e9680cb554061013, type: 2}
@@ -15754,7 +15754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1529060189
 MonoBehaviour:
   m_ObjectHideFlags: 0
