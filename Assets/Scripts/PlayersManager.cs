@@ -9,6 +9,7 @@ public class PlayersManager : MonoBehaviour
 {
     [SerializeField] private int numberOfPlayers = 0;
     public GameObject splattermap;
+    public int numPlayers = 0;
     public bool[] numbersTaken = {false,false,false,false};
     public bool[] colorsTaken = {false,false,false,false};
     // Start is called before the first frame update
@@ -45,6 +46,7 @@ public class PlayersManager : MonoBehaviour
     {
         
         numberOfPlayers++;
+        numPlayers++;
     }
 
     // Update is called once per frame

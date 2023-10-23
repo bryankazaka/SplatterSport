@@ -33,6 +33,7 @@ public class GameManagerBattle : MonoBehaviour
     public AudioClip btn_highlight;
     public AudioClip btn_click;
 
+    public GameObject[] playerUpDesc;
     private AudioSource audioSource;
 
     private bool inBattle = false;
@@ -82,6 +83,7 @@ public class GameManagerBattle : MonoBehaviour
     public int winner;
 
     public Sprite [] upgrades;
+    public List<(string,string)> upgradeText;
 
     public GameObject playerOneUpgradeSprite;
     public GameObject playerTwoUpgradeSprite;
@@ -104,7 +106,7 @@ public class GameManagerBattle : MonoBehaviour
 
     public GameObject speechBubbleOne;
     public GameObject speechBubbleTwo;
-
+    private bool[] upgradesActive = {false,false,false,false};
     public GameObject tutorialObj;
     public GameObject upgradeScreen;
 
@@ -137,6 +139,16 @@ public class GameManagerBattle : MonoBehaviour
         playerFourCount = 0;
         takenColours = new List<int> {};
         tutorialPrompts = new List<string> {"Try pressing ↑↓←→ or using the analogue on your controller rookie!", "Ever heard of left clicking or pressing RT/R2 to attack!?", "Come on! Hit mobs and splash more than your opponents!", "Watch the braziers on the top of the screen, thats your time limit!", "If you win a round i'll drop a banner for you!"};
+        upgradeText = new List<(string,string)> {("Juggernaut","-75% Stun Time"),("Featherweight","+15% Attack Speed \n -5% Damage"),("Bigger Splat","+10% Splat Size"),
+        ("Flying Limbs","Limbs Move Faster \n and Bounce More"),
+        ("Hard Hitter","+10% KnockBack \n and Limb Speed"),
+        ("Disdainfull Stroke","+10% Damage"),
+        ("Big Hands","+10% Weapon Size \n and Range"),
+        ("Deft Brushstroke","+10% Attack Speed"),
+        ("Artist Deadline","+10% Movement Speed"),
+        ("Heavyweight","+15% Damage \n -5% Attack Speed")
+        };
+        Debug.Log(upgradeText.Count);
     }
 
     void Awake()
@@ -321,7 +333,10 @@ public class GameManagerBattle : MonoBehaviour
 
     public void StartBattle()
     {
-
+        for (int i = 0; i < 4; i++)
+        {
+            upgradesActive[i] = false;
+        }
         GetComponentInChildren<MainSpawner>().StartRound();
         GetComponentInChildren<TimerController>().enabled = true;
         GetComponentInChildren<PlayersManager>().StartGame();
@@ -832,12 +847,14 @@ public class GameManagerBattle : MonoBehaviour
             losersPanel.transform.Find("pThreePanel").gameObject,
             losersPanel.transform.Find("pFourPanel").gameObject
         };
-
-        for (int i = 0; i < players.Length; i++)
+        int lenPlayers = GetComponentInChildren<PlayersManager>().numPlayers; 
+        for (int i = 0; i > lenPLayers; i++)
         {
+            
             if (i != winner)
             {
                 panels[i].SetActive(true);
+                upgradesActive[i] = true;
             }
             else
             {
@@ -869,63 +886,100 @@ public class GameManagerBattle : MonoBehaviour
         playerOneCount = 0;
         playerOneUpgrades = randomUpgradeIndexes();
         playerOneUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerOneUpgrades[playerOneCount]];
+        playerUpDesc[0].GetComponent<TextMeshProUGUI>().text = upgradeText[playerOneUpgrades[playerOneCount]].Item2;
+        playerUpDesc[4].GetComponent<TextMeshProUGUI>().text = upgradeText[playerOneUpgrades[playerOneCount]].Item1;
 
         playerTwoCount = 0;
         playerTwoUpgrades = randomUpgradeIndexes();
         playerTwoUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerTwoUpgrades[playerTwoCount]];
+        playerUpDesc[1].GetComponent<TextMeshProUGUI>().text = upgradeText[playerTwoUpgrades[playerTwoCount]].Item2;
+        playerUpDesc[5].GetComponent<TextMeshProUGUI>().text = upgradeText[playerTwoUpgrades[playerTwoCount]].Item1;
 
         playerThreeCount = 0;
         playerThreeUpgrades = randomUpgradeIndexes();
         playerThreeUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerThreeUpgrades[ playerThreeCount]];
+        playerUpDesc[2].GetComponent<TextMeshProUGUI>().text = upgradeText[playerThreeUpgrades[playerThreeCount]].Item2;
+        playerUpDesc[6].GetComponent<TextMeshProUGUI>().text = upgradeText[playerThreeUpgrades[playerThreeCount]].Item1;
 
         playerFourCount = 0;
         playerFourUpgrades = randomUpgradeIndexes();
         playerFourUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerFourUpgrades[playerFourCount]];
+        playerUpDesc[3].GetComponent<TextMeshProUGUI>().text = upgradeText[playerFourUpgrades[playerFourCount]].Item2;
+        playerUpDesc[7].GetComponent<TextMeshProUGUI>().text = upgradeText[playerFourUpgrades[playerFourCount]].Item1;
     }
 
     public void playerOneUpgradeRight()
     {
-        playerOneCount = (playerOneCount + 1) % 3;
-        playerOneUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerOneUpgrades[playerOneCount]];
+        if (upgradesActive[0])         
+            {playerOneCount = (playerOneCount + 1) % 3;
+            playerOneUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerOneUpgrades[playerOneCount]];
+            playerUpDesc[0].GetComponent<TextMeshProUGUI>().text = upgradeText[playerOneUpgrades[playerOneCount]].Item2;
+            playerUpDesc[4].GetComponent<TextMeshProUGUI>().text = upgradeText[playerOneUpgrades[playerOneCount]].Item1;}
     }
     public void playerOneUpgradeLeft()
     {
-        playerOneCount = (playerOneCount + 2) % 3;
-        playerOneUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerOneUpgrades[playerOneCount]];
+        if (upgradesActive[0]) 
+            {playerOneCount = (playerOneCount + 2) % 3;
+            playerOneUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerOneUpgrades[playerOneCount]];
+            Debug.Log(playerOneUpgrades[playerOneCount]);
+            Debug.Log(upgradeText.Count);
+            Debug.Log(upgradeText[0].Item2);
+            playerUpDesc[0].GetComponent<TextMeshProUGUI>().text = upgradeText[playerOneUpgrades[playerOneCount]].Item2;
+            playerUpDesc[4].GetComponent<TextMeshProUGUI>().text = upgradeText[playerOneUpgrades[playerOneCount]].Item1;}
     }
 
     public void playerTwoUpgradeRight()
     {
-        playerTwoCount = (playerTwoCount + 1) % 3;
-        playerTwoUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerTwoUpgrades[playerTwoCount]];
+        if (upgradesActive[1]) 
+            {playerTwoCount = (playerTwoCount + 1) % 3;
+            playerTwoUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerTwoUpgrades[playerTwoCount]];
+            playerUpDesc[1].GetComponent<TextMeshProUGUI>().text = upgradeText[playerTwoUpgrades[playerTwoCount]].Item2;
+            playerUpDesc[5].GetComponent<TextMeshProUGUI>().text = upgradeText[playerTwoUpgrades[playerTwoCount]].Item1;}
+        
     }
     public void playerTwoUpgradeLeft()
     {
-        playerTwoCount = (playerTwoCount + 2) % 3;
-        playerTwoUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerTwoUpgrades[playerTwoCount]];
+        if (upgradesActive[1]) 
+            {playerTwoCount = (playerTwoCount + 2) % 3;
+            playerTwoUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerTwoUpgrades[playerTwoCount]];
+            playerUpDesc[1].GetComponent<TextMeshProUGUI>().text = upgradeText[playerTwoUpgrades[playerTwoCount]].Item2;
+            playerUpDesc[5].GetComponent<TextMeshProUGUI>().text = upgradeText[playerTwoUpgrades[playerTwoCount]].Item1;}
     }
 
     public void playerThreeUpgradeRight()
     {
-        playerThreeCount = (playerThreeCount + 1) % 3;
-        playerThreeUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerThreeUpgrades[playerThreeCount]];
+        if (upgradesActive[2]) 
+            {playerThreeCount = (playerThreeCount + 1) % 3;
+            playerThreeUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerThreeUpgrades[playerThreeCount]];
+            playerUpDesc[2].GetComponent<TextMeshProUGUI>().text = upgradeText[playerThreeUpgrades[playerThreeCount]].Item2;
+            playerUpDesc[6].GetComponent<TextMeshProUGUI>().text = upgradeText[playerThreeUpgrades[playerThreeCount]].Item1;}
     }
     public void playerThreeUpgradeLeft()
     {
-        playerThreeCount = (playerThreeCount + 2) % 3;
-        playerThreeUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerThreeUpgrades[playerThreeCount]];
+        if (upgradesActive[2]) 
+            {playerThreeCount = (playerThreeCount + 2) % 3;
+            playerThreeUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerThreeUpgrades[playerThreeCount]];
+            playerUpDesc[2].GetComponent<TextMeshProUGUI>().text = upgradeText[playerThreeUpgrades[playerThreeCount]].Item2;
+            playerUpDesc[6].GetComponent<TextMeshProUGUI>().text = upgradeText[playerThreeUpgrades[playerThreeCount]].Item1;}
     }
 
     public void playerFourUpgradeRight()
     {
-        playerFourCount = (playerFourCount + 1) % 3;
-        playerFourUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerFourUpgrades[playerFourCount]];
+        if (upgradesActive[3]) 
+           { playerFourCount = (playerFourCount + 1) % 3;
+            playerFourUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerFourUpgrades[playerFourCount]];
+            playerUpDesc[3].GetComponent<TextMeshProUGUI>().text = upgradeText[playerFourUpgrades[playerFourCount]].Item2;
+            playerUpDesc[7].GetComponent<TextMeshProUGUI>().text = upgradeText[playerFourUpgrades[playerFourCount]].Item1;}
     }
     public void playerFourUpgradeLeft()
     {
-        playerFourCount = (playerFourCount + 2) % 3;
-        playerFourUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerFourUpgrades[playerFourCount]];
+        if (upgradesActive[3]) 
+            {playerFourCount = (playerFourCount + 2) % 3;
+            playerFourUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerFourUpgrades[playerFourCount]];
+            playerUpDesc[3].GetComponent<TextMeshProUGUI>().text = upgradeText[playerFourUpgrades[playerFourCount]].Item2;
+            playerUpDesc[7].GetComponent<TextMeshProUGUI>().text = upgradeText[playerFourUpgrades[playerFourCount]].Item1;}
     }
+
 
     public void dropBoard()
     {
