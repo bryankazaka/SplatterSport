@@ -12,9 +12,13 @@ public class TimerController : MonoBehaviour
     public Tilemap timerMap;
     private float startUp;
     private bool litUp;
+    public AudioClip flameSizzle;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         float secondsPerUpdate = ((float)timerSeconds)/(26.0f); //calculate the amount of time between brazier tile updates
         litUp=false;
         startUp = Time.time;
@@ -59,7 +63,7 @@ public class TimerController : MonoBehaviour
     }
     void Light()
     {
-       
+        audioSource.PlayOneShot(flameSizzle, 0.1f);
         
         timerMap.SetTile(pos,brazierStates[1]); //set the tile for the brazier
         timerMap.SetAnimationFrame(pos,0);
