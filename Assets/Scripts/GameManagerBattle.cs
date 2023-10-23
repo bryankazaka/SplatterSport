@@ -32,7 +32,6 @@ public class GameManagerBattle : MonoBehaviour
 
     public AudioClip btn_highlight;
     public AudioClip btn_click;
-    public AudioClip battle_theme;
 
     private AudioSource audioSource;
 
@@ -100,15 +99,19 @@ public class GameManagerBattle : MonoBehaviour
     public TextMeshProUGUI tWinner;
 
     public GameObject endGame;
+    
+    private List<string> tutorialPrompts;
 
+    public GameObject speechBubbleOne;
+    public GameObject speechBubbleTwo;
+
+    public GameObject tutorialObj;
     void Start()
     {
         tRounds.text = "Points to win:" + "\n";
-        tDrops.text = "Crowd Drops:" + "\n";
+        tDrops.text = "Tutorial:" + "\n";
         audioSource = gameObject.GetComponent<AudioSource>();
-        audioSource.volume = 0.3f;
-        audioSource.clip = battle_theme;
-        audioSource.Play();
+        audioSource.volume = 0.3f;  
         playerColors = new int[4];
         players = new GameObject[4];
         colors = new Color32[5];
@@ -126,12 +129,68 @@ public class GameManagerBattle : MonoBehaviour
         playerThreeCount = 0;
         playerFourCount = 0;
         takenColours = new List<int> {};
+        tutorialPrompts = new List<string> {"Try pressing ↑↓←→ or using the analogue on your controller rookie!", "Ever heard of left clicking or pressing RT/R2 to attack!?", "Come on! Hit mobs and splash more than your opponent!", "Keep an eye on the braziers on the top of the screen, thats your time limit!", "If you win a round i'll drop a banner for you!"};
     }
 
     void Awake()
     {
         StartCoroutine(turnOneCharSelect());
     }
+
+    IEnumerator tutorial()
+    {
+        yield return new WaitForSeconds(1.4f);
+        if (!speechBubbleOne.activeInHierarchy)
+        {
+            speechBubbleOne.SetActive(true);
+            speechBubbleOne.transform.Find("tCrowd").gameObject.GetComponent<TextMeshProUGUI>().text = tutorialPrompts[0];
+        }
+
+        yield return new WaitForSeconds(5.4f);
+        if (speechBubbleOne.activeInHierarchy)
+            speechBubbleOne.SetActive(false);
+        
+        if (!speechBubbleTwo.activeInHierarchy)
+        {
+            speechBubbleTwo.SetActive(true);
+            speechBubbleTwo.transform.Find("tCrowd").gameObject.GetComponent<TextMeshProUGUI>().text = tutorialPrompts[1];
+        }
+
+        yield return new WaitForSeconds(5.4f);
+        if (speechBubbleTwo.activeInHierarchy)
+            speechBubbleTwo.SetActive(false);
+        
+        if (!speechBubbleOne.activeInHierarchy)
+        {
+            speechBubbleOne.SetActive(true);
+            speechBubbleOne.transform.Find("tCrowd").gameObject.GetComponent<TextMeshProUGUI>().text = tutorialPrompts[2];
+        }
+
+        yield return new WaitForSeconds(5.4f);
+        if (speechBubbleOne.activeInHierarchy)
+            speechBubbleOne.SetActive(false);
+        
+        if (!speechBubbleTwo.activeInHierarchy)
+        {
+            speechBubbleTwo.SetActive(true);
+            speechBubbleTwo.transform.Find("tCrowd").gameObject.GetComponent<TextMeshProUGUI>().text = tutorialPrompts[3];
+        }
+
+        yield return new WaitForSeconds(5.4f);
+        if (speechBubbleTwo.activeInHierarchy)
+            speechBubbleTwo.SetActive(false);
+        
+        if (!speechBubbleOne.activeInHierarchy)
+        {
+            speechBubbleOne.SetActive(true);
+            speechBubbleOne.transform.Find("tCrowd").gameObject.GetComponent<TextMeshProUGUI>().text = tutorialPrompts[4];
+        }
+
+        yield return new WaitForSeconds(5.4f);
+        if (speechBubbleOne.activeInHierarchy)
+            speechBubbleOne.SetActive(false);
+    }
+
 
 
     IEnumerator turnOneCharSelect()
@@ -144,7 +203,7 @@ public class GameManagerBattle : MonoBehaviour
     {
         
         tRounds.text = "Points to win:" + "\n" + roundCounter[roundIndex];
-        tDrops.text = "Crowd Drops:" + "\n" + dropChoice[dropIndex];
+        tDrops.text = "Tutorial:" + "\n" + dropChoice[dropIndex];
             
         
         if (Input.GetKey(KeyCode.Space) && !inBattle)
@@ -242,7 +301,11 @@ public class GameManagerBattle : MonoBehaviour
         GetComponentInChildren<TimerController>().enabled = true;
         GetComponentInChildren<PlayersManager>().StartGame();
         GetComponentInChildren<TimerController>().StartAgain();
-        upBoard();
+        if(dropIndex==0)
+        {
+            tutorialObj.gameObject.SetActive(true);
+            StartCoroutine(tutorial());
+        }
 
     }
     
@@ -255,7 +318,11 @@ public class GameManagerBattle : MonoBehaviour
         GetComponentInChildren<MainSpawner>().EndRound();
         GetComponentInChildren<MobsManager>().EndRound();
         inBattle = false;
+        tWinner.text = "Winner: Player " + (winner+1).ToString();
+        endGame.SetActive(true);
         dropBoard();
+        
+        displayLosers();
        
         //start the upgrade for losing players       
     }
@@ -335,7 +402,8 @@ public class GameManagerBattle : MonoBehaviour
                 playerOneCount += 4;
             }
             playerOneColour.gameObject.GetComponent<Image>().sprite = weapons[playerOneCount];
-       
+            int tempNum = (playerOneCount - playerOneCount%4)/4;
+            players[0].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
         }
     }
 
@@ -366,7 +434,10 @@ public class GameManagerBattle : MonoBehaviour
                 playerTwoCount += 4;
             }
             playerTwoColour.gameObject.GetComponent<Image>().sprite = weapons[playerTwoCount];
-   
+            int tempNum = (playerTwoCount - playerTwoCount%4)/4;
+            players[1].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
+            players[1].GetComponentInChildren<WeaponController>().initWeapon(
+                players[1].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerTwoCount]);
         }
     }
 
@@ -397,7 +468,10 @@ public class GameManagerBattle : MonoBehaviour
                 playerThreeCount += 4;
             }
             playerThreeColour.gameObject.GetComponent<Image>().sprite = weapons[playerThreeCount];
-          
+            int tempNum = (playerThreeCount - playerThreeCount%4)/4;
+            players[2].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
+            players[2].GetComponentInChildren<WeaponController>().initWeapon(
+                players[2].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerThreeCount]);
         }
     }
 
@@ -428,7 +502,10 @@ public class GameManagerBattle : MonoBehaviour
                 playerFourCount += 4;
             }
             playerFourColour.gameObject.GetComponent<Image>().sprite = weapons[playerFourCount];
-      
+            int tempNum = (playerFourCount - playerFourCount%4)/4;
+            players[3].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
+            players[3].GetComponentInChildren<WeaponController>().initWeapon(
+                players[3].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerFourCount]);
         }
     }
 
@@ -462,7 +539,8 @@ public class GameManagerBattle : MonoBehaviour
                 playerOneCount -= 4;
             }
             playerOneColour.gameObject.GetComponent<Image>().sprite = weapons[playerOneCount];
-            
+            int tempNum = (playerOneCount - playerOneCount%4)/4;
+            players[0].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
         }
     }
 
@@ -495,7 +573,10 @@ public class GameManagerBattle : MonoBehaviour
                 playerTwoCount -= 4;
             }
             playerTwoColour.gameObject.GetComponent<Image>().sprite = weapons[playerTwoCount];
-           
+            int tempNum = (playerTwoCount - playerTwoCount%4)/4;
+            players[1].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
+            players[1].GetComponentInChildren<WeaponController>().initWeapon(
+                players[1].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerTwoCount]);
         }
     }
 
@@ -526,7 +607,10 @@ public class GameManagerBattle : MonoBehaviour
                 playerThreeCount -= 4;
             }
             playerThreeColour.gameObject.GetComponent<Image>().sprite = weapons[playerThreeCount];
-           
+            int tempNum = (playerThreeCount - playerThreeCount%4)/4;
+            players[2].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
+            players[2].GetComponentInChildren<WeaponController>().initWeapon(
+                players[2].GetComponent<PlayerController>().getPlayerColour(),tempNum,weapons[playerThreeCount]);
         }
     }
 
@@ -544,7 +628,6 @@ public class GameManagerBattle : MonoBehaviour
             }
             playerFourColour.gameObject.GetComponent<Image>().color = colors[playerFourCount];
             players[3].GetComponent<PlayerController>().setPlayerColour(playerFourCount);
-            
         }
         else if (playerModes[3].CompareTo("weapon") == 0)
         {
@@ -558,7 +641,8 @@ public class GameManagerBattle : MonoBehaviour
                 playerFourCount -= 4;
             }
             playerFourColour.gameObject.GetComponent<Image>().sprite = weapons[playerFourCount];
-            
+            int tempNum = (playerFourCount - playerFourCount%4)/4;
+            players[3].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
         }
     }
 
@@ -584,28 +668,23 @@ public class GameManagerBattle : MonoBehaviour
 
     public void playerOneNext()
     {
-        
-        if(playerModes[0].CompareTo("colour") == 0 && !takenColours.Contains(playerOneCount))
+        if (!takenColours.Contains(playerOneCount))
         {
+            if(playerModes[0].CompareTo("colour") == 0)
+            {
                 playerModes[0] = "weapon";
                 playerOneNextButtonText.text = "Done";
                 playerOneColour.gameObject.GetComponent<Image>().sprite = weapons[playerOneCount];
                 playerOneColour.gameObject.GetComponent<Image>().color = colors[4];
                 takenColours.Add(playerOneCount);
-                players[0].GetComponent<PlayerController>().setPlayerColour(playerOneCount);
                 
-        }
-        else
-        if(playerModes[0].CompareTo("weapon") == 0)
-        {
-               
-                int tempNum = (playerOneCount - playerOneCount%4)/4;
-                players[0].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
+            }
+            else
+            if(playerModes[0].CompareTo("weapon") == 0)
+            {
                 players[0].gameObject.GetComponent<PlayerController>().CreateWeapon(weapons[playerOneCount]);
                 GameObject.Find("pOnePanel").SetActive(false);
-                
-                playerModes[0]= "ready";
-            
+            }
         }
         
          
@@ -613,89 +692,76 @@ public class GameManagerBattle : MonoBehaviour
 
     public void playerTwoNext()
     {
-        
-            if (playerModes[1].CompareTo("colour") == 0 && !takenColours.Contains(playerTwoCount))
+        if (!takenColours.Contains(playerTwoCount))
+        {
+            if (playerModes[1].CompareTo("colour") == 0)
             {
                 playerModes[1] = "weapon";
                 playerTwoNextButtonText.text = "Done";
                 playerTwoColour.gameObject.GetComponent<Image>().sprite = weapons[playerTwoCount];
                 playerTwoColour.gameObject.GetComponent<Image>().color = colors[4];
                 takenColours.Add(playerTwoCount);
-                players[1].GetComponent<PlayerController>().setPlayerColour(playerTwoCount);
-              
+                playerTwoButton.gameObject.SetActive(false);
             }
-            else
-            if(playerModes[1].CompareTo("weapon") == 0)
-            {
-                int tempNum = (playerTwoCount - playerTwoCount%4)/4;
-                players[1].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
-                players[1].gameObject.GetComponent<PlayerController>().CreateWeapon(weapons[playerTwoCount]);
-                GameObject.Find("pTwoPanel").SetActive(false);
-                playerModes[1]= "ready";            
-            }
-        
-        
+        }
+        else
+        if(playerModes[1].CompareTo("weapon") == 0)
+        {
+            GameObject.Find("pTwoPanel").SetActive(false);            
+        }
         
     }
 
     public void playerThreeNext()
     {
-        
-            if (playerModes[2].CompareTo("colour") == 0 && !takenColours.Contains(playerThreeCount))
+        if (!takenColours.Contains(playerThreeCount))
+        {
+            if (playerModes[2].CompareTo("colour") == 0)
             {
                 playerModes[2] = "weapon";
                 playerThreeNextButtonText.text = "Done";
                 playerThreeColour.gameObject.GetComponent<Image>().sprite = weapons[playerThreeCount];
                 playerThreeColour.gameObject.GetComponent<Image>().color = colors[4];
                 takenColours.Add(playerThreeCount);
-                players[2].GetComponent<PlayerController>().setPlayerColour(playerThreeCount);
-                
+                playerThreeButton.gameObject.SetActive(false);
             }
-            else
-            if(playerModes[2].CompareTo("weapon") == 0)
-            {
-                int tempNum = (playerThreeCount - playerThreeCount%4)/4;
-                players[2].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
-                players[2].gameObject.GetComponent<PlayerController>().CreateWeapon(weapons[playerThreeCount]);
-                GameObject.Find("pThreePanel").SetActive(false);
-                playerModes[2]= "ready";
-                
-            }
-        
-       
+        }
+        else
+        if(playerModes[2].CompareTo("weapon") == 0)
+        {
+             GameObject.Find("pThreePanel").SetActive(false);
+            
+        }
         
     }
 
     public void playerFourNext()
     {
-        
-            if (playerModes[3].CompareTo("colour") ==  0&& !takenColours.Contains(playerFourCount))
+        if (!takenColours.Contains(playerFourCount))
+        {
+            if (playerModes[3].CompareTo("colour") == 0)
             {
                 playerModes[3] = "weapon";
                 playerFourNextButtonText.text = "Done";
                 playerFourColour.gameObject.GetComponent<Image>().sprite = weapons[playerFourCount];
                 playerFourColour.gameObject.GetComponent<Image>().color = colors[4];
                 takenColours.Add(playerFourCount);
-                players[3].GetComponent<PlayerController>().setPlayerColour(playerFourCount);
-              
+                playerFourButton.gameObject.SetActive(false);
             }
             else
             if(playerModes[3].CompareTo("weapon") == 0)
             {
-                int tempNum = (playerFourCount - playerFourCount%4)/4;
-                players[3].GetComponent<PlayerController>().setPlayerWeapon(tempNum);
-                players[3].gameObject.GetComponent<PlayerController>().CreateWeapon(weapons[playerFourCount]);
                 GameObject.Find("pFourPanel").SetActive(false);
-                playerModes[3]= "ready";
+            
             }
-        
+        }
         
         
     }
 
     public void displayLosers()
     {
-        
+        GameObject.Find("upgradeSelect").SetActive(true);
         GameObject[] panels = 
         {
             losersPanel.transform.Find("pOnePanel").gameObject,
@@ -715,6 +781,7 @@ public class GameManagerBattle : MonoBehaviour
                 panels[i].SetActive(false);
             }
         }
+        genUpgrades();
     }
 
     private List<int> randomUpgradeIndexes()
@@ -742,15 +809,15 @@ public class GameManagerBattle : MonoBehaviour
 
         playerTwoCount = 0;
         playerTwoUpgrades = randomUpgradeIndexes();
-        playerTwoUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerTwoUpgrades[0]];
+        playerTwoUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerTwoUpgrades[playerTwoCount]];
 
         playerThreeCount = 0;
         playerThreeUpgrades = randomUpgradeIndexes();
-        playerThreeUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerThreeUpgrades[0]];
+        playerThreeUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerThreeUpgrades[ playerThreeCount]];
 
         playerFourCount = 0;
         playerFourUpgrades = randomUpgradeIndexes();
-        playerFourUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerFourUpgrades[0]];
+        playerFourUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerFourUpgrades[playerFourCount]];
     }
 
     public void playerOneUpgradeRight()
@@ -799,15 +866,12 @@ public class GameManagerBattle : MonoBehaviour
 
     public void dropBoard()
     {
-        boardUp.gameObject.SetActive(false);
         boardDrop.gameObject.SetActive(true);
     }
 
     public void upBoard()
     {
-        boardDrop.gameObject.SetActive(false);
-        boardUp.gameObject.SetActive(true);
-       
+        boardDrop.gameObject.SetActive(true);
     }
 
     public void backToMain()
@@ -817,7 +881,7 @@ public class GameManagerBattle : MonoBehaviour
 
     IEnumerator backToMainDelay()
     {
-        yield return new WaitForSeconds(0.517f);
+        yield return new WaitForSeconds(0.417f);
         int previousSceneIndex = SceneManager.GetActiveScene().buildIndex - 1;
         SceneManager.LoadScene(previousSceneIndex);
     }
