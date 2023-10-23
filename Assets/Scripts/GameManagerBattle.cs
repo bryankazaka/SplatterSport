@@ -346,6 +346,7 @@ public class GameManagerBattle : MonoBehaviour
         {
             upgradesActive[i] = false;
         }
+        Debug.Log("gameStart");
         GetComponentInChildren<MainSpawner>().StartRound();
         GetComponentInChildren<TimerController>().enabled = true;
         GetComponentInChildren<PlayersManager>().StartGame();
@@ -429,13 +430,18 @@ public class GameManagerBattle : MonoBehaviour
         }
     }
 
+    public void upgradePlayer(int upgrade, GameObject Player)
+    {
+        Player.GetComponent<PlayerController>().Upgrade(upgrade);
+    }
+
      public void updatePlayer(GameObject player)
      {        
         PlayerController play = player.GetComponent<PlayerController>();
         players[play.playerNum] = player;
         playerColors[play.playerNum] = play.getPlayerColour(); // [playernum] = color    
      }
-
+    
 
     public void dropsTextBackwards()
     {
@@ -707,24 +713,6 @@ public class GameManagerBattle : MonoBehaviour
         if (!upgradeScreen.activeSelf)
         {
             switch (playerNum)
-            {            
-            case 0:
-                playerOneNext();
-            break;
-            case 1:
-                playerTwoNext();
-            break;
-            case 2:
-                playerThreeNext();
-            break;
-            case 3:
-                playerFourNext();
-            break;
-            }
-        }
-        else
-        {
-             switch (playerNum)
             {            
             case 0:
                 playerOneNext();

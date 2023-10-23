@@ -15,6 +15,8 @@ public class WeaponController : MonoBehaviour
     private float maxRange ;
     public float attackRange = 0.5f;
     public float attackSpeed;
+    public float sizeUp= 1.0f;
+    public float rangeUp = 1.0f;
     private float startAttackTime;
     private bool isAttacking;
     private Transform playerTransform;
@@ -148,7 +150,12 @@ public class WeaponController : MonoBehaviour
        
     }
 
-
+    public void WepUpgrade(float size, float range)
+    {
+        sizeUp = size;
+        rangeUp = range;
+        initWeapon(weapon.getColour(),animator.GetInteger("Weapon"), gameObject.GetComponent<SpriteRenderer>().sprite);
+    }
     public void initWeapon(int colour, int weaponType, Sprite spriteT)
     {
          
@@ -162,24 +169,24 @@ public class WeaponController : MonoBehaviour
                 weapon = new Brush(colour);
                 animator.SetInteger("Weapon",BRUSH);
                 animator.SetInteger("Colour",colour);
-                transform.localScale = new(2,2,1);
-                weaponDist = 1.5f;
+                transform.localScale = new Vector3(2,2,1) * sizeUp;
+                weaponDist = 1.5f * rangeUp;
                 //set colour of weapon
                 break;
             case PENCIL:
                 weapon = new Pencil(colour);
                 animator.SetInteger("Weapon",PENCIL);
                 animator.SetInteger("Colour",colour);
-                transform.localScale = new(1.5f,1.5f,1);
-                weaponDist = 1.25f;
+                transform.localScale = new Vector3(1.5f,1.5f,1) * sizeUp;
+                weaponDist = 1.25f * rangeUp;
                 //set colour of weapon
                 break;
             case ROLLER:
                 weapon = new Roller(colour);
                 animator.SetInteger("Weapon",ROLLER);
                 animator.SetInteger("Colour",colour);
-                transform.localScale = new(3,3,1);
-                weaponDist = 2.0f;
+                transform.localScale = new Vector3(3,3,1) * sizeUp;
+                weaponDist = 2.0f * rangeUp;
                 
                 //set colour of weapon
                 break;
@@ -224,6 +231,11 @@ public class WeaponController : MonoBehaviour
         }
        
         
+    }
+    public void upgradeSpeed(float upgrade)
+    {
+        attackSpeed = weapon.getAttackSpeed() * upgrade;
+        animator.SetFloat("Speed",attackSpeed);
     }
     public void OnAim(InputAction.CallbackContext ctx) => joystickDirection = ctx.ReadValue<Vector2>();
 

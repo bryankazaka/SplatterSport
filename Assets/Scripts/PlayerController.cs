@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public float stunTime = 1.00f;
     public bool isMouse = false;
 
-    private float[] upgrades; // StunT AtcSp Dmg Prop LmbSp Bounce KnckB Spread Size Rng Move
+    public float[] upgrades; // StunT AtcSp Dmg Prop LmbSp Bounce KnckB Spread Size Rng Move
 
     public bool isDone = false;
 
@@ -81,7 +81,12 @@ public class PlayerController : MonoBehaviour
                 break;
             case 1:
                 upgrades[1] += 0.15f;
+                foreach (Transform weaponT in transform)
+                {                    
+                    weaponT.gameObject.GetComponent<WeaponController>().upgradeSpeed(upgrades[1]);
+                }
                 upgrades[2] -= 0.05f;
+                damageMult = upgrades[2];
                 break;
             case 2:
                 upgrades[3] += 0.1f;
@@ -96,6 +101,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case 5:
                 upgrades[2] += 0.1f;
+                damageMult = upgrades[2];
                 break;
             case 6:
                 upgrades[8] += 0.1f;
@@ -103,13 +109,23 @@ public class PlayerController : MonoBehaviour
                 break;
             case 7:
                 upgrades[1] += 0.1f;
+                foreach (Transform weaponT in transform)
+                {                    
+                    weaponT.gameObject.GetComponent<WeaponController>().upgradeSpeed(upgrades[1]);
+                }
                 break;
             case 8:
                 upgrades[10] += 0.1f;
+                playerMovement.upgradeMoveSpeed(upgrades[10]);
                 break;
             case 9:
                 upgrades[2] += 0.15f;
+                damageMult = upgrades[2];
                 upgrades[1] -= 0.1f;
+                foreach (Transform weaponT in transform)
+                {                    
+                    weaponT.gameObject.GetComponent<WeaponController>().upgradeSpeed(upgrades[1]);
+                }
                 break;
 
         }
