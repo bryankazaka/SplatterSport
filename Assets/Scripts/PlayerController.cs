@@ -94,7 +94,8 @@ public class PlayerController : MonoBehaviour
     public void OnChooseL(InputAction.CallbackContext ctx)
     {   
        if (ctx.performed && !isDone)
-        {             
+        {    
+                     
             GetComponentInParent<GameManagerBattle>().playerSelect(getPlayerNumber(),true);                   
         }  
     }
@@ -102,7 +103,8 @@ public class PlayerController : MonoBehaviour
     public void OnChooseR(InputAction.CallbackContext ctx)
     {      
         if (ctx.performed && !isDone)
-        {             
+        {          
+            
             GetComponentInParent<GameManagerBattle>().playerSelect(getPlayerNumber(),false);                   
         }           
     }

@@ -266,6 +266,7 @@ public class GameManagerBattle : MonoBehaviour
         }
         else
         {
+            Debug.Log("upgradeTime");
            switch (playerNum)
             {
             case 0:
@@ -331,11 +332,13 @@ public class GameManagerBattle : MonoBehaviour
     public void EndRound()
     {
         winner = GetComponentInChildren<SplatterController>().getWinner();
+        Debug.Log("Player " + (winner +1)+ " won that round");
         GetComponentInChildren<WallController>().winPoint(winner);
         GetComponentInChildren<WallController>().UpdateWall(playerColors);
         GetComponentInChildren<CrowdController>().CrowdReset();
         GetComponentInChildren<MainSpawner>().EndRound();
         GetComponentInChildren<MobsManager>().EndRound();
+        GetComponentInChildren<PlayersManager>().EndRound();
         inBattle = false;
         dropBoard();        
         displayLosers();
@@ -809,9 +812,9 @@ public class GameManagerBattle : MonoBehaviour
             losersPanel.transform.Find("pFourPanel").gameObject
         };
 
-        for (int i = 0; i < panels.Length; i++)
+        for (int i = 0; i < players.Length; i++)
         {
-            if (i + 1 != winner)
+            if (i != winner)
             {
                 panels[i].SetActive(true);
             }
@@ -905,14 +908,14 @@ public class GameManagerBattle : MonoBehaviour
 
     public void dropBoard()
     {
-        boardDrop.gameObject.SetActive(false);
-        boardUp.gameObject.SetActive(true);
+        boardDrop.gameObject.SetActive(true);
+        boardUp.gameObject.SetActive(false);
     }
 
     public void upBoard()
     {
-        boardUp.gameObject.SetActive(false);
-        boardDrop.gameObject.SetActive(true);
+        boardUp.gameObject.SetActive(true);
+        boardDrop.gameObject.SetActive(false);
     }
 
     public void backToMain()
