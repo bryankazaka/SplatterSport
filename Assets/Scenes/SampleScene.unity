@@ -7591,6 +7591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfPlayers: 0
   splattermap: {fileID: 1538564805}
+  numPlayers: 0
   numbersTaken: 00000000
   colorsTaken: 00000000
 --- !u!1 &939825833
@@ -12697,7 +12698,7 @@ Tilemap:
       - {fileID: -727991476, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: 320087227, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: -474964340, guid: 3037628c76454664798a2c475ca22a35, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 1
   - first: {x: -12, y: 8, z: 0}
@@ -12725,7 +12726,7 @@ Tilemap:
       - {fileID: -727991476, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: 320087227, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: -474964340, guid: 3037628c76454664798a2c475ca22a35, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 1
   - first: {x: -10, y: 8, z: 0}
@@ -12795,7 +12796,7 @@ Tilemap:
       - {fileID: -727991476, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: 320087227, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: -474964340, guid: 3037628c76454664798a2c475ca22a35, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 1
   - first: {x: -5, y: 8, z: 0}
@@ -13005,7 +13006,7 @@ Tilemap:
       - {fileID: -727991476, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: 320087227, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: -474964340, guid: 3037628c76454664798a2c475ca22a35, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 1
   - first: {x: 10, y: 8, z: 0}
@@ -27905,6 +27906,18 @@ MonoBehaviour:
       - m_Target: {fileID: 633817220}
         m_TargetAssemblyTypeName: GameManagerBattle, Assembly-CSharp
         m_MethodName: playBattleTheme
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 633817220}
+        m_TargetAssemblyTypeName: GameManagerBattle, Assembly-CSharp
+        m_MethodName: StartBattle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

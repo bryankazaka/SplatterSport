@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isStunned = false;
     public Rigidbody2D rb;
     public Animator animator;
+    private float moveUp;
     private float startStun;
     private Vector2 stunDirect;
     private PlayerController playerController;
@@ -25,6 +26,10 @@ public class PlayerMovement : MonoBehaviour
         screenBounds = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0));
     }
 
+    public void upgradeMoveSpeed(int upgrade)
+    {
+        moveUp = upgrade;
+    }
     public void OnMove(InputAction.CallbackContext ctx)
     {
         movement.x = ctx.ReadValue<Vector2>().x;
@@ -57,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Horizontal", movement.x); 
             animator.SetFloat("Vertical", movement.y); 
             animator.SetFloat("Speed", movement.sqrMagnitude);
-            Vector2 newPosition = rb.position + movement * moveSpeed * Time.fixedDeltaTime;
+            Vector2 newPosition = rb.position + movement * (moveSpeed*moveUp) * Time.fixedDeltaTime;
             
             // Clamp the player's position within the screen boundaries
             newPosition.x = Mathf.Clamp(newPosition.x, -screenBounds.x, screenBounds.x);
