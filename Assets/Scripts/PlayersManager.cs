@@ -31,6 +31,16 @@ public class PlayersManager : MonoBehaviour
         splattermap.GetComponent<SplatterController>().SetColor(colorPlayers);
     }
 
+    public void EndRound()
+    {
+        foreach (Transform player in transform)
+        {
+            PlayerController playObj = player.GetComponent<PlayerController>();
+            player.gameObject.GetComponent<PlayerMovement>().enabled = false;
+            playObj.isDone = false;           
+        
+        }    
+    }
     public void OnJoin(PlayerInput pi)
     {
         

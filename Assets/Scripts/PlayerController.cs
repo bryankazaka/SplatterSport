@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
         
         if (ctx.performed && !isDone)
         {
-            Debug.Log("select");
+           
             GetComponentInParent<GameManagerBattle>().PlayerNext(getPlayerNumber());
         }
        
@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
     }
     public void setPlayerWeapon(int weaponNew)
     {
-        Debug.Log("Weapon Change " +  weaponNew);
+        
         weapon = weaponNew;
     }
 

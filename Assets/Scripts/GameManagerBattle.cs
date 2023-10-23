@@ -106,6 +106,7 @@ public class GameManagerBattle : MonoBehaviour
     public GameObject speechBubbleTwo;
 
     public GameObject tutorialObj;
+    public GameObject upgradeScreen;
     void Start()
     {
         tRounds.text = "Points to win:" + "\n";
@@ -233,50 +234,67 @@ public class GameManagerBattle : MonoBehaviour
     }
     public void playerSelect(int playerNum, bool left)
     {
-        
-        switch (playerNum)
+        if (!upgradeScreen.activeSelf)
         {
+            switch (playerNum)
+            {
             case 0:
                 if (left)
-                {
-                    playerOneLeft();
-                }
+                {playerOneLeft();}
                 else
-                {
-                    playerOneRight();
-                }
+                {playerOneRight();}
                 break;
             case 1:
                 if (left)
-                {
-                    playerTwoLeft();
-                }
+                {playerTwoLeft();}
                 else
-                {   
-                    playerTwoRight();
-                }
+                {playerTwoRight();}
                 break;
             case 2:
                 if (left)
-                {
-                    playerThreeLeft();
-                }
+                {playerThreeLeft();}
                 else
-                {
-                    playerThreeRight();
-                }
+                {playerThreeRight();}
                 break;
             case 3:
                 if (left)
-                {
-                    playerFourLeft();
-                }
+                {playerFourLeft();}
                 else
-                {
-                    playerFourRight();
-                }
+                {playerFourRight();}
                 break; 
+            }
         }
+        else
+        {
+           switch (playerNum)
+            {
+            case 0:
+                if (left)
+                {playerOneUpgradeLeft();}
+                else
+                {playerOneUpgradeRight();}
+                break;
+            case 1:
+                if (left)
+                {playerTwoUpgradeLeft();}
+                else
+                {playerTwoUpgradeRight();}
+                break;
+            case 2:
+                if (left)
+                {playerThreeUpgradeLeft();}
+                else
+                {playerThreeUpgradeRight();}
+                break;
+            case 3:
+                if (left)
+                {playerFourUpgradeLeft();}
+                else
+                {playerFourUpgradeRight();}
+                break; 
+            } 
+        }
+        
     }
     public void roundsTextBackwards()
     {
@@ -306,6 +324,7 @@ public class GameManagerBattle : MonoBehaviour
             tutorialObj.gameObject.SetActive(true);
             StartCoroutine(tutorial());
         }
+        upBoard();
 
     }
     
@@ -318,8 +337,7 @@ public class GameManagerBattle : MonoBehaviour
         GetComponentInChildren<MainSpawner>().EndRound();
         GetComponentInChildren<MobsManager>().EndRound();
         inBattle = false;
-        dropBoard();
-        
+        dropBoard();        
         displayLosers();
        
         //start the upgrade for losing players       
@@ -629,22 +647,43 @@ public class GameManagerBattle : MonoBehaviour
 
     public void PlayerNext(int playerNum)
     {
-        switch (playerNum)
-        {            
-           case 0:
-            playerOneNext();
-           break;
-           case 1:
-            playerTwoNext();
-           break;
-           case 2:
-            playerThreeNext();
-           break;
-           case 3:
-            playerFourNext();
-           break;
-
+        if (!upgradeScreen.activeSelf)
+        {
+            switch (playerNum)
+            {            
+            case 0:
+                playerOneNext();
+            break;
+            case 1:
+                playerTwoNext();
+            break;
+            case 2:
+                playerThreeNext();
+            break;
+            case 3:
+                playerFourNext();
+            break;
+            }
         }
+        else
+        {
+             switch (playerNum)
+            {            
+            case 0:
+                playerOneNext();
+            break;
+            case 1:
+                playerTwoNext();
+            break;
+            case 2:
+                playerThreeNext();
+            break;
+            case 3:
+                playerFourNext();
+            break;
+            }
+        }
+            
     }
 
     public void playerOneNext()
@@ -761,7 +800,7 @@ public class GameManagerBattle : MonoBehaviour
 
     public void displayLosers()
     {
-        GameObject.Find("upgradeSelect").SetActive(true);
+       upgradeScreen.SetActive(true);
         GameObject[] panels = 
         {
             losersPanel.transform.Find("pOnePanel").gameObject,
@@ -866,11 +905,13 @@ public class GameManagerBattle : MonoBehaviour
 
     public void dropBoard()
     {
-        boardDrop.gameObject.SetActive(true);
+        boardDrop.gameObject.SetActive(false);
+        boardUp.gameObject.SetActive(true);
     }
 
     public void upBoard()
     {
+        boardUp.gameObject.SetActive(false);
         boardDrop.gameObject.SetActive(true);
     }
 
