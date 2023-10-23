@@ -29,6 +29,7 @@ public class GameManagerBattle : MonoBehaviour
     private int dropIndex = 0;
     private int[] playerColors;
     private GameObject[] players;
+    private int[] playerUpgradeChoices= {0,0,0,0};
 
     public AudioClip btn_highlight;
     public AudioClip btn_click;
@@ -430,9 +431,31 @@ public class GameManagerBattle : MonoBehaviour
         }
     }
 
-    public void upgradePlayer(int upgrade, GameObject Player)
+    public void upgradePlayers()
     {
-        Player.GetComponent<PlayerController>().Upgrade(upgrade);
+        
+        int lenPlayers = 0;
+        Transform playersT = GetComponentInChildren<PlayersManager>().transform;
+        foreach (Transform player in playersT)
+        {
+            lenPlayers++;
+        } 
+        if (lenPlayers > 0)
+        {
+            players[0].GetComponent<PlayerController>().Upgrade(playerOneUpgrades[playerOneCount]);
+        }
+        if (lenPlayers > 1)
+        {
+            players[1].GetComponent<PlayerController>().Upgrade(playerTwoUpgrades[playerTwoCount]);
+        }
+        if (lenPlayers > 2)
+        {
+            players[2].GetComponent<PlayerController>().Upgrade(playerThreeUpgrades[playerThreeCount]);
+        }
+        if (lenPlayers > 3)
+        {
+            players[3].GetComponent<PlayerController>().Upgrade(playerFourUpgrades[playerFourCount]);
+        }
     }
 
      public void updatePlayer(GameObject player)
