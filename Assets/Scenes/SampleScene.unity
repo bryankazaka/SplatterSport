@@ -12452,7 +12452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbe1531ff7a18674cb5a78b9729a43b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerSeconds: 10
+  timerSeconds: 60
   brazierStates:
   - {fileID: 11400000, guid: 334b4dfafb5913046987fd0269e2d4d2, type: 2}
   - {fileID: 11400000, guid: 521dee116298d004e9680cb554061013, type: 2}
@@ -12788,7 +12788,7 @@ Tilemap:
       - {fileID: -727991476, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: 320087227, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: -474964340, guid: 3037628c76454664798a2c475ca22a35, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 1
   - first: {x: -12, y: 8, z: 0}
@@ -12816,7 +12816,7 @@ Tilemap:
       - {fileID: -727991476, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: 320087227, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: -474964340, guid: 3037628c76454664798a2c475ca22a35, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 1
   - first: {x: -10, y: 8, z: 0}
@@ -13096,7 +13096,7 @@ Tilemap:
       - {fileID: -727991476, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: 320087227, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: -474964340, guid: 3037628c76454664798a2c475ca22a35, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 1
   - first: {x: 10, y: 8, z: 0}
