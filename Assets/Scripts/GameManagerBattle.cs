@@ -116,6 +116,8 @@ public class GameManagerBattle : MonoBehaviour
     public AudioClip crowdRoar;
 
     private AudioSource crowdAudioSource;
+    public int numberOfPlayers = 0;
+
     void Start()
     {
         tRounds.text = "Points to win:" + "\n";
@@ -341,11 +343,13 @@ public class GameManagerBattle : MonoBehaviour
         {
             upgradesActive[i] = false;
         }
+        GetComponentInChildren<MainSpawner>().numberOfPlayers = numberOfPlayers;
         GetComponentInChildren<MainSpawner>().StartRound();
         GetComponentInChildren<TimerController>().enabled = true;
         GetComponentInChildren<PlayersManager>().StartGame();
         GetComponentInChildren<WallController>().setWinningScore(int.Parse(roundCounter[roundIndex]));
         GetComponentInChildren<TimerController>().StartAgain();
+        
         if(dropIndex==0)
         {
             tutorialObj.gameObject.SetActive(true);
@@ -409,6 +413,7 @@ public class GameManagerBattle : MonoBehaviour
 
     public void addPlayer(GameObject player)
     {
+        numberOfPlayers++;
         PlayerController play = player.GetComponent<PlayerController>();
         players[play.playerNum] = player;
         playerColors[play.playerNum] = play.getPlayerColour(); // [playernum] = color

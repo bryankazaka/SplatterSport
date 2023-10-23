@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MobSpawner : MonoBehaviour
 {
@@ -8,9 +10,33 @@ public class MobSpawner : MonoBehaviour
     public float mobsPerSecond; //how many mobs spawn per second
     public float spawnWaitTime; //how long before mobs being to spawn 
 
+    public float spawnRateMult;
+
+    public float mobBaseSpawnUnit;
+
+    public int roundMult;
+
     // Start is called before the first frame update
+    private void Awake()
+    {
+        print(gameObject.name);
+        switch (gameObject.name)
+        {
+            case "bucketM":
+                mobBaseSpawnUnit = 0.3f;
+                break;
+            case "canvasM":
+                mobBaseSpawnUnit = 0.1f;
+                break;
+            case "statueM":
+                mobBaseSpawnUnit = 0.025f;
+                break;
+        }
+    }
+
     public void StartRound()
     {
+        mobsPerSecond = (mobBaseSpawnUnit * spawnRateMult) + (roundMult * 0.1f);
         float newmobsPerSecond = 1.0f/mobsPerSecond; 
         InvokeRepeating(nameof(Spawn), spawnWaitTime, newmobsPerSecond); //repeats the instantiation of another mob object
     }
