@@ -12,9 +12,7 @@ public class WeaponController : MonoBehaviour
 {
     
     private const int BRUSH = 0, PENCIL = 1, ROLLER = 2;
-    public float weaponRange = 1f;
     private float maxRange ;
-    public float minWeaponRange = 0.5f;
     public float attackRange = 0.5f;
     public float attackSpeed;
     private float startAttackTime;
@@ -23,8 +21,9 @@ public class WeaponController : MonoBehaviour
     public Transform attackPoint;
     public LayerMask enemyLayers;
     private Animator animator;
+    public AudioSource audioSource;
 
-    
+    public float weaponDist = 1.5f;
     public Vector3 screenPosition;
     public Vector3 worldPosition;
     private Weapon weapon;
@@ -36,20 +35,19 @@ public class WeaponController : MonoBehaviour
     public bool isMouse;
     private Vector2 joystickDirection;
     private  Vector3 target;
+    public AudioClip attackSound;
 
     private void Awake()
     {
            
-        
-        
-       
         weapon = new Brush(0);
     }
 
     private void Start()
     {
     
-        playerController = GetComponentInParent<PlayerController>();       
+        playerController = GetComponentInParent<PlayerController>();
+        audioSource = GetComponent<AudioSource>();
         playerTransform = transform.parent;
                  
         maxRange = attackRange;
@@ -86,7 +84,7 @@ public class WeaponController : MonoBehaviour
         }
        
         float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
-        target = Vector3.Normalize(target)*1.5f;
+        target = Vector3.Normalize(target)*weaponDist;
         target = playerController.transform.position + target;
         transform.position = target;
         attackPoint.position = target;
@@ -150,15 +148,6 @@ public class WeaponController : MonoBehaviour
        
     }
 
-    private void  Update()     
-    {
-        if (gameObject.GetComponent<SpriteRenderer>().sprite == null)
-        {
-            Debug.Log(animator.GetCurrentAnimatorStateInfo(0).fullPathHash);
-        }
-        
-      
-    }
 
     public void initWeapon(int colour, int weaponType, Sprite spriteT)
     {
@@ -173,22 +162,29 @@ public class WeaponController : MonoBehaviour
                 weapon = new Brush(colour);
                 animator.SetInteger("Weapon",BRUSH);
                 animator.SetInteger("Colour",colour);
+                transform.localScale = new(2,2,1);
+                weaponDist = 1.5f;
                 //set colour of weapon
                 break;
             case PENCIL:
                 weapon = new Pencil(colour);
                 animator.SetInteger("Weapon",PENCIL);
                 animator.SetInteger("Colour",colour);
+                transform.localScale = new(1.5f,1.5f,1);
+                weaponDist = 1.25f;
                 //set colour of weapon
                 break;
             case ROLLER:
                 weapon = new Roller(colour);
                 animator.SetInteger("Weapon",ROLLER);
                 animator.SetInteger("Colour",colour);
+                transform.localScale = new(3,3,1);
+                weaponDist = 2.0f;
+                
                 //set colour of weapon
                 break;
         }
-         attackRange = weapon.getRange();
+        attackRange = weapon.getRange();
         attackSpeed = weapon.getAttackSpeed();
         animator.SetFloat("Speed",attackSpeed);
         
@@ -206,6 +202,7 @@ public class WeaponController : MonoBehaviour
     {
         if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("Swing")) // if I press and its not attacking attack
         {
+            audioSource.PlayOneShot(attackSound, 0.5f);
             animator.SetTrigger("Attack");
             startAttackTime = Time.time;      
         }
@@ -215,13 +212,15 @@ public class WeaponController : MonoBehaviour
     public void OnAttack(InputAction.CallbackContext ctx)
     {
         
-       
+       Debug.Log("Attack");
         if (ctx.started)
         {
+            Debug.Log("MouseButtonDown");
             isAttacking = true;
         }
         if (ctx.canceled)
         {
+             Debug.Log("MouseButtonUp");
             isAttacking = false;
         }
        

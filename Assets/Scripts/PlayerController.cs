@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour
     private const int BRUSH = 0, PENCIL = 1, ROLLER = 2;
 
 
-    public int colour;
-    public int weapon;
+    public int colour = 0;
+    public int weapon = 0;
     public int playerNum = 0; //0 for player 1, 1 for player 2 ect
     public float speed;
     public float damageMult = 1.00f;
@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour
     {
         gameObject.transform.parent =  GameObject.Find("GameManager").transform.Find("PlayersManager").transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        setPlayerColour(getFreeCol());
     }
     public void FinishChar()
     {

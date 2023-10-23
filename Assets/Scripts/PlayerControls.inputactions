@@ -142,7 +142,7 @@
                     "name": "",
                     "id": "f0b81ae2-e3c9-4569-aab6-594bbd7d6a9a",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "",
+                    "interactions": "Hold(duration=10000)",
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Attack",
@@ -203,6 +203,11 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
                     "isOptional": false,
                     "isOR": false
                 }
