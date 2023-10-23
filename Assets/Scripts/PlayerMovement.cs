@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             Vector2 newPosition = rb.position + (Vector2)Vector3.Normalize(rb.position-stunDirect) * 
-            (1/(2*(Time.time - startStun))) * Time.fixedDeltaTime;
+            (1/(2*(Time.time - (startStun*stunUp)))) * Time.fixedDeltaTime;
            
             newPosition.x = Mathf.Clamp(newPosition.x, -screenBounds.x, screenBounds.x);
             newPosition.y = Mathf.Clamp(newPosition.y, -screenBounds.y, 3);

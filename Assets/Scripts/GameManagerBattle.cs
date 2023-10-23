@@ -151,15 +151,15 @@ public class GameManagerBattle : MonoBehaviour
         takenColours = new List<int> {};
         tutorialPrompts = new List<string> {"Try pressing ↑↓←→ or using the analogue on your controller rookie!", "Ever heard of left clicking or pressing RT/R2 to attack!?", "Come on! Hit mobs and splash more than your opponents!", "Watch the braziers on the top of the screen, thats your time limit!", "If you win a round i'll drop a banner for you!"};
         upgradeText = new List<(string,string)> {("Juggernaut","25% Stun Time"),
-        ("Featherweight","+60% Attack Speed \n -30% Damage"),
-        ("Bigger Splat","+30% Splat Size"),
-        ("Flying Limbs","+30% Limb Speed \n 50% Bouncier"),
-        ("Hard Hitter","+30% KnockBack \n +30% Limb Spread"),
-        ("Disdainfull Stroke","+30% Damage"),
-        ("Big Hands","+30% Weapon Size \n and Range"),
-        ("Deft Brushstroke","+30% Attack Speed"),
-        ("Artist Deadline","+30% Movement Speed"),
-        ("Heavyweight","+60% Damage \n -30% Attack Speed")
+        ("Featherweight","+100% Attack Speed \n -25% Damage"),
+        ("Bigger Splat","+20% Splat Size"),
+        ("Flying Limbs","+50% Limb Speed \n 50% Bouncier"),
+        ("Hard Hitter","+50% KnockBack \n +50% Limb Spread"),
+        ("Disdainfull Stroke","+75% Damage"),
+        ("Big Hands","+50% Weapon Range"),
+        ("Deft Brushstroke","+75% Attack Speed"),
+        ("Artist Deadline","+50% Movement Speed"),
+        ("Heavyweight","+100% Damage \n -25% Attack Speed")
         };
     }
 
@@ -402,7 +402,7 @@ public class GameManagerBattle : MonoBehaviour
     public void EndGame(int winningPlayer)
     {
         dropBoard();
-        tWinner.text = "Winner: Player " + winningPlayer+1;
+        tWinner.text = "Winner: Player " + (winningPlayer+1);
         endGame.SetActive(true);
         crowdAudioSource.Stop();
         audioSource.Stop();

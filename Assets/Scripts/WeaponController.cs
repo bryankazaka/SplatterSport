@@ -163,6 +163,8 @@ public class WeaponController : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().sprite = spriteT;
        
         animator = GetComponent<Animator>();
+        animator.enabled = false;
+        animator.enabled = true;
         switch (weaponType)
         {
             case BRUSH:
