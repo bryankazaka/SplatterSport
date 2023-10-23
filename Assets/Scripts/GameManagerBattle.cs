@@ -147,9 +147,11 @@ public class GameManagerBattle : MonoBehaviour
         playerFourCount = 0;
         takenColours = new List<int> {};
         tutorialPrompts = new List<string> {"Try pressing ↑↓←→ or using the analogue on your controller rookie!", "Ever heard of left clicking or pressing RT/R2 to attack!?", "Come on! Hit mobs and splash more than your opponents!", "Watch the braziers on the top of the screen, thats your time limit!", "If you win a round i'll drop a banner for you!"};
-        upgradeText = new List<(string,string)> {("Juggernaut","-75% Stun Time"),("Featherweight","+15% Attack Speed \n -5% Damage"),("Bigger Splat","+10% Splat Size"),
-        ("Flying Limbs","Limbs Move Faster \n and Bounce More"),
-        ("Hard Hitter","+10% KnockBack \n and Limb Speed"),
+        upgradeText = new List<(string,string)> {("Juggernaut","25% Stun Time"),
+        ("Featherweight","+15% Attack Speed \n -5% Damage"),
+        ("Bigger Splat","+10% Splat Size"),
+        ("Flying Limbs","+10% Limb Speed \n 50% Bouncier"),
+        ("Hard Hitter","+10% KnockBack \n +10% Limb Spread"),
         ("Disdainfull Stroke","+10% Damage"),
         ("Big Hands","+10% Weapon Size \n and Range"),
         ("Deft Brushstroke","+10% Attack Speed"),
@@ -866,7 +868,7 @@ public class GameManagerBattle : MonoBehaviour
             losersPanel.transform.Find("pFourPanel").gameObject
         };
         int lenPlayers = GetComponentInChildren<PlayersManager>().numPlayers; 
-        for (int i = 0; i > lenPlayers; i++)
+        for (int i = 0; i < lenPlayers; i++)
         {
             
             if (i != winner)

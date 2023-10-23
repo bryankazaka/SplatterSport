@@ -19,8 +19,9 @@ public class PlayerController : MonoBehaviour
     public float propagation = 1.00f;
     public float knockBack = 1.00f;
     public float stunTime = 1.00f;
-    public bool leadLimbs = false;
     public bool isMouse = false;
+
+    private float[] upgrades; // StunT AtcSp Dmg Prop LmbSp Bounce KnckB Spread Size Rng Move
 
     public bool isDone = false;
 
@@ -30,6 +31,11 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        upgrades = new float[11];
+        for (int i = 0; i < 11; i++)
+        {
+            upgrades[i] = 1.0f;
+        }
         gameObject.transform.parent =  GameObject.Find("GameManager").transform.Find("PlayersManager").transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -66,7 +72,48 @@ public class PlayerController : MonoBehaviour
             return getFreeNum(numP);
          }
     }
+    public void Upgrade(int type)
+    {
+        switch (type)
+        {
+            case 0:
+                upgrades[0] = upgrades[0]*0.25f;
+                break;
+            case 1:
+                upgrades[1] += 0.15f;
+                upgrades[2] -= 0.05f;
+                break;
+            case 2:
+                upgrades[3] += 0.1f;
+                break;
+            case 3:
+                upgrades[4] += 0.1f;
+                upgrades[5] *= 0.5f;
+                break;
+            case 4:
+                upgrades[6] += 0.1f;
+                upgrades[7] += 0.1f;
+                break;
+            case 5:
+                upgrades[2] += 0.1f;
+                break;
+            case 6:
+                upgrades[8] += 0.1f;
+                upgrades[9] += 0.1f;
+                break;
+            case 7:
+                upgrades[1] += 0.1f;
+                break;
+            case 8:
+                upgrades[10] += 0.1f;
+                break;
+            case 9:
+                upgrades[2] += 0.15f;
+                upgrades[1] -= 0.1f;
+                break;
 
+        }
+    }
     private int getFreeCol()
     {
          bool[] num = GetComponentInParent<PlayersManager>().colorsTaken;
