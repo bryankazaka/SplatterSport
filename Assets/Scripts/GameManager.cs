@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour
 
     public void buttonExit()
     {
-        Debug.Log("App closed");
         Application.Quit();
     }
 

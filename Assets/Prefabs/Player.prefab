@@ -159,11 +159,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   audioSource: {fileID: 8525680111523179909}
+  weaponDist: 1.5
   screenPosition: {x: 0, y: 0, z: 0}
   worldPosition: {x: 0, y: 0, z: 0}
   playerInput: {fileID: 0}
   isMouse: 0
-  attackSound: {fileID: 8300000, guid: 38102ae2298134feb82d5a50f213a6e7, type: 3}
+  attackSound: {fileID: 8300000, guid: 1479c9f4018b5374a9998e95abeab7ee, type: 3}
 --- !u!82 &8525680111523179909
 AudioSource:
   m_ObjectHideFlags: 0
@@ -436,7 +437,6 @@ MonoBehaviour:
   propagation: 1
   knockBack: 1
   stunTime: 1
-  leadLimbs: 0
   isMouse: 1
   isDone: 0
 --- !u!114 &3910508675127121185

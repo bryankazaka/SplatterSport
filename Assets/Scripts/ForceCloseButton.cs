@@ -21,7 +21,6 @@ public class ForceCloseButton : MonoBehaviour
 
     public void OnClick()
     {
-        Debug.Log("Hi");
         closeButton.onClick.Invoke();
     } 
 

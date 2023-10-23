@@ -158,7 +158,6 @@ public class GameManagerBattle : MonoBehaviour
         ("Artist Deadline","+10% Movement Speed"),
         ("Heavyweight","+15% Damage \n -5% Attack Speed")
         };
-        Debug.Log(upgradeText.Count);
     }
 
     void Awake()
