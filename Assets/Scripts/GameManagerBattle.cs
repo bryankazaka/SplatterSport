@@ -112,11 +112,19 @@ public class GameManagerBattle : MonoBehaviour
 
     public AudioClip battleTheme;
     public AudioClip selectScreenTheme;
+    public AudioClip crowdRoar;
+
+    private AudioSource crowdAudioSource;
     void Start()
     {
         tRounds.text = "Points to win:" + "\n";
         tDrops.text = "Tutorial:" + "\n";
-        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource = gameObject.AddComponent<AudioSource>();
+        crowdAudioSource = gameObject.AddComponent<AudioSource>();
+        crowdAudioSource.clip = crowdRoar;
+        crowdAudioSource.volume = 0.2f;
+        crowdAudioSource.loop = true;
+
         audioSource.volume = 0.3f;  
         audioSource.clip = selectScreenTheme;
         audioSource.loop = true;
@@ -252,6 +260,7 @@ public class GameManagerBattle : MonoBehaviour
     }
     public void playerSelect(int playerNum, bool left)
     {
+        PlaySelectTheme();
         if (!upgradeScreen.activeSelf)
         {
             switch (playerNum)
@@ -355,6 +364,8 @@ public class GameManagerBattle : MonoBehaviour
         audioSource.clip = battleTheme;
         audioSource.loop = true;
         audioSource.Play();
+        crowdAudioSource.Play();
+        
     }
     
     public void EndRound()
@@ -370,18 +381,25 @@ public class GameManagerBattle : MonoBehaviour
         inBattle = false;
         dropBoard();        
         displayLosers();
+        PlaySelectTheme();
+       
+        //start the upgrade for losing players       
+    }
+
+    void PlaySelectTheme()
+    {
         audioSource.Stop();
+        crowdAudioSource.Stop();
         audioSource.clip = selectScreenTheme;
         audioSource.loop = true;
         audioSource.Play();
-       
-        //start the upgrade for losing players       
     }
 
     public void EndGame(int winningPlayer)
     {
         tWinner.text = "Winner: Player " + winningPlayer;
         endGame.SetActive(true);
+        crowdAudioSource.Stop();
         audioSource.Stop();
         audioSource.clip = selectScreenTheme;
         audioSource.loop = true;
