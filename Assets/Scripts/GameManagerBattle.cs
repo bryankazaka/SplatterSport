@@ -149,15 +149,15 @@ public class GameManagerBattle : MonoBehaviour
         takenColours = new List<int> {};
         tutorialPrompts = new List<string> {"Try pressing ↑↓←→ or using the analogue on your controller rookie!", "Ever heard of left clicking or pressing RT/R2 to attack!?", "Come on! Hit mobs and splash more than your opponents!", "Watch the braziers on the top of the screen, thats your time limit!", "If you win a round i'll drop a banner for you!"};
         upgradeText = new List<(string,string)> {("Juggernaut","25% Stun Time"),
-        ("Featherweight","+15% Attack Speed \n -5% Damage"),
-        ("Bigger Splat","+10% Splat Size"),
-        ("Flying Limbs","+10% Limb Speed \n 50% Bouncier"),
-        ("Hard Hitter","+10% KnockBack \n +10% Limb Spread"),
-        ("Disdainfull Stroke","+10% Damage"),
-        ("Big Hands","+10% Weapon Size \n and Range"),
-        ("Deft Brushstroke","+10% Attack Speed"),
-        ("Artist Deadline","+10% Movement Speed"),
-        ("Heavyweight","+15% Damage \n -5% Attack Speed")
+        ("Featherweight","+30% Attack Speed \n -10% Damage"),
+        ("Bigger Splat","+20% Splat Size"),
+        ("Flying Limbs","+20% Limb Speed \n 50% Bouncier"),
+        ("Hard Hitter","+20% KnockBack \n +20% Limb Spread"),
+        ("Disdainfull Stroke","+20% Damage"),
+        ("Big Hands","+20% Weapon Size \n and Range"),
+        ("Deft Brushstroke","+20% Attack Speed"),
+        ("Artist Deadline","+20% Movement Speed"),
+        ("Heavyweight","+30% Damage \n -10% Attack Speed")
         };
     }
 
