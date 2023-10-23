@@ -107,12 +107,18 @@ public class GameManagerBattle : MonoBehaviour
 
     public GameObject tutorialObj;
     public GameObject upgradeScreen;
+
+    public AudioClip battleTheme;
+    public AudioClip selectScreenTheme;
     void Start()
     {
         tRounds.text = "Points to win:" + "\n";
         tDrops.text = "Tutorial:" + "\n";
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.volume = 0.3f;  
+        audioSource.clip = selectScreenTheme;
+        audioSource.loop = true;
+        audioSource.Play();
         playerColors = new int[4];
         players = new GameObject[4];
         colors = new Color32[5];
@@ -326,7 +332,14 @@ public class GameManagerBattle : MonoBehaviour
             StartCoroutine(tutorial());
         }
         upBoard();
+    }
 
+    public void playBattleTheme()
+    {
+        audioSource.Stop();
+        audioSource.clip = battleTheme;
+        audioSource.loop = true;
+        audioSource.Play();
     }
     
     public void EndRound()
@@ -342,6 +355,10 @@ public class GameManagerBattle : MonoBehaviour
         inBattle = false;
         dropBoard();        
         displayLosers();
+        audioSource.Stop();
+        audioSource.clip = selectScreenTheme;
+        audioSource.loop = true;
+        audioSource.Play();
        
         //start the upgrade for losing players       
     }
@@ -350,6 +367,10 @@ public class GameManagerBattle : MonoBehaviour
     {
         tWinner.text = "Winner: Player " + winningPlayer;
         endGame.SetActive(true);
+        audioSource.Stop();
+        audioSource.clip = selectScreenTheme;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
     public void addPlayer(GameObject player)
