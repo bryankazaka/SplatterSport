@@ -11,8 +11,8 @@ public class WallController : MonoBehaviour
     private int[] positions = {-15,-7,2,10};
     private string[] colors = {"blue","yellow","green","pink"};
     private int winningScore;
-   
-    
+
+
     // Start is called before the first frame update
     private void Start() {
         gamePoints = new int[4];
@@ -38,7 +38,6 @@ public class WallController : MonoBehaviour
     }
     public void winPoint(int player)
     {
-        
         gamePoints[player] +=1;
         if (gamePoints[player] == winningScore)
         {
