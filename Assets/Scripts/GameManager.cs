@@ -21,13 +21,16 @@ public class GameManager : MonoBehaviour
 
     public GameObject zoom;
 
+    public GameObject rulesMenu;
+    public GameObject sVolume;
+
     //public float transitionTime = 2f;
 
     private string[] rulesText = new string[] {
         "About:\nDive into the 'Colour Colliseum' and battle friends in a vibrant PVE arena. Spread your paint by defeating mobs, and claim victory by covering the most ground. Beware! Losers get to choose power-ups, so strategize wisely!",
         "Goal:\nDominate by covering the arena with your paint color. Defeat continuously spawning enemies, causing them to explode into paint splats. Overpaint your opponent's marks for the win! In this realm, mastery over color crowns you the Grand Master of Colors.",
         "Tips:\nLosing a round might offer strategic upgrades. The dynamic crowd showcases the leading player by donning their color.",
-        "Controls:\nMove: Directional Keys\nAttack/Pickup/Use: R2\nDodge: L2"
+        "Controls:\nMove: Directional Keys or Controller Analogue\nAttack: Left Click or RT/R2"
     };
 
     private string[] roundCounter = new string[] {"3","5","7"};
@@ -121,5 +124,29 @@ public class GameManager : MonoBehaviour
         {
             btnClose.onClick.Invoke();
         }   
+    }
+
+    IEnumerator delaySettingsClick()
+    {
+        yield return new WaitForSeconds(0.417f);
+        sVolume.gameObject.SetActive(true);
+        btnClose.gameObject.SetActive(true);
+    }
+
+    IEnumerator delayRulesClick()
+    {
+        yield return new WaitForSeconds(0.417f);
+        rulesMenu.gameObject.SetActive(true);
+        btnClose.gameObject.SetActive(true);
+    }
+
+    public void settingsClick()
+    {
+        StartCoroutine(delaySettingsClick());
+    }
+
+    public void rulesClick()
+    {
+        StartCoroutine(delayRulesClick());
     }
 }

@@ -109,12 +109,18 @@ public class GameManagerBattle : MonoBehaviour
     private bool[] upgradesActive = {false,false,false,false};
     public GameObject tutorialObj;
     public GameObject upgradeScreen;
+
+    public AudioClip battleTheme;
+    public AudioClip selectScreenTheme;
     void Start()
     {
         tRounds.text = "Points to win:" + "\n";
         tDrops.text = "Tutorial:" + "\n";
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.volume = 0.3f;  
+        audioSource.clip = selectScreenTheme;
+        audioSource.loop = true;
+        audioSource.Play();
         playerColors = new int[4];
         players = new GameObject[4];
         colors = new Color32[5];
@@ -132,7 +138,7 @@ public class GameManagerBattle : MonoBehaviour
         playerThreeCount = 0;
         playerFourCount = 0;
         takenColours = new List<int> {};
-        tutorialPrompts = new List<string> {"Try pressing ↑↓←→ or using the analogue on your controller rookie!", "Ever heard of left clicking or pressing RT/R2 to attack!?", "Come on! Hit mobs and splash more than your opponent!", "Keep an eye on the braziers on the top of the screen, thats your time limit!", "If you win a round i'll drop a banner for you!"};
+        tutorialPrompts = new List<string> {"Try pressing ↑↓←→ or using the analogue on your controller rookie!", "Ever heard of left clicking or pressing RT/R2 to attack!?", "Come on! Hit mobs and splash more than your opponents!", "Watch the braziers on the top of the screen, thats your time limit!", "If you win a round i'll drop a banner for you!"};
         upgradeText = new List<(string,string)> {("Juggernaut","-75% Stun Time"),("Featherweight","+15% Attack Speed \n -5% Damage"),("Bigger Splat","+10% Splat Size"),
         ("Flying Limbs","Limbs Move Faster \n and Bounce More"),
         ("Hard Hitter","+10% KnockBack \n and Limb Speed"),
@@ -341,7 +347,14 @@ public class GameManagerBattle : MonoBehaviour
             StartCoroutine(tutorial());
         }
         upBoard();
+    }
 
+    public void playBattleTheme()
+    {
+        audioSource.Stop();
+        audioSource.clip = battleTheme;
+        audioSource.loop = true;
+        audioSource.Play();
     }
     
     public void EndRound()
@@ -357,6 +370,10 @@ public class GameManagerBattle : MonoBehaviour
         inBattle = false;
         dropBoard();        
         displayLosers();
+        audioSource.Stop();
+        audioSource.clip = selectScreenTheme;
+        audioSource.loop = true;
+        audioSource.Play();
        
         //start the upgrade for losing players       
     }
@@ -365,6 +382,10 @@ public class GameManagerBattle : MonoBehaviour
     {
         tWinner.text = "Winner: Player " + winningPlayer;
         endGame.SetActive(true);
+        audioSource.Stop();
+        audioSource.clip = selectScreenTheme;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
     public void addPlayer(GameObject player)

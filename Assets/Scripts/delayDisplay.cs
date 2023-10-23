@@ -11,6 +11,12 @@ public class delayDisplay : MonoBehaviour
         StartCoroutine(Display());
     }
 
+
+    private void OnEnable() 
+    {
+        StartCoroutine(Display());
+    }
+
     // Update is called once per frame
     void Update()
     {
