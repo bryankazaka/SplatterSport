@@ -1080,8 +1080,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1
-  m_fontSizeBase: 1
+  m_fontSize: 0.5
+  m_fontSizeBase: 0.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5341,6 +5341,10 @@ MonoBehaviour:
   - {fileID: 1214533454}
   - {fileID: 1789724181}
   - {fileID: 867137602}
+  - {fileID: 111250309}
+  - {fileID: 1773489515}
+  - {fileID: 2101753371}
+  - {fileID: 1673089205}
   playerOneColour: {fileID: 375195359}
   playerTwoColour: {fileID: 54598816}
   playerThreeColour: {fileID: 939825833}
@@ -12749,7 +12753,7 @@ Tilemap:
       - {fileID: -727991476, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: 320087227, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: -474964340, guid: 3037628c76454664798a2c475ca22a35, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 1
   - first: {x: -8, y: 8, z: 0}
@@ -12791,7 +12795,7 @@ Tilemap:
       - {fileID: -727991476, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: 320087227, guid: 3037628c76454664798a2c475ca22a35, type: 3}
       - {fileID: -474964340, guid: 3037628c76454664798a2c475ca22a35, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 1
   - first: {x: -5, y: 8, z: 0}
@@ -16288,7 +16292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1529060189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17834,8 +17838,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1
-  m_fontSizeBase: 1
+  m_fontSize: 0.5
+  m_fontSizeBase: 0.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -25929,8 +25933,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1
-  m_fontSizeBase: 1
+  m_fontSize: 0.5
+  m_fontSizeBase: 0.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -28255,8 +28259,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1
-  m_fontSizeBase: 1
+  m_fontSize: 0.5
+  m_fontSizeBase: 0.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
