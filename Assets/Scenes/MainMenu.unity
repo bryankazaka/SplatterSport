@@ -1405,12 +1405,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btn_highlight: {fileID: 8300000, guid: 5a247a963c28c5d45879f70e2b7e1495, type: 3}
   btn_click: {fileID: 8300000, guid: c8020c96be9083c478ed2e45eeedbd95, type: 3}
+  startSplat: {fileID: 8300000, guid: 60ba4a4b03a6b44dfb4981af919f0ecf, type: 3}
   bgmMenu: {fileID: 8300000, guid: 16aaef173db1bfc409f149f7e68f64ab, type: 3}
   volumeText: {fileID: 297596021}
   rules: {fileID: 1881003997}
   boardDrop: {fileID: 168568305}
   btnClose: {fileID: 830601591}
   slider: {fileID: 2071060984}
+  audioSource: {fileID: 0}
   zoom: {fileID: 2053060650}
   rulesMenu: {fileID: 757806449}
   sVolume: {fileID: 2071060982}
