@@ -19,7 +19,7 @@ public class MobSpawner : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        print(gameObject.name);
+        
         switch (gameObject.name)
         {
             case "bucketM":
@@ -36,7 +36,7 @@ public class MobSpawner : MonoBehaviour
 
     public void StartRound()
     {
-        mobsPerSecond = (mobBaseSpawnUnit * spawnRateMult) + (roundMult * 0.1f);
+        mobsPerSecond = mobBaseSpawnUnit * spawnRateMult * ((roundMult/10)+1.0f);
         float newmobsPerSecond = 1.0f/mobsPerSecond; 
         InvokeRepeating(nameof(Spawn), spawnWaitTime, newmobsPerSecond); //repeats the instantiation of another mob object
     }

@@ -444,19 +444,19 @@ public class GameManagerBattle : MonoBehaviour
         {
             lenPlayers++;
         } 
-        if (lenPlayers > 0)
+        if (lenPlayers > 0 && !(winner == 0))
         {
             players[0].GetComponent<PlayerController>().Upgrade(playerOneUpgrades[playerOneCount]);
         }
-        if (lenPlayers > 1)
+        if (lenPlayers > 1 && !(winner == 1))
         {
             players[1].GetComponent<PlayerController>().Upgrade(playerTwoUpgrades[playerTwoCount]);
         }
-        if (lenPlayers > 2)
+        if (lenPlayers > 2 && !(winner == 2))
         {
             players[2].GetComponent<PlayerController>().Upgrade(playerThreeUpgrades[playerThreeCount]);
         }
-        if (lenPlayers > 3)
+        if (lenPlayers > 3 && !(winner == 3))
         {
             players[3].GetComponent<PlayerController>().Upgrade(playerFourUpgrades[playerFourCount]);
         }
