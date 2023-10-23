@@ -234,13 +234,6 @@ public class GameManagerBattle : MonoBehaviour
         tRounds.text = "Points to win:" + "\n" + roundCounter[roundIndex];
         tDrops.text = "Tutorial:" + "\n" + dropChoice[dropIndex];
             
-        
-        if (Input.GetKey(KeyCode.Space) && !inBattle)
-        {
-            StartBattle();
-            inBattle = true;
-        }
-
     }
 
     public void btnHighlight()
@@ -262,7 +255,7 @@ public class GameManagerBattle : MonoBehaviour
     }
     public void playerSelect(int playerNum, bool left)
     {
-        PlaySelectTheme();
+       
         if (!upgradeScreen.activeSelf)
         {
             switch (playerNum)
@@ -343,11 +336,12 @@ public class GameManagerBattle : MonoBehaviour
 
     public void StartBattle()
     {
+        playBattleTheme();
         for (int i = 0; i < 4; i++)
         {
             upgradesActive[i] = false;
         }
-        Debug.Log("gameStart");
+        
         GetComponentInChildren<MainSpawner>().StartRound();
         GetComponentInChildren<TimerController>().enabled = true;
         GetComponentInChildren<PlayersManager>().StartGame();
@@ -373,7 +367,7 @@ public class GameManagerBattle : MonoBehaviour
     public void EndRound()
     {
         winner = GetComponentInChildren<SplatterController>().getWinner();
-        Debug.Log("Player " + (winner +1)+ " won that round");
+        
         GetComponentInChildren<WallController>().winPoint(winner);
         GetComponentInChildren<WallController>().UpdateWall(playerColors);
         GetComponentInChildren<CrowdController>().CrowdReset();
@@ -399,6 +393,7 @@ public class GameManagerBattle : MonoBehaviour
 
     public void EndGame(int winningPlayer)
     {
+        dropBoard();
         tWinner.text = "Winner: Player " + winningPlayer;
         endGame.SetActive(true);
         crowdAudioSource.Stop();
