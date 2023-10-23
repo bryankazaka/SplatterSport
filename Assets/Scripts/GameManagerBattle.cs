@@ -129,7 +129,7 @@ public class GameManagerBattle : MonoBehaviour
         playerThreeCount = 0;
         playerFourCount = 0;
         takenColours = new List<int> {};
-        tutorialPrompts = new List<string> {"Try pressing ↑↓←→ or using the analogue on your controller rookie!", "Ever heard of left clicking or pressing RT/R2 to attack!?", "Come on! Hit mobs and splash more than your opponent!", "Keep an eye on the braziers on the top of the screen, thats your time limit!", "If you win a round i'll drop a banner for you!"};
+        tutorialPrompts = new List<string> {"Try pressing ↑↓←→ or using the analogue on your controller rookie!", "Ever heard of left clicking or pressing RT/R2 to attack!?", "Come on! Hit mobs and splash more than your opponent!", "Watch the braziers on the top of the screen, thats your time limit!", "If you win a round i'll drop a banner for you!"};
     }
 
     void Awake()

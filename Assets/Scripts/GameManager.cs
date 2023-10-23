@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject zoom;
 
+    public GameObject rulesMenu;
+    public GameObject sVolume;
+
     //public float transitionTime = 2f;
 
     private string[] rulesText = new string[] {
@@ -121,5 +124,29 @@ public class GameManager : MonoBehaviour
         {
             btnClose.onClick.Invoke();
         }   
+    }
+
+    IEnumerator delaySettingsClick()
+    {
+        yield return new WaitForSeconds(0.417f);
+        sVolume.gameObject.SetActive(true);
+        btnClose.gameObject.SetActive(true);
+    }
+
+    IEnumerator delayRulesClick()
+    {
+        yield return new WaitForSeconds(0.417f);
+        rulesMenu.gameObject.SetActive(true);
+        btnClose.gameObject.SetActive(true);
+    }
+
+    public void settingsClick()
+    {
+        StartCoroutine(delaySettingsClick());
+    }
+
+    public void rulesClick()
+    {
+        StartCoroutine(delayRulesClick());
     }
 }
