@@ -192,7 +192,7 @@ public class WeaponController : MonoBehaviour
 
     private void damageEnemy(Collider2D hit)
     {
-   
+        audioSource.PlayOneShot(attackSound, 0.5f);
         float dmgAmount = weapon.getDamage() * playerController.damageMult;
         hit.gameObject.GetComponent<MobController>().takeDamage(playerController.gameObject, dmgAmount);
         //deal dmg to hit enemy
@@ -202,7 +202,6 @@ public class WeaponController : MonoBehaviour
     {
         if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("Swing")) // if I press and its not attacking attack
         {
-            audioSource.PlayOneShot(attackSound, 0.5f);
             animator.SetTrigger("Attack");
             startAttackTime = Time.time;      
         }
