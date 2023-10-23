@@ -35,7 +35,6 @@ public class CustomButtonBattle : MonoBehaviour, ISelectHandler, IPointerEnterHa
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            Debug.Log(elapsed);
             tmpText.color = Color.Lerp(originalColor, targetColor, elapsed / duration);
             yield return null; 
         }

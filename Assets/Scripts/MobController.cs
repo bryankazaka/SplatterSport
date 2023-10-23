@@ -37,7 +37,7 @@ public class MobController : MonoBehaviour
         maxHealth = health;
         //randomize
         speed *= Random.Range(0.90f,1.10f);
-        limbSpeed *= Random.Range(0.90f,1.10f);
+        limbSpeed *= Random.Range(0.45f,0.55f);
         limbSpread = (int) (limbSpread * Random.Range(0.90f,1.10f));
         splatProp *= Random.Range(0.90f,1.10f);
         colors = new Color32[4];

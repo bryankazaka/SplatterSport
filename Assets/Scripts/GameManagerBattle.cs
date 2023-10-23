@@ -158,7 +158,6 @@ public class GameManagerBattle : MonoBehaviour
         ("Artist Deadline","+10% Movement Speed"),
         ("Heavyweight","+15% Damage \n -5% Attack Speed")
         };
-        Debug.Log(upgradeText.Count);
     }
 
     void Awake()
@@ -295,7 +294,6 @@ public class GameManagerBattle : MonoBehaviour
         }
         else
         {
-            Debug.Log("upgradeTime");
            switch (playerNum)
             {
             case 0:
@@ -941,9 +939,6 @@ public class GameManagerBattle : MonoBehaviour
         if (upgradesActive[0]) 
             {playerOneCount = (playerOneCount + 2) % 3;
             playerOneUpgradeSprite.gameObject.GetComponent<Image>().sprite = upgrades[playerOneUpgrades[playerOneCount]];
-            Debug.Log(playerOneUpgrades[playerOneCount]);
-            Debug.Log(upgradeText.Count);
-            Debug.Log(upgradeText[0].Item2);
             playerUpDesc[0].GetComponent<TextMeshProUGUI>().text = upgradeText[playerOneUpgrades[playerOneCount]].Item2;
             playerUpDesc[4].GetComponent<TextMeshProUGUI>().text = upgradeText[playerOneUpgrades[playerOneCount]].Item1;}
     }
